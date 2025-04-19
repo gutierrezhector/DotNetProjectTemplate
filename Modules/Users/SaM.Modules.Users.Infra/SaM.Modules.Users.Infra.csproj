@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageVersion Include="Microsoft.EntityFrameworkCore" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Core\SaM.Core.Abstractions\SaM.Core.Abstractions.csproj" />
+      <ProjectReference Include="..\..\..\Core\SaM.Core.Exceptions\SaM.Core.Exceptions.csproj" />
+      <ProjectReference Include="..\..\..\Database\SaM.Database.Core\SaM.Database.Core.csproj" />
+      <ProjectReference Include="..\..\..\Database\SaM.Database.Migrations\SaM.Database.Migrations.csproj" />
+      <ProjectReference Include="..\SaM.Modules.Users.Application\SaM.Modules.Users.Application.csproj" />
+      <ProjectReference Include="..\SaM.Modules.Users.Domain\SaM.Modules.Users.Domain.csproj" />
+      <ProjectReference Include="..\SaM.Modules.Users.Ports\SaM.Modules.Users.Ports.csproj" />
+      <ProjectReference Include="..\SaM.Modules.Users.Web\SaM.Modules.Users.Web.csproj" />
+    </ItemGroup>
+
+</Project>

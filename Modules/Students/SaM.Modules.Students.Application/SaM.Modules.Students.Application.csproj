@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\Teachers\SaM.Modules.Teachers.Ports\SaM.Modules.Teachers.Ports.csproj" />
+        <ProjectReference Include="..\SaM.Modules.Students.Domain\SaM.Modules.Students.Domain.csproj"/>
+        <ProjectReference Include="..\SaM.Modules.Students.Ports\SaM.Modules.Students.Ports.csproj" />
+        <ProjectReference Include="..\SaM.Modules.Students.Web\SaM.Modules.Students.Web.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FluentValidation" />
+    </ItemGroup>
+
+</Project>

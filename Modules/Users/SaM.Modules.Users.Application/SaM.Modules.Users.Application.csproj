@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Core\SaM.Core.Exceptions\SaM.Core.Exceptions.csproj" />
+      <ProjectReference Include="..\SaM.Modules.Users.Domain\SaM.Modules.Users.Domain.csproj" />
+      <ProjectReference Include="..\SaM.Modules.Users.Ports\SaM.Modules.Users.Ports.csproj" />
+      <ProjectReference Include="..\SaM.Modules.Users.Web\SaM.Modules.Users.Web.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FluentValidation" />
+    </ItemGroup>
+
+</Project>

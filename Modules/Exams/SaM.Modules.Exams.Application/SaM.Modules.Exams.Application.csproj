@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\SaM.Modules.Exams.Domain\SaM.Modules.Exams.Domain.csproj" />
+      <ProjectReference Include="..\SaM.Modules.Exams.Web\SaM.Modules.Exams.Web.csproj" />
+    </ItemGroup>
+
+</Project>

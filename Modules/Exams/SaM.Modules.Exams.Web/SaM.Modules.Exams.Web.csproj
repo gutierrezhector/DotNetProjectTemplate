@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Core\SaM.Core.Abstractions\SaM.Core.Abstractions.csproj" />
+      <ProjectReference Include="..\SaM.Modules.Exams.Domain\SaM.Modules.Exams.Domain.csproj" />
+      <ProjectReference Include="..\SaM.Modules.Exams.Ports\SaM.Modules.Exams.Ports.csproj" />
+    </ItemGroup>
+
+</Project>
