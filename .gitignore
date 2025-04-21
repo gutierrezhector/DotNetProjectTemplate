@@ -288,19 +288,3 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
-
-# Appsettings
-back/Talent.Training.Web/Config/*.json
-
-# lokalise
-.lokalise.logs
-
-# LaunchSettings
-back/Talent.Training.Web/Properties/launchSettings.json
-back/Talent.Training.Web/web.config
-**/web.config
-
-**/Version.json
-
-#e2e
-e2e/Talent.Training.UI/testSettings.json

@@ -1,15 +1,15 @@
-using SaM.Modules.Students.Ports.OutBounds.Models;
-using SaM.Modules.Students.Web.Candidates;
+using SaM.Database.Core.Daos.Students;
+using SaM.Modules.Students.Domain.Entities;
 
 namespace SaM.Modules.Students.Infra.Factories;
 
 public static class StudentFactory
 {
-    public static Student Create(StudentCandidate candidate)
+    public static StudentDao Create(Student student)
     {
-        return new Student
+        return new StudentDao
         {
-            UserId = candidate.UserId
+            UserId = student.UserId,
         };
     }
 }

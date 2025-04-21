@@ -9,7 +9,8 @@ public class SaMDbContextFactory : IDesignTimeDbContextFactory<SaMDbContext>
     {        
         var optionsBuilder = new DbContextOptionsBuilder<SaMDbContext>();
         optionsBuilder.UseSqlServer(
-            "Server=MSI;Database=SaM;Trusted_Connection=True;");        
+            "Server=DYOUGI;Database=SaM;Trusted_Connection=True;TrustServerCertificate=True;",
+            o => o.MigrationsAssembly("SaM.Database.Migrations"));
         
         return new SaMDbContext(optionsBuilder.Options);
     }

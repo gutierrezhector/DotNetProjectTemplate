@@ -1,4 +1,4 @@
-using SaM.Modules.Users.Ports.OutBounds.Models;
+using SaM.Modules.Users.Domain.Entities;
 using SaM.Modules.Users.Web.Candidates;
 
 namespace SaM.Modules.Users.Web.Abstractions;
@@ -6,5 +6,7 @@ namespace SaM.Modules.Users.Web.Abstractions;
 public interface IUsersApplication
 {
     Task<User> GetByIdAsync(int id);
-    Task<User> CreateAsync(UserCandidate candidate);
+    Task<User> CreateAsync(UserCreationCandidate creationCandidate);
+    Task<User> UpdateAsync(int id, UserUpdateCandidate updateCandidate);
+    Task DeleteAsync(int id);
 }

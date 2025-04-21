@@ -1,54 +1,82 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SaM.Core.Abstractions.Mappers;
+using SaM.Core.Abstractions.Repository;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Database.Core;
-using SaM.Database.Data.Daos.Students;
+using SaM.Database.Core.Daos.Students;
+using SaM.Modules.Students.Domain.Entities;
+using SaM.Modules.Students.Infra.Factories;
 using SaM.Modules.Students.Ports.InBounds;
-using SaM.Modules.Students.Ports.OutBounds.Models;
 
 namespace SaM.Modules.Students.Infra.Repositories;
 
 public class StudentsRepository(
     SaMDbContext dbContext,
     Mapper<StudentDao, Student> studentDaoToStudentMapper
-) : IStudentsRepository
+) : BaseRepository(dbContext), IStudentsRepository
 {
     public async Task<List<Student>> GetAllAsync()
     {
-        var studentsDao = await Set()
+        var studentsDao = await Set<StudentDao>()
             .ToListAsync();
 
         return studentDaoToStudentMapper.Map(studentsDao);
     }
 
-    public async Task<Student?> GetByIdAsync(int studentId)
+    public async Task<Student> GetByIdAsync(int studentId)
     {
-        var studentDao = await Set()
-            .Where(u => u.Id == studentId)
-            .FirstOrDefaultAsync();
-
-        if (studentDao == null)
-            throw new NotFoundException($"student with id '{studentId}' not found.");
+        var studentDao = await GetByIdInternal(studentId);
 
         return studentDaoToStudentMapper.Map(studentDao);
     }
 
     public async Task<bool> ExistAsync(int userId)
     {
-        return await Set()
+        return await Set<StudentDao>()
             .AnyAsync(s => s.UserId == userId);
     }
 
     public async Task<Student> Create(Student studentToCreate)
     {
-        dbContext.Add(studentToCreate);
-        await dbContext.SaveChangesAsync();
+        var newStudentDao = StudentFactory.Create(studentToCreate);
+        
+        DbContext.Add(newStudentDao);
+        await SaveChangesAsync();
 
         return studentToCreate;
     }
 
-    private DbSet<StudentDao> Set()
+    public async Task<Student> UpdateAsync(Student student)
     {
-        return dbContext.Set<StudentDao>();
+        var studentDaoToUpdate = await GetByIdInternal(student.Id);
+        
+        studentDaoToUpdate.UpdateFromDomainEntity(student);
+        
+        await SaveChangesAsync();
+
+        return student;
+    }
+
+    public async Task DeleteAsync(int id)
+    {
+        var studentDao = await GetByIdInternal(id);
+
+        Set<StudentDao>().Remove(studentDao);
+        
+        await SaveChangesAsync();
+    }
+    
+    private async Task<StudentDao> GetByIdInternal(int id)
+    {
+        var studentDao = await Set<StudentDao>()
+            .Where(u => u.Id == id)
+            .FirstOrDefaultAsync();
+
+        if (studentDao == null)
+        {
+            throw new NotFoundException($"student with id '{id}' not found.");
+        }
+
+        return studentDao;
     }
 }

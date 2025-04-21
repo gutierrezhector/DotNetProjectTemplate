@@ -1,16 +1,16 @@
 using Microsoft.Extensions.DependencyInjection;
 using SaM.Core.Abstractions.Mappers;
-using SaM.Modules.Exams.Ports.OutBounds.Models;
-using SaM.Modules.Exams.Web.Dtos;
+using SaM.Modules.Exams.Domain.Entities;
 using SaM.Modules.Exams.Web.Mappers;
+using SaM.Modules.Exams.Web.ViewModels;
 
 namespace SaM.Modules.Exams.Web;
 
 public static class ServiceCollectionExtension
 {
-    public static IServiceCollection RegisterExamWeb(this IServiceCollection services)
+    public static IServiceCollection RegisterExamsWeb(this IServiceCollection services)
     {
-        services.AddScoped<Mapper<Exam, ExamDto>, ExamMapper>();
+        services.AddScoped<Mapper<Exam, ExamViewModel>, ExamViewModelMapper>();
 
         return services;
     }

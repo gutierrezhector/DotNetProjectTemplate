@@ -16,7 +16,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\SaM.Database.Data\SaM.Database.Data.csproj" />
+      <ProjectReference Include="..\..\Modules\Exams\SaM.Modules.Exams.Ports\SaM.Modules.Exams.Ports.csproj" />
+      <ProjectReference Include="..\..\Modules\Grades\SaM.Modules.Grades.Ports\SaM.Modules.Grades.Ports.csproj" />
+      <ProjectReference Include="..\..\Modules\Students\SaM.Modules.Students.Ports\SaM.Modules.Students.Ports.csproj" />
     </ItemGroup>
 
 </Project>

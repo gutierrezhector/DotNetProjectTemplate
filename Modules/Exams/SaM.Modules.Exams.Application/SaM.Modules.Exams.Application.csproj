@@ -7,8 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\Core\SaM.Core.Exceptions\SaM.Core.Exceptions.csproj" />
       <ProjectReference Include="..\SaM.Modules.Exams.Domain\SaM.Modules.Exams.Domain.csproj" />
       <ProjectReference Include="..\SaM.Modules.Exams.Web\SaM.Modules.Exams.Web.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FluentValidation" />
     </ItemGroup>
 
 </Project>

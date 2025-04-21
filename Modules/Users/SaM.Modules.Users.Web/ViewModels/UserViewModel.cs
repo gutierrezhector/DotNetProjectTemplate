@@ -2,6 +2,7 @@
 
 public record UserViewModel
 {
-    public required string FirstName { get; init; }
-    public required string LastName { get; init; }
+    public required int Id { get; set; }
+    public required string FirstName { get; set; }
+    public required string LastName { get; set; }
 }

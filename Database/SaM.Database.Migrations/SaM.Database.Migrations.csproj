@@ -17,7 +17,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\SaM.Database.Core\SaM.Database.Core.csproj" />
-      <ProjectReference Include="..\SaM.Database.Data\SaM.Database.Data.csproj" />
     </ItemGroup>
 
 </Project>
