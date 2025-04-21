@@ -1,9 +1,16 @@
+using SaM.Database.Core;
 using SaM.Modules.Exams.Application;
 using SaM.Modules.Exams.Infra;
 using SaM.Modules.Exams.Web;
+using SaM.Modules.Grades.Application;
+using SaM.Modules.Grades.Infra;
+using SaM.Modules.Grades.Web;
+using SaM.Modules.Students.Application;
 using SaM.Modules.Students.Infra;
+using SaM.Modules.Students.Web;
 using SaM.Modules.Teachers.Application;
 using SaM.Modules.Teachers.Infra;
+using SaM.Modules.Teachers.Web;
 using SaM.Modules.Users.Application;
 using SaM.Modules.Users.Infra;
 using SaM.Modules.Users.Web;
@@ -14,17 +21,32 @@ public static class RegisterServices
 {
     public static void Register(WebApplicationBuilder webApplicationBuilder)
     {
-        webApplicationBuilder.Services.RegisterUsersWeb();
-        webApplicationBuilder.Services.RegisterUsersApplication();
-        webApplicationBuilder.Services.RegisterUsersInfra();
+        webApplicationBuilder.Services
+            .RegisterEntityFramework();
+            
+        webApplicationBuilder.Services
+            .RegisterUsersWeb()
+            .RegisterUsersApplication()
+            .RegisterUsersInfra();
         
-        webApplicationBuilder.Services.RegisterStudentsInfra();
+        webApplicationBuilder.Services
+            .RegisterStudentsWeb()
+            .RegisterStudentsApplication()
+            .RegisterStudentsInfra();
 
-        webApplicationBuilder.Services.RegisterExamWeb();
-        webApplicationBuilder.Services.RegisterExamsApplication();
-        webApplicationBuilder.Services.RegisterExamsInfra();
+        webApplicationBuilder.Services
+            .RegisterExamsWeb()
+            .RegisterExamsApplication()
+            .RegisterExamsInfra();
         
-        webApplicationBuilder.Services.RegisterTeachersApplication();
-        webApplicationBuilder.Services.RegisterTeachersInfra();
+        webApplicationBuilder.Services
+            .RegisterTeachersWeb()
+            .RegisterTeachersApplication()
+            .RegisterTeachersInfra();
+        
+        webApplicationBuilder.Services
+            .RegisterGradesWeb()
+            .RegisterGradesApplication()
+            .RegisterGradesInfra();
     }
 }

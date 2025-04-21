@@ -1,35 +1,54 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SaM.Core.Abstractions.Mappers;
+using SaM.Modules.Students.Domain.Entities;
 using SaM.Modules.Students.Web.Abstractions;
-using SaM.Modules.Students.Web.Candidates;
 using SaM.Modules.Students.Web.Payloads;
+using SaM.Modules.Students.Web.ViewModels;
 
 namespace SaM.Modules.Students.Web.Controllers;
 
 public class StudentController(
-    IStudentsApplication studentsApplication
-    ) : ControllerBase
+    IStudentsApplication studentsApplication,
+    Mapper<Student, StudentViewModel> studentViewModelMapper
+) : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAllAsync()
     {
         var students = await studentsApplication.GetAllAsync();
 
-        return Ok(students);
+        return Ok(studentViewModelMapper.Map(students));
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetById(int id)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetByIdAsync(int id)
     {
         var student = await studentsApplication.GetByIdAsync(id);
 
-        return Ok(student);
+        return Ok(studentViewModelMapper.Map(student));
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(StudentPayload payload)
+    public async Task<IActionResult> CreateAsync([FromBody] StudentCreationPayload creationPayload)
     {
-        var student = await studentsApplication.Create(payload.ToCandidate());
+        var createdStudent = await studentsApplication.CreateAsync(creationPayload.ToCandidate());
 
-        return Created($"students/{student.Id}", student);
+        return Created($"students/{createdStudent.Id}", studentViewModelMapper.Map(createdStudent));
+    }
+    
+    [HttpPut]
+    public async Task<IActionResult> UpdateAsync(int id, [FromBody] StudentUpdatePayload updatePayload)
+    {
+        var updatedStudent = await studentsApplication.UpdateAsync(id, updatePayload.ToCandidate());
+
+        return Ok(studentViewModelMapper.Map(updatedStudent));
+    }
+    
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAsync(int id)
+    {
+        await studentsApplication.DeleteAsync(id);
+
+        return NoContent();
     }
 }

@@ -7,8 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="InBounds\" />
       <Folder Include="OutBounds\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Exams\SaM.Modules.Exams.Ports\SaM.Modules.Exams.Ports.csproj" />
+      <ProjectReference Include="..\..\Students\SaM.Modules.Students.Ports\SaM.Modules.Students.Ports.csproj" />
+      <ProjectReference Include="..\SaM.Modules.Grades.Domain\SaM.Modules.Grades.Domain.csproj" />
     </ItemGroup>
 
 </Project>

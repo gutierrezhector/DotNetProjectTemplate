@@ -9,7 +9,8 @@ public static class ServiceCollectionExtension
 {
     public static IServiceCollection RegisterTeachersApplication(this IServiceCollection services)
     {
-        services.AddScoped<IValidator<TeacherCandidate>, TeacherCandidateValidator>();
+        services.AddScoped<IValidator<TeacherCreationCandidate>, TeacherCreationCandidateValidator>();
+        services.AddScoped<IValidator<TeacherUpdateCandidate>, TeacherUpdateCandidateValidator>();
 
         return services;
     }
