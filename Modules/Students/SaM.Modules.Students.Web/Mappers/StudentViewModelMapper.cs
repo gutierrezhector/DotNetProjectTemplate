@@ -1,16 +1,16 @@
 ﻿using SaM.Core.Abstractions.Mappers;
-using SaM.Modules.Students.Domain.Entities;
+using SaM.Modules.Students.Ports.InBounds.Entities;
 using SaM.Modules.Students.Web.ViewModels;
-using SaM.Modules.Users.Domain.Entities;
+using SaM.Modules.Users.Ports.InBounds.Entities;
 using SaM.Modules.Users.Web.ViewModels;
 
 namespace SaM.Modules.Students.Web.Mappers;
 
 public class StudentViewModelMapper(
-    Mapper<User, UserViewModel> userViewModelMapper
-) : Mapper<Student, StudentViewModel>
+    Mapper<IUser, UserViewModel> userViewModelMapper
+) : Mapper<IStudent, StudentViewModel>
 {
-    public override StudentViewModel Map(Student from)
+    public override StudentViewModel Map(IStudent from)
     {
         return new StudentViewModel
         {

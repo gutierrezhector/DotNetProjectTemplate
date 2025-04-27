@@ -4,36 +4,38 @@ using SaM.Core.Abstractions.Repository;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Database.Core;
 using SaM.Database.Core.Daos.Exams;
-using SaM.Modules.Exams.Domain.Entities;
 using SaM.Modules.Exams.Infra.Factories;
-using SaM.Modules.Exams.Ports.InBounds;
+using SaM.Modules.Exams.Ports.InBounds.Candidates;
+using SaM.Modules.Exams.Ports.InBounds.Entities;
+using SaM.Modules.Exams.Ports.OutBounds;
+using SaM.Modules.Exams.Ports.OutBounds.Repositories;
 
 namespace SaM.Modules.Exams.Infra.Repositories;
 
 public class ExamsRepository(
     SaMDbContext dbContext, 
-    Mapper<ExamDao, Exam> mapper
+    Mapper<ExamDao, IExam> mapper
 ) : BaseRepository(dbContext), IExamsRepository
 {
-    public async Task<List<Exam>> GetAllAsync()
+    public async Task<List<IExam>> GetAllAsync()
     {
         var exams = await Set<ExamDao>().ToListAsync();
 
         return mapper.Map(exams);
     }
 
-    public async Task<Exam> GetByIdAsync(int id)
+    public async Task<IExam> GetByIdAsync(int id)
     {
         var exam =  await GetByIdInternal(id);
 
         return mapper.Map(exam);
     }
 
-    public async Task<Exam> CreateAsync(Exam examToCreate)
+    public async Task<IExam> CreateAsync(IExam examToCreate)
     {
         var newExamDao = ExamDaoFactory.Create(examToCreate);
         
-        dbContext.Add(newExamDao);
+        DbContext.Add(newExamDao);
         
         await SaveChangesAsync();
 
@@ -42,15 +44,15 @@ public class ExamsRepository(
         return examToCreate;
     }
 
-    public async Task<Exam> UpdateAsync(Exam exam)
+    public async Task<IExam> UpdateAsync(int id, IExamUpdateCandidate updateCandidate)
     {
-        var examDaoToUpdate = await GetByIdInternal(exam.Id);
+        var examDaoToUpdate = await GetByIdInternal(id);
         
-        examDaoToUpdate.UpdateFromDomainEntity(exam);
+        examDaoToUpdate.UpdateFromCandidate(updateCandidate);
         
         await SaveChangesAsync();
 
-        return exam;
+        return mapper.Map(examDaoToUpdate);
     }
 
     public async Task DeleteAsync(int id)

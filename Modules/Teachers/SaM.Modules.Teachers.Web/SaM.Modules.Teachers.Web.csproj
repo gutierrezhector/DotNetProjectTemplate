@@ -14,7 +14,6 @@
         <ProjectReference Include="..\..\..\Core\SaM.Core.Abstractions\SaM.Core.Abstractions.csproj" />
         <ProjectReference Include="..\..\..\Core\SaM.Core.Types\SaM.Core.Types.csproj"/>
         <ProjectReference Include="..\..\Users\SaM.Modules.Users.Web\SaM.Modules.Users.Web.csproj" />
-        <ProjectReference Include="..\SaM.Modules.Teachers.Domain\SaM.Modules.Teachers.Domain.csproj"/>
         <ProjectReference Include="..\SaM.Modules.Teachers.Ports\SaM.Modules.Teachers.Ports.csproj" />
     </ItemGroup>
 

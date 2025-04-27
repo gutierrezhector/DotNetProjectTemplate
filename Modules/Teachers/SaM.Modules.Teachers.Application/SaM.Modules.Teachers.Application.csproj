@@ -13,7 +13,6 @@
     <ItemGroup>
         <ProjectReference Include="..\..\..\Core\SaM.Core.Exceptions\SaM.Core.Exceptions.csproj"/>
         <ProjectReference Include="..\..\Students\SaM.Modules.Students.Application\SaM.Modules.Students.Application.csproj"/>
-        <ProjectReference Include="..\SaM.Modules.Teachers.Domain\SaM.Modules.Teachers.Domain.csproj"/>
         <ProjectReference Include="..\SaM.Modules.Teachers.Ports\SaM.Modules.Teachers.Ports.csproj" />
         <ProjectReference Include="..\SaM.Modules.Teachers.Web\SaM.Modules.Teachers.Web.csproj"/>
     </ItemGroup>

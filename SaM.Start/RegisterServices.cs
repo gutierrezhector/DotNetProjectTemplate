@@ -1,17 +1,22 @@
 using SaM.Database.Core;
 using SaM.Modules.Exams.Application;
+using SaM.Modules.Exams.Domain;
 using SaM.Modules.Exams.Infra;
 using SaM.Modules.Exams.Web;
 using SaM.Modules.Grades.Application;
+using SaM.Modules.Grades.Domain;
 using SaM.Modules.Grades.Infra;
 using SaM.Modules.Grades.Web;
 using SaM.Modules.Students.Application;
+using SaM.Modules.Students.Domain;
 using SaM.Modules.Students.Infra;
 using SaM.Modules.Students.Web;
 using SaM.Modules.Teachers.Application;
+using SaM.Modules.Teachers.Domain;
 using SaM.Modules.Teachers.Infra;
 using SaM.Modules.Teachers.Web;
 using SaM.Modules.Users.Application;
+using SaM.Modules.Users.Domain;
 using SaM.Modules.Users.Infra;
 using SaM.Modules.Users.Web;
 
@@ -23,30 +28,35 @@ public static class RegisterServices
     {
         webApplicationBuilder.Services
             .RegisterEntityFramework();
-            
+
         webApplicationBuilder.Services
             .RegisterUsersWeb()
             .RegisterUsersApplication()
-            .RegisterUsersInfra();
+            .RegisterUsersInfra()
+            .RegisterUsersDomain();
         
         webApplicationBuilder.Services
             .RegisterStudentsWeb()
             .RegisterStudentsApplication()
-            .RegisterStudentsInfra();
+            .RegisterStudentsInfra()
+            .RegisterStudentsDomain();
 
         webApplicationBuilder.Services
             .RegisterExamsWeb()
             .RegisterExamsApplication()
-            .RegisterExamsInfra();
-        
+            .RegisterExamsInfra()
+            .RegisterExamsDomain();
+
         webApplicationBuilder.Services
             .RegisterTeachersWeb()
             .RegisterTeachersApplication()
-            .RegisterTeachersInfra();
-        
+            .RegisterTeachersInfra()
+            .RegisterTeachersDomain();
+
         webApplicationBuilder.Services
             .RegisterGradesWeb()
             .RegisterGradesApplication()
-            .RegisterGradesInfra();
+            .RegisterGradesInfra()
+            .RegisterGradesDomain();
     }
 }

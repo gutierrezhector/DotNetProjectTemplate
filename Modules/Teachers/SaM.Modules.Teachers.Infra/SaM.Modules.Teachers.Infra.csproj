@@ -11,7 +11,10 @@
         <ProjectReference Include="..\..\..\Core\SaM.Core.Exceptions\SaM.Core.Exceptions.csproj"/>
         <ProjectReference Include="..\..\..\Database\SaM.Database.Core\SaM.Database.Core.csproj"/>
         <ProjectReference Include="..\SaM.Modules.Teachers.Application\SaM.Modules.Teachers.Application.csproj"/>
-        <ProjectReference Include="..\SaM.Modules.Teachers.Domain\SaM.Modules.Teachers.Domain.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Mappers\" />
     </ItemGroup>
 
 </Project>

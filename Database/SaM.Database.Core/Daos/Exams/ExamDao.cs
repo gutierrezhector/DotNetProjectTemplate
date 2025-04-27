@@ -1,6 +1,6 @@
 using SaM.Database.Core.Daos.Grades;
 using SaM.Database.Core.Daos.Teachers;
-using SaM.Modules.Exams.Domain.Entities;
+using SaM.Modules.Exams.Ports.InBounds.Candidates;
 
 namespace SaM.Database.Core.Daos.Exams;
     
@@ -15,12 +15,12 @@ public class ExamDao
     public TeacherDao? ResponsibleTeacher { get; set; }
     public List<GradeDao>? Grades { get; set; }
 
-    public void UpdateFromDomainEntity(Exam exam)
+    public void UpdateFromCandidate(IExamUpdateCandidate updateCandidate)
     {
-        Title = exam.Title;
-        StartDate = exam.StartDate;
-        EndDate = exam.EndDate;
-        MaxPoints = exam.MaxPoints;
-        ResponsibleTeacherId = exam.ResponsibleTeacherId;
+        Title = updateCandidate.Title;
+        StartDate = updateCandidate.StartDate;
+        EndDate = updateCandidate.EndDate;
+        MaxPoints = updateCandidate.MaxPoints;
+        ResponsibleTeacherId = updateCandidate.ResponsibleTeacherId;
     }
 }

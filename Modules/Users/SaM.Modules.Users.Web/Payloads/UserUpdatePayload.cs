@@ -1,18 +1,9 @@
-﻿using SaM.Modules.Users.Web.Candidates;
+﻿using SaM.Modules.Users.Ports.InBounds.Payloads;
 
 namespace SaM.Modules.Users.Web.Payloads;
 
-public record UserUpdatePayload
+public record UserUpdatePayload : IUserUpdatePayload
 {
     public string FirstName { get; init; }
     public string LastName { get; init; }
-
-    public UserUpdateCandidate ToCandidate()
-    {
-        return new UserUpdateCandidate
-        {
-            FirstName = FirstName,
-            LastName = LastName
-        };
-    }
 }

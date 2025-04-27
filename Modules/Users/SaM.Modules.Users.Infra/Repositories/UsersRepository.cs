@@ -4,25 +4,26 @@ using SaM.Core.Abstractions.Repository;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Database.Core;
 using SaM.Database.Core.Daos.Users;
-using SaM.Modules.Users.Domain.Entities;
 using SaM.Modules.Users.Infra.Factories;
-using SaM.Modules.Users.Ports.InBounds;
+using SaM.Modules.Users.Ports.InBounds.Candidates;
+using SaM.Modules.Users.Ports.InBounds.Entities;
+using SaM.Modules.Users.Ports.OutBounds.Repositories;
 
 namespace SaM.Modules.Users.Infra.Repositories;
 
 public class UsersRepository(
     SaMDbContext dbContext,
-    Mapper<UserDao, User> userMapper
+    Mapper<UserDao, IUser> userDaoToUserEntityMapper
 ) : BaseRepository(dbContext), IUsersRepository
 {
-    public async Task<User> GetByIdAsync(int id)
+    public async Task<IUser> GetByIdAsync(int id)
     {
         var userDao = await GetByIdInternal(id);
         
-        return userMapper.Map(userDao);
+        return userDaoToUserEntityMapper.Map(userDao);
     }
 
-    public async Task<User> CreateAsync(User user)
+    public async Task<IUser> CreateAsync(IUser user)
     {
         var newUserDao = UserDaoFactory.Create(user);
         
@@ -34,15 +35,15 @@ public class UsersRepository(
         return user;
     }
 
-    public async Task<User> UpdateAsync(User user)
+    public async Task<IUser> UpdateAsync(int id, IUserUpdateCandidate updateCandidate)
     {
-        var userDaoToUpdate = await GetByIdInternal(user.Id);
+        var userDaoToUpdate = await GetByIdInternal(id);
         
-        userDaoToUpdate.UpdateFromDomainEntity(user);
+        userDaoToUpdate.UpdateFromCandidate(updateCandidate);
         
         await SaveChangesAsync();
 
-        return user;
+        return userDaoToUserEntityMapper.Map(userDaoToUpdate);
     }
 
     public async Task DeleteAsync(int id)

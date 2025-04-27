@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using SaM.Core.Abstractions.Mappers;
-using SaM.Modules.Users.Domain.Entities;
-using SaM.Modules.Users.Web.Abstractions;
+using SaM.Modules.Users.Ports.InBounds;
+using SaM.Modules.Users.Ports.InBounds.Applications;
+using SaM.Modules.Users.Ports.InBounds.Entities;
 using SaM.Modules.Users.Web.Payloads;
 using SaM.Modules.Users.Web.ViewModels;
 
@@ -11,7 +12,7 @@ namespace SaM.Modules.Users.Web.Controllers;
 [Route("api/users")]
 public class UsersController(
     IUsersApplication usersApplication,
-    Mapper<User, UserViewModel> userViewModelMapper
+    Mapper<IUser, UserViewModel> userEntityViewModelMapper
 ) : ControllerBase
 {
     [HttpGet("{id}")]
@@ -19,23 +20,23 @@ public class UsersController(
     {
         var user = await usersApplication.GetByIdAsync(id);
 
-        return Ok(userViewModelMapper.Map(user));
+        return Ok(userEntityViewModelMapper.Map(user));
     }
 
     [HttpPost]
     public async Task<IActionResult> CreateAsync([FromBody] UserCreationPayload creationPayload)
     {
-        var newUser = await usersApplication.CreateAsync(creationPayload.ToCandidate());
+        var newUser = await usersApplication.CreateAsync(creationPayload);
 
-        return Created($"users/{newUser.Id}", userViewModelMapper.Map(newUser));
+        return Created($"users/{newUser.Id}", userEntityViewModelMapper.Map(newUser));
     }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateAsync(int id,[FromBody] UserUpdatePayload updatePayload)
     {
-        var updatedUser = await usersApplication.UpdateAsync(id, updatePayload.ToCandidate());
+        var updatedUser = await usersApplication.UpdateAsync(id, updatePayload);
 
-        return Ok(userViewModelMapper.Map(updatedUser));
+        return Ok(userEntityViewModelMapper.Map(updatedUser));
     }
 
     [HttpDelete("{id}")]

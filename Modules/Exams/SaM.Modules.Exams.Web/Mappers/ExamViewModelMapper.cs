@@ -1,16 +1,16 @@
 using SaM.Core.Abstractions.Mappers;
-using SaM.Modules.Exams.Domain.Entities;
+using SaM.Modules.Exams.Ports.InBounds.Entities;
 using SaM.Modules.Exams.Web.ViewModels;
-using SaM.Modules.Teachers.Domain.Entities;
+using SaM.Modules.Teachers.Ports.InBounds.Entities;
 using SaM.Modules.Teachers.Web.ViewModels;
 
 namespace SaM.Modules.Exams.Web.Mappers;
 
 public class ExamViewModelMapper(
-    Mapper<Teacher, TeacherViewModel> teacherViewModelMapper
-) : Mapper<Exam, ExamViewModel>
+    Mapper<ITeacher, TeacherViewModel> teacherViewModelMapper
+) : Mapper<IExam, ExamViewModel>
 {
-    public override ExamViewModel Map(Exam exam)
+    public override ExamViewModel Map(IExam exam)
     {
         return new ExamViewModel
         {

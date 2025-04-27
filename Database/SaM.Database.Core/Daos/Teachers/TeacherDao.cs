@@ -1,7 +1,7 @@
 using SaM.Core.Types.Enums;
 using SaM.Database.Core.Daos.Exams;
 using SaM.Database.Core.Daos.Users;
-using SaM.Modules.Teachers.Domain.Entities;
+using SaM.Modules.Teachers.Ports.InBounds.Entities;
 
 namespace SaM.Database.Core.Daos.Teachers;
 
@@ -13,7 +13,7 @@ public class TeacherDao
     public required SchoolSubject SchoolSubject { get; set; }
     public List<ExamDao>? Exams { get; set; }
 
-    public void UpdateFromDomainEntity(Teacher teacher)
+    public void UpdateFromDomainEntity(ITeacher teacher)
     {
         UserId = teacher.UserId;
         SchoolSubject = teacher.SchoolSubject;

@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using SaM.Core.Abstractions.Mappers;
-using SaM.Modules.Grades.Domain.Entities;
-using SaM.Modules.Grades.Web.Abstractions;
+using SaM.Modules.Grades.Ports.InBounds;
+using SaM.Modules.Grades.Ports.InBounds.Applications;
+using SaM.Modules.Grades.Ports.InBounds.Entities;
 using SaM.Modules.Grades.Web.Payloads;
 using SaM.Modules.Grades.Web.ViewModels;
 
@@ -9,7 +10,7 @@ namespace SaM.Modules.Grades.Web.Controllers;
 
 public class GradesController(
     IGradesApplication gradesApplication,
-    Mapper<Grade, GradeViewModel> gradeViewModelMapper
+    Mapper<IGrade, GradeViewModel> gradeViewModelMapper
 ) : ControllerBase
 {
     [HttpGet("{id}")]
@@ -23,14 +24,14 @@ public class GradesController(
     [HttpPost]
     public async Task<IActionResult> CreateAsync([FromBody] GradeCreationPayload creationPayload)
     {
-        var newGrade = await gradesApplication.CreateAsync(creationPayload.ToCandidate());
+        var newGrade = await gradesApplication.CreateAsync(creationPayload);
         return Created($"grades/{newGrade.Id}", gradeViewModelMapper.Map(newGrade));
     }
     
     [HttpPut]
     public async Task<IActionResult> UpdateAsync(int id, [FromBody] GradeUpdatePayload updatePayload)
     {
-        var updatedGrade = await gradesApplication.UpdateAsync(id, updatePayload.ToCandidate());
+        var updatedGrade = await gradesApplication.UpdateAsync(id, updatePayload);
 
         return Ok(gradeViewModelMapper.Map(updatedGrade));
     }

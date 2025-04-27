@@ -1,7 +1,11 @@
-using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
-using SaM.Modules.Teachers.Application.Validations;
-using SaM.Modules.Teachers.Web.Candidates;
+using SaM.Core.Abstractions.Mappers;
+using SaM.Modules.Teachers.Application.Applications;
+using SaM.Modules.Teachers.Application.Mappers;
+using SaM.Modules.Teachers.Ports.InBounds;
+using SaM.Modules.Teachers.Ports.InBounds.Applications;
+using SaM.Modules.Teachers.Ports.InBounds.Candidates;
+using SaM.Modules.Teachers.Ports.InBounds.Payloads;
 
 namespace SaM.Modules.Teachers.Application;
 
@@ -9,8 +13,10 @@ public static class ServiceCollectionExtension
 {
     public static IServiceCollection RegisterTeachersApplication(this IServiceCollection services)
     {
-        services.AddScoped<IValidator<TeacherCreationCandidate>, TeacherCreationCandidateValidator>();
-        services.AddScoped<IValidator<TeacherUpdateCandidate>, TeacherUpdateCandidateValidator>();
+        services.AddScoped<ITeachersApplication, TeachersApplication>();
+        
+        services.AddScoped<Mapper<ITeacherCreationPayload, ITeacherCreationCandidate>, TeacherCreationCandidateMapper>();
+        services.AddScoped<Mapper<ITeacherUpdatePayload, ITeacherUpdateCandidate>, TeacherUpdateCandidateMapper>();
 
         return services;
     }

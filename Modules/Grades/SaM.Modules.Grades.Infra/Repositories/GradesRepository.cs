@@ -4,24 +4,26 @@ using SaM.Core.Abstractions.Repository;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Database.Core;
 using SaM.Database.Core.Daos.Grades;
-using SaM.Modules.Grades.Domain.Entities;
 using SaM.Modules.Grades.Infra.Factories;
-using SaM.Modules.Grades.Ports.InBounds;
+using SaM.Modules.Grades.Ports.InBounds.Candidates;
+using SaM.Modules.Grades.Ports.InBounds.Entities;
+using SaM.Modules.Grades.Ports.OutBounds;
+using SaM.Modules.Grades.Ports.OutBounds.Repositories;
 
 namespace SaM.Modules.Grades.Infra.Repositories;
 
 public class GradesRepository(
     SaMDbContext dbContext,
-    Mapper<GradeDao, Grade> gradeDaoToEntityMapper
+    Mapper<GradeDao, IGrade> gradeDaoToEntityMapper
 ) : BaseRepository(dbContext), IGradesRepository
 {
-    public async Task<Grade> GetByIdAsync(int id)
+    public async Task<IGrade> GetByIdAsync(int id)
     {
         var grade =  await GetByIdInternal(id);
         return gradeDaoToEntityMapper.Map(grade);
     }
 
-    public async Task<Grade> CreateAsync(Grade grade)
+    public async Task<IGrade> CreateAsync(IGrade grade)
     {
         var newGradeDao = GradeDaoFactory.Create(grade);
         
@@ -32,15 +34,15 @@ public class GradesRepository(
         return grade;
     }
 
-    public async Task<Grade> UpdateAsync(Grade grade)
+    public async Task<IGrade> UpdateAsync(int id, IGradeUpdateCandidate updateCandidate)
     {
-        var gradeDaoToUpdate = await GetByIdInternal(grade.Id);
+        var gradeDaoToUpdate = await GetByIdInternal(id);
         
-        gradeDaoToUpdate.UpdateFromDomainEntity(grade);
+        gradeDaoToUpdate.UpdateFromCandidate(updateCandidate);
         
         await SaveChangesAsync();
 
-        return grade;
+        return gradeDaoToEntityMapper.Map(gradeDaoToUpdate);
     }
 
     public async Task DeleteAsync(int id)

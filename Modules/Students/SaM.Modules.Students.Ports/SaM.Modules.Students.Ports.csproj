@@ -8,11 +8,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Users\SaM.Modules.Users.Ports\SaM.Modules.Users.Ports.csproj" />
-      <ProjectReference Include="..\SaM.Modules.Students.Domain\SaM.Modules.Students.Domain.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="OutBounds\" />
     </ItemGroup>
 
 </Project>

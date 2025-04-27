@@ -4,18 +4,20 @@ using SaM.Core.Abstractions.Repository;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Database.Core;
 using SaM.Database.Core.Daos.Students;
-using SaM.Modules.Students.Domain.Entities;
 using SaM.Modules.Students.Infra.Factories;
-using SaM.Modules.Students.Ports.InBounds;
+using SaM.Modules.Students.Ports.InBounds.Candidates;
+using SaM.Modules.Students.Ports.InBounds.Entities;
+using SaM.Modules.Students.Ports.OutBounds;
+using SaM.Modules.Students.Ports.OutBounds.Repositories;
 
 namespace SaM.Modules.Students.Infra.Repositories;
 
 public class StudentsRepository(
     SaMDbContext dbContext,
-    Mapper<StudentDao, Student> studentDaoToStudentMapper
+    Mapper<StudentDao, IStudent> studentDaoToStudentMapper
 ) : BaseRepository(dbContext), IStudentsRepository
 {
-    public async Task<List<Student>> GetAllAsync()
+    public async Task<List<IStudent>> GetAllAsync()
     {
         var studentsDao = await Set<StudentDao>()
             .ToListAsync();
@@ -23,7 +25,7 @@ public class StudentsRepository(
         return studentDaoToStudentMapper.Map(studentsDao);
     }
 
-    public async Task<Student> GetByIdAsync(int studentId)
+    public async Task<IStudent> GetByIdAsync(int studentId)
     {
         var studentDao = await GetByIdInternal(studentId);
 
@@ -36,7 +38,7 @@ public class StudentsRepository(
             .AnyAsync(s => s.UserId == userId);
     }
 
-    public async Task<Student> Create(Student studentToCreate)
+    public async Task<IStudent> Create(IStudent studentToCreate)
     {
         var newStudentDao = StudentFactory.Create(studentToCreate);
         
@@ -46,15 +48,15 @@ public class StudentsRepository(
         return studentToCreate;
     }
 
-    public async Task<Student> UpdateAsync(Student student)
+    public async Task<IStudent> UpdateAsync(int id, IStudentUpdateCandidate updateCandidate)
     {
-        var studentDaoToUpdate = await GetByIdInternal(student.Id);
+        var studentDaoToUpdate = await GetByIdInternal(id);
         
-        studentDaoToUpdate.UpdateFromDomainEntity(student);
+        studentDaoToUpdate.UpdateFromCandidate(updateCandidate);
         
         await SaveChangesAsync();
 
-        return student;
+        return studentDaoToStudentMapper.Map(studentDaoToUpdate);
     }
 
     public async Task DeleteAsync(int id)

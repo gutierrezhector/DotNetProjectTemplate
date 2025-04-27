@@ -7,8 +7,14 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\..\Core\SaM.Core.Abstractions\SaM.Core.Abstractions.csproj" />
         <ProjectReference Include="..\..\..\Core\SaM.Core.Types\SaM.Core.Types.csproj"/>
-        <ProjectReference Include="..\..\Users\SaM.Modules.Users.Domain\SaM.Modules.Users.Domain.csproj"/>
+        <ProjectReference Include="..\..\Students\SaM.Modules.Students.Ports\SaM.Modules.Students.Ports.csproj" />
+        <ProjectReference Include="..\SaM.Modules.Teachers.Ports\SaM.Modules.Teachers.Ports.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FluentValidation" />
     </ItemGroup>
 
 </Project>

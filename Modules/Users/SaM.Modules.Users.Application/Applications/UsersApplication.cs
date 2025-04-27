@@ -1,0 +1,56 @@
+using FluentValidation;
+using SaM.Core.Abstractions.Mappers;
+using SaM.Core.Exceptions.Implementations;
+using SaM.Modules.Users.Ports.InBounds.Applications;
+using SaM.Modules.Users.Ports.InBounds.Candidates;
+using SaM.Modules.Users.Ports.InBounds.Entities;
+using SaM.Modules.Users.Ports.InBounds.Factories;
+using SaM.Modules.Users.Ports.InBounds.Payloads;
+using SaM.Modules.Users.Ports.OutBounds.Repositories;
+
+namespace SaM.Modules.Users.Application.Applications;
+
+public class UsersApplication(
+    IUsersRepository usersRepository, 
+    IUserEntityFactory userEntityFactory, 
+    IValidator<IUserCreationCandidate> userCreationCandidateValidator,
+    IValidator<IUserUpdateCandidate> userUpdateCandidateValidator,
+    Mapper<IUserCreationPayload, IUserCreationCandidate> userCreationCandidateMapper,
+    Mapper<IUserUpdatePayload, IUserUpdateCandidate> userUpdateCandidateMapper
+) : IUsersApplication
+{
+    public async Task<IUser> GetByIdAsync(int id)
+    {
+        return await usersRepository.GetByIdAsync(id);
+    }
+
+    public async Task<IUser> CreateAsync(IUserCreationPayload creationPayload)
+    {
+        var creationCandidate = userCreationCandidateMapper.Map(creationPayload);
+        var validationResult = await userCreationCandidateValidator.ValidateAsync(creationCandidate);
+        if (!validationResult.IsValid)
+        {
+            throw new ValidationResultException(validationResult);
+        }
+        
+        var userToCreate = userEntityFactory.Create(creationCandidate);
+        return await usersRepository.CreateAsync(userToCreate);
+    }
+
+    public async Task<IUser> UpdateAsync(int id, IUserUpdatePayload updatePayload)
+    {
+        var updateCandidate = userUpdateCandidateMapper.Map(updatePayload);
+        var validationResult = await userUpdateCandidateValidator.ValidateAsync(updateCandidate);
+        if (!validationResult.IsValid)
+        {
+            throw new ValidationResultException(validationResult);
+        }
+        
+        return await usersRepository.UpdateAsync(id, updateCandidate);
+    }
+
+    public async Task DeleteAsync(int id)
+    {
+        await usersRepository.DeleteAsync(id);
+    }
+}

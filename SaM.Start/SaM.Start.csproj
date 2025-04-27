@@ -20,6 +20,7 @@
       <ProjectReference Include="..\Database\SaM.Database.Core\SaM.Database.Core.csproj" />
       <ProjectReference Include="..\Modules\Exams\SaM.Modules.Exams.Infra\SaM.Modules.Exams.Infra.csproj" />
       <ProjectReference Include="..\Modules\Grades\SaM.Modules.Grades.Application\SaM.Modules.Grades.Application.csproj" />
+      <ProjectReference Include="..\Modules\Grades\SaM.Modules.Grades.Domain\SaM.Modules.Grades.Domain.csproj" />
       <ProjectReference Include="..\Modules\Grades\SaM.Modules.Grades.Infra\SaM.Modules.Grades.Infra.csproj" />
       <ProjectReference Include="..\Modules\Grades\SaM.Modules.Grades.Web\SaM.Modules.Grades.Web.csproj" />
       <ProjectReference Include="..\Modules\Students\SaM.Modules.Students.Infra\SaM.Modules.Students.Infra.csproj" />

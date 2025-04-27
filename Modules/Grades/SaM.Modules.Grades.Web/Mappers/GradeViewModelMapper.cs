@@ -1,17 +1,16 @@
 ﻿using SaM.Core.Abstractions.Mappers;
-using SaM.Modules.Grades.Domain.Entities;
+using SaM.Modules.Grades.Ports.InBounds.Entities;
 using SaM.Modules.Grades.Web.ViewModels;
-using SaM.Modules.Students.Domain.Entities;
-using SaM.Modules.Students.Web.Mappers;
+using SaM.Modules.Students.Ports.InBounds.Entities;
 using SaM.Modules.Students.Web.ViewModels;
 
 namespace SaM.Modules.Grades.Web.Mappers;
 
 public class GradeViewModelMapper(
-    Mapper<Student, StudentViewModel> studentViewModelMapper
-) : Mapper<Grade, GradeViewModel>
+    Mapper<IStudent, StudentViewModel> studentViewModelMapper
+) : Mapper<IGrade, GradeViewModel>
 {
-    public override GradeViewModel Map(Grade from)
+    public override GradeViewModel Map(IGrade from)
     {
         return new GradeViewModel
         {
