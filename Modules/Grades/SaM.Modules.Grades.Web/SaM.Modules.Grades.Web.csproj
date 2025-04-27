@@ -11,7 +11,6 @@
         <ProjectReference Include="..\..\Exams\SaM.Modules.Exams.Web\SaM.Modules.Exams.Web.csproj" />
         <ProjectReference Include="..\..\Students\SaM.Modules.Students.Ports\SaM.Modules.Students.Ports.csproj" />
         <ProjectReference Include="..\..\Students\SaM.Modules.Students.Web\SaM.Modules.Students.Web.csproj" />
-        <ProjectReference Include="..\SaM.Modules.Grades.Domain\SaM.Modules.Grades.Domain.csproj"/>
         <ProjectReference Include="..\SaM.Modules.Grades.Ports\SaM.Modules.Grades.Ports.csproj" />
     </ItemGroup>
 

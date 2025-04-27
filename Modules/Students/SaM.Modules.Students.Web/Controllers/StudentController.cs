@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SaM.Core.Abstractions.Mappers;
-using SaM.Modules.Students.Domain.Entities;
-using SaM.Modules.Students.Web.Abstractions;
+using SaM.Modules.Students.Ports.InBounds;
+using SaM.Modules.Students.Ports.InBounds.Applications;
+using SaM.Modules.Students.Ports.InBounds.Entities;
 using SaM.Modules.Students.Web.Payloads;
 using SaM.Modules.Students.Web.ViewModels;
 
@@ -9,7 +10,7 @@ namespace SaM.Modules.Students.Web.Controllers;
 
 public class StudentController(
     IStudentsApplication studentsApplication,
-    Mapper<Student, StudentViewModel> studentViewModelMapper
+    Mapper<IStudent, StudentViewModel> studentViewModelMapper
 ) : ControllerBase
 {
     [HttpGet]
@@ -31,7 +32,7 @@ public class StudentController(
     [HttpPost]
     public async Task<IActionResult> CreateAsync([FromBody] StudentCreationPayload creationPayload)
     {
-        var createdStudent = await studentsApplication.CreateAsync(creationPayload.ToCandidate());
+        var createdStudent = await studentsApplication.CreateAsync(creationPayload);
 
         return Created($"students/{createdStudent.Id}", studentViewModelMapper.Map(createdStudent));
     }
@@ -39,7 +40,7 @@ public class StudentController(
     [HttpPut]
     public async Task<IActionResult> UpdateAsync(int id, [FromBody] StudentUpdatePayload updatePayload)
     {
-        var updatedStudent = await studentsApplication.UpdateAsync(id, updatePayload.ToCandidate());
+        var updatedStudent = await studentsApplication.UpdateAsync(id, updatePayload);
 
         return Ok(studentViewModelMapper.Map(updatedStudent));
     }

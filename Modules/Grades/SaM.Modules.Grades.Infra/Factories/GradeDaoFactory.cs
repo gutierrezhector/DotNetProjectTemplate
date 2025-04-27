@@ -1,11 +1,11 @@
 ﻿using SaM.Database.Core.Daos.Grades;
-using SaM.Modules.Grades.Domain.Entities;
+using SaM.Modules.Grades.Ports.InBounds.Entities;
 
 namespace SaM.Modules.Grades.Infra.Factories;
 
 public static class GradeDaoFactory
 {
-    public static GradeDao Create(Grade grade)
+    public static GradeDao Create(IGrade grade)
     {
         return new GradeDao
         {

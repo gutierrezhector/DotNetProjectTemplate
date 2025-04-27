@@ -11,7 +11,6 @@
         <ProjectReference Include="..\..\..\Core\SaM.Core.Exceptions\SaM.Core.Exceptions.csproj"/>
         <ProjectReference Include="..\..\..\Database\SaM.Database.Core\SaM.Database.Core.csproj"/>
         <ProjectReference Include="..\SaM.Modules.Students.Application\SaM.Modules.Students.Application.csproj"/>
-        <ProjectReference Include="..\SaM.Modules.Students.Domain\SaM.Modules.Students.Domain.csproj"/>
         <ProjectReference Include="..\SaM.Modules.Students.Web\SaM.Modules.Students.Web.csproj"/>
     </ItemGroup>
 

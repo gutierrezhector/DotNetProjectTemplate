@@ -1,11 +1,11 @@
 ﻿using SaM.Database.Core.Daos.Teachers;
-using SaM.Modules.Teachers.Domain.Entities;
+using SaM.Modules.Teachers.Ports.InBounds.Entities;
 
 namespace SaM.Modules.Teachers.Infra.Factories;
 
 public static class TeacherDaoFactory
 {
-    public static TeacherDao Create(Teacher teacher)
+    public static TeacherDao Create(ITeacher teacher)
     {
         return new TeacherDao
         {

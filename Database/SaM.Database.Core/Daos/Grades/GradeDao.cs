@@ -1,6 +1,6 @@
 using SaM.Database.Core.Daos.Exams;
 using SaM.Database.Core.Daos.Students;
-using SaM.Modules.Grades.Domain.Entities;
+using SaM.Modules.Grades.Ports.InBounds.Candidates;
 
 namespace SaM.Database.Core.Daos.Grades;
 
@@ -13,10 +13,10 @@ public class GradeDao
     public required int StudentId { get; set; }
     public StudentDao? Student { get; set; }
 
-    public void UpdateFromDomainEntity(Grade grade)
+    public void UpdateFromCandidate(IGradeUpdateCandidate candidate)
     {
-        Notation = grade.Notation;
-        ExamId = grade.ExamId;
-        StudentId = grade.StudentId;
+        Notation = candidate.Notation;
+        ExamId = candidate.ExamId;
+        StudentId = candidate.StudentId;
     }
 }

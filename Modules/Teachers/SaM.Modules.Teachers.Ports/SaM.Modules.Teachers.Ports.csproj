@@ -7,12 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\Core\SaM.Core.Types\SaM.Core.Types.csproj" />
       <ProjectReference Include="..\..\Users\SaM.Modules.Users.Ports\SaM.Modules.Users.Ports.csproj" />
-      <ProjectReference Include="..\SaM.Modules.Teachers.Domain\SaM.Modules.Teachers.Domain.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="OutBounds\" />
     </ItemGroup>
 
 </Project>

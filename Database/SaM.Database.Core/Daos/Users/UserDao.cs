@@ -1,4 +1,4 @@
-using SaM.Modules.Users.Domain.Entities;
+using SaM.Modules.Users.Ports.InBounds.Candidates;
 
 namespace SaM.Database.Core.Daos.Users;
 
@@ -8,9 +8,9 @@ public class UserDao
     public required string FirstName { get; set; }
     public required string LastName { get; set; }
 
-    public void UpdateFromDomainEntity(User user)
+    public void UpdateFromCandidate(IUserUpdateCandidate updateCandidate)
     {
-        FirstName = user.FirstName;
-        LastName = user.LastName;
+        FirstName = updateCandidate.FirstName;
+        LastName = updateCandidate.LastName;
     }
 }

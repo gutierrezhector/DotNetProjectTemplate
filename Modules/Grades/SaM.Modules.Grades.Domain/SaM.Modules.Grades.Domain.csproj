@@ -8,7 +8,9 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Exams\SaM.Modules.Exams.Domain\SaM.Modules.Exams.Domain.csproj" />
+      <ProjectReference Include="..\..\Exams\SaM.Modules.Exams.Ports\SaM.Modules.Exams.Ports.csproj" />
       <ProjectReference Include="..\..\Students\SaM.Modules.Students.Domain\SaM.Modules.Students.Domain.csproj" />
+      <ProjectReference Include="..\SaM.Modules.Grades.Ports\SaM.Modules.Grades.Ports.csproj" />
     </ItemGroup>
 
 </Project>

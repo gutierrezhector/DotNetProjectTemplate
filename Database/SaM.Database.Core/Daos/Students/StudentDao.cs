@@ -1,6 +1,7 @@
 using SaM.Database.Core.Daos.Grades;
 using SaM.Database.Core.Daos.Users;
-using SaM.Modules.Students.Domain.Entities;
+using SaM.Modules.Students.Ports.InBounds.Candidates;
+using SaM.Modules.Students.Ports.InBounds.Entities;
 
 namespace SaM.Database.Core.Daos.Students;
 
@@ -11,8 +12,8 @@ public class StudentDao
     public UserDao? User { get; set; }
     public List<GradeDao>? Grades { get; set; }
 
-    public void UpdateFromDomainEntity(Student student)
+    public void UpdateFromCandidate(IStudentUpdateCandidate updateCandidate)
     {
-        UserId = student.UserId;
+        UserId = updateCandidate.UserId;
     }
 }

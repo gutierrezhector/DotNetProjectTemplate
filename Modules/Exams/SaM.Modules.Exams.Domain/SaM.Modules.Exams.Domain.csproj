@@ -8,6 +8,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\Teachers\SaM.Modules.Teachers.Domain\SaM.Modules.Teachers.Domain.csproj"/>
+        <ProjectReference Include="..\SaM.Modules.Exams.Ports\SaM.Modules.Exams.Ports.csproj" />
     </ItemGroup>
 
 </Project>

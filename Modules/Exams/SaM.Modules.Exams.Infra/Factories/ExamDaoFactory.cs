@@ -1,12 +1,11 @@
 ﻿using SaM.Database.Core.Daos.Exams;
-using SaM.Modules.Exams.Domain.Entities;
-using SaM.Modules.Exams.Web.Candidates;
+using SaM.Modules.Exams.Ports.InBounds.Entities;
 
 namespace SaM.Modules.Exams.Infra.Factories;
 
 public static class ExamDaoFactory
 {
-    public static ExamDao Create(Exam exam)
+    public static ExamDao Create(IExam exam)
     {
         return new ExamDao
         {

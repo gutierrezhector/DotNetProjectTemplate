@@ -4,18 +4,19 @@ using SaM.Core.Abstractions.Repository;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Database.Core;
 using SaM.Database.Core.Daos.Teachers;
-using SaM.Modules.Teachers.Domain.Entities;
 using SaM.Modules.Teachers.Infra.Factories;
-using SaM.Modules.Teachers.Ports.InBounds;
+using SaM.Modules.Teachers.Ports.InBounds.Entities;
+using SaM.Modules.Teachers.Ports.OuBounds;
+using SaM.Modules.Teachers.Ports.OuBounds.Repositories;
 
 namespace SaM.Modules.Teachers.Infra.Repositories;
 
 public class TeacherRepository(
     SaMDbContext dbContext,
-    Mapper<TeacherDao, Teacher> mapper
+    Mapper<TeacherDao, ITeacher> mapper
 ) : BaseRepository(dbContext), ITeacherRepository
 {
-    public async Task<List<Teacher>> GetAllAsync()
+    public async Task<List<ITeacher>> GetAllAsync()
     {
         var teachers = await Set<TeacherDao>()
             .ToListAsync();
@@ -23,7 +24,7 @@ public class TeacherRepository(
         return mapper.Map(teachers);
     }
 
-    public async Task<Teacher> GetByIdAsync(int id)
+    public async Task<ITeacher> GetByIdAsync(int id)
     {
         var teacher = await Set<TeacherDao>()
             .Where(t => t.Id == id)
@@ -37,7 +38,7 @@ public class TeacherRepository(
         return mapper.Map(teacher);
     }
 
-    public async Task<Teacher> Create(Teacher newTeacher)
+    public async Task<ITeacher> Create(ITeacher newTeacher)
     {
         var newTeacherDao = TeacherDaoFactory.Create(newTeacher);
         
@@ -49,7 +50,7 @@ public class TeacherRepository(
         return newTeacher;
     }
 
-    public async Task<Teacher> UpdateAsync(Teacher teacher)
+    public async Task<ITeacher> UpdateAsync(ITeacher teacher)
     {
         var teacherDaoToUpdate = await GetByIdInternal(teacher.Id);
         

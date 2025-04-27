@@ -1,19 +1,10 @@
 using SaM.Core.Types.Enums;
-using SaM.Modules.Teachers.Web.Candidates;
+using SaM.Modules.Teachers.Ports.InBounds.Payloads;
 
 namespace SaM.Modules.Teachers.Web.Payloads;
 
-public record TeacherCreationPayload
+public record TeacherCreationPayload : ITeacherCreationPayload
 {
     public SchoolSubject SchoolSubject { get; init; }
     public int UserId { get; init; }
-
-    public TeacherCreationCandidate ToCandidate()
-    {
-        return new TeacherCreationCandidate
-        {
-            SchoolSubject = SchoolSubject,
-            UserId = UserId
-        };
-    }
 }

@@ -6,4 +6,15 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="FluentValidation" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Core\SaM.Core.Abstractions\SaM.Core.Abstractions.csproj" />
+      <ProjectReference Include="..\..\..\Database\SaM.Database.Core\SaM.Database.Core.csproj" />
+      <ProjectReference Include="..\SaM.Modules.Users.Ports\SaM.Modules.Users.Ports.csproj" />
+    </ItemGroup>
+
 </Project>
