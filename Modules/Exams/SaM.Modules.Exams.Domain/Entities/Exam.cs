@@ -1,4 +1,5 @@
 using SaM.Modules.Exams.Ports.InBounds.Entities;
+using SaM.Modules.Grades.Ports.InBounds.Entities;
 using SaM.Modules.Teachers.Ports.InBounds.Entities;
 
 namespace SaM.Modules.Exams.Domain.Entities;
@@ -12,4 +13,5 @@ public class Exam : IExam
     public required decimal MaxPoints { get; set; }
     public required int ResponsibleTeacherId { get; set; }
     public ITeacher? ResponsibleTeacher { get; set; }
+    public List<IGrade>? Grades { get; set; }
 }

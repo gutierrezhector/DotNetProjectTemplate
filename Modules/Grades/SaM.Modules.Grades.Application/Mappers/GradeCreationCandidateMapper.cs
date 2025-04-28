@@ -7,7 +7,7 @@ namespace SaM.Modules.Grades.Application.Mappers;
 
 public class GradeCreationCandidateMapper : Mapper<IGradeCreationPayload, IGradeCreationCandidate>
 {
-    public override IGradeCreationCandidate Map(IGradeCreationPayload from)
+    public override IGradeCreationCandidate MapNonNullable(IGradeCreationPayload from)
     {
         return new GradeCreationCandidate
         {

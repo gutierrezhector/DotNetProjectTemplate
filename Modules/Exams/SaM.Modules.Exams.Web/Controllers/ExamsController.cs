@@ -17,7 +17,7 @@ public class ExamsController(
     {
         var exams = await application.GetAllAsync();
 
-        return Ok(examViewModelMapper.Map(exams));
+        return Ok(examViewModelMapper.MapNonNullable(exams));
     }
 
     [HttpGet("{id}")]
@@ -25,7 +25,7 @@ public class ExamsController(
     {
         var exam = await application.GetByIdAsync(id);
 
-        return Ok(examViewModelMapper.Map(exam));
+        return Ok(examViewModelMapper.MapNonNullable(exam));
     }
 
     [HttpPost]
@@ -40,7 +40,7 @@ public class ExamsController(
     {
         var updatedExam = await application.UpdateAsync(id, updatePayload);
 
-        return Ok(examViewModelMapper.Map(updatedExam));
+        return Ok(examViewModelMapper.MapNonNullable(updatedExam));
     }
 
     [HttpDelete("{id}")]

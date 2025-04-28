@@ -21,14 +21,14 @@ public class StudentsRepository(
         var studentsDao = await Set<StudentDao>()
             .ToListAsync();
 
-        return studentDaoToStudentMapper.Map(studentsDao);
+        return studentDaoToStudentMapper.MapNonNullable(studentsDao);
     }
 
     public async Task<IStudent> GetByIdAsync(int studentId)
     {
         var studentDao = await GetByIdInternal(studentId);
 
-        return studentDaoToStudentMapper.Map(studentDao);
+        return studentDaoToStudentMapper.MapNonNullable(studentDao);
     }
 
     public async Task<bool> ExistAsync(int userId)
@@ -55,7 +55,7 @@ public class StudentsRepository(
 
         await SaveChangesAsync();
 
-        return studentDaoToStudentMapper.Map(studentDaoToUpdate);
+        return studentDaoToStudentMapper.MapNonNullable(studentDaoToUpdate);
     }
 
     public async Task DeleteAsync(int id)

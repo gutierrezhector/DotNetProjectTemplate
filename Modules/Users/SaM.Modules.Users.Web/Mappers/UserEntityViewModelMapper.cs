@@ -6,7 +6,7 @@ namespace SaM.Modules.Users.Web.Mappers;
 
 public class UserEntityViewModelMapper : Mapper<IUser, UserViewModel>
 {
-    public override UserViewModel Map(IUser from)
+    public override UserViewModel MapNonNullable(IUser from)
     {
         return new UserViewModel
         {

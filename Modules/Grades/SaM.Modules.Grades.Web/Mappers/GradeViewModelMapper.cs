@@ -10,7 +10,7 @@ public class GradeViewModelMapper(
     Mapper<IStudent, StudentViewModel> studentViewModelMapper
 ) : Mapper<IGrade, GradeViewModel>
 {
-    public override GradeViewModel Map(IGrade from)
+    public override GradeViewModel MapNonNullable(IGrade from)
     {
         return new GradeViewModel
         {
@@ -19,8 +19,7 @@ public class GradeViewModelMapper(
             ExamId = from.ExamId,
             Exam = null,
             StudentId = from.StudentId,
-            // TODO manage null
-            Student = studentViewModelMapper.Map(from.Student),
+            Student = studentViewModelMapper.MapNullable(from.Student),
         };
     }
 }

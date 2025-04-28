@@ -7,7 +7,7 @@ namespace SaM.Modules.Exams.Application.Mappers;
 
 public class ExamUpdateCandidateMapper : Mapper<IExamUpdatePayload, IExamUpdateCandidate>
 {
-    public override IExamUpdateCandidate Map(IExamUpdatePayload from)
+    public override IExamUpdateCandidate MapNonNullable(IExamUpdatePayload from)
     {
         return new ExamUpdateCandidate
         {

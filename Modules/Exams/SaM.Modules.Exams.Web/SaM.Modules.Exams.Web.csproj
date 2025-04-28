@@ -16,8 +16,4 @@
       <ProjectReference Include="..\SaM.Modules.Exams.Ports\SaM.Modules.Exams.Ports.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Abstractions\" />
-    </ItemGroup>
-
 </Project>

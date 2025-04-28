@@ -7,7 +7,7 @@ namespace SaM.Modules.Exams.Application.Mappers;
 
 public class ExamCreationCandidateMapper : Mapper<IExamCreationPayload, IExamCreationCandidate>
 {
-    public override IExamCreationCandidate Map(IExamCreationPayload from)
+    public override IExamCreationCandidate MapNonNullable(IExamCreationPayload from)
     {
         return new ExamCreationCandidate
         {

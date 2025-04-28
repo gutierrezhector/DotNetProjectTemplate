@@ -7,7 +7,7 @@ namespace SaM.Modules.Users.Application.Mappers;
 
 public class UserUpdateCandidateMapper : Mapper<IUserUpdatePayload, IUserUpdateCandidate>
 {
-    public override IUserUpdateCandidate Map(IUserUpdatePayload from)
+    public override IUserUpdateCandidate MapNonNullable(IUserUpdatePayload from)
     {
         return new UserUpdateCandidate
         {

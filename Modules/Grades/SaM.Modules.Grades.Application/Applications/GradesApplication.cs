@@ -27,7 +27,7 @@ public class GradesApplication(
 
     public async Task<IGrade> CreateAsync(IGradeCreationPayload creationPayload)
     {
-        var creationCandidate = gradeCreationCandidateMapper.Map(creationPayload);
+        var creationCandidate = gradeCreationCandidateMapper.MapNonNullable(creationPayload);
         var validationResult = await gradeCreationCandidateValidator.ValidateAsync(creationCandidate);
         if (!validationResult.IsValid)
         {
@@ -42,7 +42,7 @@ public class GradesApplication(
 
     public async Task<IGrade> UpdateAsync(int id, IGradeUpdatePayload updatePayload)
     {
-        var updateCandidate = gradeUpdateCandidateMapper.Map(updatePayload);
+        var updateCandidate = gradeUpdateCandidateMapper.MapNonNullable(updatePayload);
         var validationResult = await gradeUpdateCandidateValidator.ValidateAsync(updateCandidate);
         if (!validationResult.IsValid)
         {

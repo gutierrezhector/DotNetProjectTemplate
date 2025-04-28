@@ -7,7 +7,7 @@ namespace SaM.Modules.Teachers.Application.Mappers;
 
 public class TeacherUpdateCandidateMapper : Mapper<ITeacherUpdatePayload, ITeacherUpdateCandidate>
 {
-    public override ITeacherUpdateCandidate Map(ITeacherUpdatePayload from)
+    public override ITeacherUpdateCandidate MapNonNullable(ITeacherUpdatePayload from)
     {
         return new TeacherUpdateCandidate
         {

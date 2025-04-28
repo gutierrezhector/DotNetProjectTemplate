@@ -18,14 +18,14 @@ public class GradesController(
     {
         var grade = await gradesApplication.GetByIdAsync(id);
 
-        return Ok(gradeViewModelMapper.Map(grade));
+        return Ok(gradeViewModelMapper.MapNonNullable(grade));
     }
 
     [HttpPost]
     public async Task<IActionResult> CreateAsync([FromBody] GradeCreationPayload creationPayload)
     {
         var newGrade = await gradesApplication.CreateAsync(creationPayload);
-        return Created($"grades/{newGrade.Id}", gradeViewModelMapper.Map(newGrade));
+        return Created($"grades/{newGrade.Id}", gradeViewModelMapper.MapNonNullable(newGrade));
     }
 
     [HttpPut]
@@ -33,7 +33,7 @@ public class GradesController(
     {
         var updatedGrade = await gradesApplication.UpdateAsync(id, updatePayload);
 
-        return Ok(gradeViewModelMapper.Map(updatedGrade));
+        return Ok(gradeViewModelMapper.MapNonNullable(updatedGrade));
     }
 
     [HttpDelete("{id}")]

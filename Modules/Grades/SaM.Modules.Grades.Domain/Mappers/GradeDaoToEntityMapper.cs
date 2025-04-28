@@ -14,17 +14,16 @@ public class GradeDaoToEntityMapper(
     Mapper<ExamDao, IExam> examFromDaoMapper
 ) : Mapper<GradeDao, IGrade>
 {
-    public override IGrade Map(GradeDao from)
+    public override IGrade MapNonNullable(GradeDao from)
     {
         return new Grade
         {
             Id = from.Id,
             Notation = from.Notation,
             StudentId = from.StudentId,
-            // TODO manage null
-            Student = studentFromDaoMapper.Map(from.Student),
+            Student = studentFromDaoMapper.MapNullable(from.Student),
             ExamId = from.ExamId,
-            Exam = examFromDaoMapper.Map(from.Exam),
+            Exam = examFromDaoMapper.MapNullable(from.Exam),
         };
     }
 }
