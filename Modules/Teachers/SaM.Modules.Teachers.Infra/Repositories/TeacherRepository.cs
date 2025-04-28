@@ -20,7 +20,7 @@ public class TeacherRepository(
         var teachers = await Set<TeacherDao>()
             .ToListAsync();
 
-        return mapper.Map(teachers);
+        return mapper.MapNonNullable(teachers);
     }
 
     public async Task<ITeacher> GetByIdAsync(int id)
@@ -34,7 +34,7 @@ public class TeacherRepository(
             throw new NotFoundException($"teacher with id '{id}' not found.'");
         }
 
-        return mapper.Map(teacher);
+        return mapper.MapNonNullable(teacher);
     }
 
     public async Task<ITeacher> Create(ITeacher newTeacher)

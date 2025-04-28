@@ -32,7 +32,7 @@ public class StudentsApplication(
 
     public async Task<IStudent> CreateAsync(IStudentCreationPayload creationPayload)
     {
-        var creationCandidate = studentCreationCandidateMapper.Map(creationPayload);
+        var creationCandidate = studentCreationCandidateMapper.MapNonNullable(creationPayload);
         var validationResult = await studentCreationCandidateValidator.ValidateAsync(creationCandidate);
         if (!validationResult.IsValid)
         {
@@ -46,7 +46,7 @@ public class StudentsApplication(
 
     public async Task<IStudent> UpdateAsync(int id, IStudentUpdatePayload updatePayload)
     {
-        var updateCandidate = studentUpdateCandidateMapper.Map(updatePayload);
+        var updateCandidate = studentUpdateCandidateMapper.MapNonNullable(updatePayload);
         var validationResult = await studentUpdateCandidateValidator.ValidateAsync(updateCandidate);
         if (!validationResult.IsValid)
         {

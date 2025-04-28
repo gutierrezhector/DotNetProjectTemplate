@@ -7,7 +7,7 @@ namespace SaM.Modules.Teachers.Application.Mappers;
 
 public class TeacherCreationCandidateMapper : Mapper<ITeacherCreationPayload, ITeacherCreationCandidate>
 {
-    public override ITeacherCreationCandidate Map(ITeacherCreationPayload from)
+    public override ITeacherCreationCandidate MapNonNullable(ITeacherCreationPayload from)
     {
         return new TeacherCreationCandidate
         {

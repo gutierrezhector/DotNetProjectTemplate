@@ -7,7 +7,7 @@ namespace SaM.Modules.Users.Domain.Mappers;
 
 public class UserDaoToEntityMapper : Mapper<UserDao, IUser>
 {
-    public override IUser Map(UserDao from)
+    public override IUser MapNonNullable(UserDao from)
     {
         return new User
         {

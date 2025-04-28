@@ -26,7 +26,7 @@ public class UsersApplication(
 
     public async Task<IUser> CreateAsync(IUserCreationPayload creationPayload)
     {
-        var creationCandidate = userCreationCandidateMapper.Map(creationPayload);
+        var creationCandidate = userCreationCandidateMapper.MapNonNullable(creationPayload);
         var validationResult = await userCreationCandidateValidator.ValidateAsync(creationCandidate);
         if (!validationResult.IsValid)
         {
@@ -39,7 +39,7 @@ public class UsersApplication(
 
     public async Task<IUser> UpdateAsync(int id, IUserUpdatePayload updatePayload)
     {
-        var updateCandidate = userUpdateCandidateMapper.Map(updatePayload);
+        var updateCandidate = userUpdateCandidateMapper.MapNonNullable(updatePayload);
         var validationResult = await userUpdateCandidateValidator.ValidateAsync(updateCandidate);
         if (!validationResult.IsValid)
         {

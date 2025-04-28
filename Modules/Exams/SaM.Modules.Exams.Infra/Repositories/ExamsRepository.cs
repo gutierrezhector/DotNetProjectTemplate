@@ -20,14 +20,14 @@ public class ExamsRepository(
     {
         var exams = await Set<ExamDao>().ToListAsync();
 
-        return mapper.Map(exams);
+        return mapper.MapNonNullable(exams);
     }
 
     public async Task<IExam> GetByIdAsync(int id)
     {
         var exam = await GetByIdInternal(id);
 
-        return mapper.Map(exam);
+        return mapper.MapNonNullable(exam);
     }
 
     public async Task<IExam> CreateAsync(IExam examToCreate)
@@ -51,7 +51,7 @@ public class ExamsRepository(
 
         await SaveChangesAsync();
 
-        return mapper.Map(examDaoToUpdate);
+        return mapper.MapNonNullable(examDaoToUpdate);
     }
 
     public async Task DeleteAsync(int id)

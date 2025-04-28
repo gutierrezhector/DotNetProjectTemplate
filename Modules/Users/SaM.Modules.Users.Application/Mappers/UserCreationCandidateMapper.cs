@@ -7,7 +7,7 @@ namespace SaM.Modules.Users.Application.Mappers;
 
 public class UserCreationCandidateMapper : Mapper<IUserCreationPayload, IUserCreationCandidate>
 {
-    public override IUserCreationCandidate Map(IUserCreationPayload from)
+    public override IUserCreationCandidate MapNonNullable(IUserCreationPayload from)
     {
         return new UserCreationCandidate
         {

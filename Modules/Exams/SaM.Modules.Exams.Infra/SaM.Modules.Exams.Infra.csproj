@@ -14,8 +14,4 @@
         <ProjectReference Include="..\SaM.Modules.Exams.Web\SaM.Modules.Exams.Web.csproj"/>
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Mappers\" />
-    </ItemGroup>
-
 </Project>

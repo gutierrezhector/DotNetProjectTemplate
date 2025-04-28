@@ -17,7 +17,7 @@ public class TeachersController(
     {
         var teachers = await teachersApplication.GetAllAsync();
 
-        return Ok(teacherViewModelMapper.Map(teachers));
+        return Ok(teacherViewModelMapper.MapNonNullable(teachers));
     }
 
     [HttpGet("{id}")]
@@ -25,14 +25,14 @@ public class TeachersController(
     {
         var teacher = await teachersApplication.GetByIdAsync(id);
 
-        return Ok(teacherViewModelMapper.Map(teacher));
+        return Ok(teacherViewModelMapper.MapNonNullable(teacher));
     }
 
     [HttpPost]
     public async Task<IActionResult> CreateAsync([FromBody] TeacherCreationPayload creationPayload)
     {
         var newTeacher = await teachersApplication.Create(creationPayload);
-        return Created($"teachers/{newTeacher.Id}", teacherViewModelMapper.Map(newTeacher));
+        return Created($"teachers/{newTeacher.Id}", teacherViewModelMapper.MapNonNullable(newTeacher));
     }
 
     [HttpPut]
@@ -40,7 +40,7 @@ public class TeachersController(
     {
         var updatedTeacher = await teachersApplication.UpdateAsync(id, teacherUpdatePayload);
 
-        return Ok(teacherViewModelMapper.Map(updatedTeacher));
+        return Ok(teacherViewModelMapper.MapNonNullable(updatedTeacher));
     }
 
     [HttpDelete("{id}")]

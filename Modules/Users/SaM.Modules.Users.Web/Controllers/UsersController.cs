@@ -19,7 +19,7 @@ public class UsersController(
     {
         var user = await usersApplication.GetByIdAsync(id);
 
-        return Ok(userEntityViewModelMapper.Map(user));
+        return Ok(userEntityViewModelMapper.MapNonNullable(user));
     }
 
     [HttpPost]
@@ -27,7 +27,7 @@ public class UsersController(
     {
         var newUser = await usersApplication.CreateAsync(creationPayload);
 
-        return Created($"users/{newUser.Id}", userEntityViewModelMapper.Map(newUser));
+        return Created($"users/{newUser.Id}", userEntityViewModelMapper.MapNonNullable(newUser));
     }
 
     [HttpPut("{id}")]
@@ -35,7 +35,7 @@ public class UsersController(
     {
         var updatedUser = await usersApplication.UpdateAsync(id, updatePayload);
 
-        return Ok(userEntityViewModelMapper.Map(updatedUser));
+        return Ok(userEntityViewModelMapper.MapNonNullable(updatedUser));
     }
 
     [HttpDelete("{id}")]

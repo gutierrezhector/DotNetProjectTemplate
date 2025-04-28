@@ -13,8 +13,4 @@
         <ProjectReference Include="..\SaM.Modules.Teachers.Application\SaM.Modules.Teachers.Application.csproj"/>
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Mappers\" />
-    </ItemGroup>
-
 </Project>

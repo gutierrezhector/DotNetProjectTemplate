@@ -31,7 +31,7 @@ public class ExamsApplication(
 
     public async Task<IExam> CreateAsync(IExamCreationPayload creationPayload)
     {
-        var creationCandidate = examCreationPayloadMapper.Map(creationPayload);
+        var creationCandidate = examCreationPayloadMapper.MapNonNullable(creationPayload);
         var validationResult = await examCreationCandidateValidator.ValidateAsync(creationCandidate);
         if (!validationResult.IsValid)
         {
@@ -45,7 +45,7 @@ public class ExamsApplication(
 
     public async Task<IExam> UpdateAsync(int id, IExamUpdatePayload updatePayload)
     {
-        var updateCandidate = examUpdatePayloadMapper.Map(updatePayload);
+        var updateCandidate = examUpdatePayloadMapper.MapNonNullable(updatePayload);
         var validationResult = await examUpdateCandidateValidator.ValidateAsync(updateCandidate);
         if (!validationResult.IsValid)
         {

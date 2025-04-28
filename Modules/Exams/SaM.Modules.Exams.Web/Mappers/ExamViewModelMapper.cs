@@ -10,7 +10,7 @@ public class ExamViewModelMapper(
     Mapper<ITeacher, TeacherViewModel> teacherViewModelMapper
 ) : Mapper<IExam, ExamViewModel>
 {
-    public override ExamViewModel Map(IExam exam)
+    public override ExamViewModel MapNonNullable(IExam exam)
     {
         return new ExamViewModel
         {
@@ -20,8 +20,7 @@ public class ExamViewModelMapper(
             EndDate = exam.EndDate,
             MaxPoints = exam.MaxPoints,
             ResponsibleTeacherId = exam.ResponsibleTeacherId,
-            // TODO : manage null
-            ResponsibleTeacher = teacherViewModelMapper.Map(exam.ResponsibleTeacher),
+            ResponsibleTeacher = teacherViewModelMapper.MapNullable(exam.ResponsibleTeacher),
         };
     }
 }

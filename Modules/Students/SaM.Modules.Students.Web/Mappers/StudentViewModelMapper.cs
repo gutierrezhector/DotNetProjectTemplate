@@ -10,14 +10,13 @@ public class StudentViewModelMapper(
     Mapper<IUser, UserViewModel> userViewModelMapper
 ) : Mapper<IStudent, StudentViewModel>
 {
-    public override StudentViewModel Map(IStudent from)
+    public override StudentViewModel MapNonNullable(IStudent from)
     {
         return new StudentViewModel
         {
             Id = from.Id,
             UserId = from.Id,
-            // TODO : manage null
-            User = userViewModelMapper.Map(from.User),
+            User = userViewModelMapper.MapNullable(from.User),
         };
     }
 }

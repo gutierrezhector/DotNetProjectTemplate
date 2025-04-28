@@ -20,7 +20,7 @@ public class UsersRepository(
     {
         var userDao = await GetByIdInternal(id);
 
-        return userDaoToUserEntityMapper.Map(userDao);
+        return userDaoToUserEntityMapper.MapNonNullable(userDao);
     }
 
     public async Task<IUser> CreateAsync(IUser user)
@@ -43,7 +43,7 @@ public class UsersRepository(
 
         await SaveChangesAsync();
 
-        return userDaoToUserEntityMapper.Map(userDaoToUpdate);
+        return userDaoToUserEntityMapper.MapNonNullable(userDaoToUpdate);
     }
 
     public async Task DeleteAsync(int id)

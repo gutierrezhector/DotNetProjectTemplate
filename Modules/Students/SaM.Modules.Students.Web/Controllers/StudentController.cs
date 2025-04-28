@@ -18,7 +18,7 @@ public class StudentController(
     {
         var students = await studentsApplication.GetAllAsync();
 
-        return Ok(studentViewModelMapper.Map(students));
+        return Ok(studentViewModelMapper.MapNonNullable(students));
     }
 
     [HttpGet("{id}")]
@@ -26,7 +26,7 @@ public class StudentController(
     {
         var student = await studentsApplication.GetByIdAsync(id);
 
-        return Ok(studentViewModelMapper.Map(student));
+        return Ok(studentViewModelMapper.MapNonNullable(student));
     }
 
     [HttpPost]
@@ -34,7 +34,7 @@ public class StudentController(
     {
         var createdStudent = await studentsApplication.CreateAsync(creationPayload);
 
-        return Created($"students/{createdStudent.Id}", studentViewModelMapper.Map(createdStudent));
+        return Created($"students/{createdStudent.Id}", studentViewModelMapper.MapNonNullable(createdStudent));
     }
 
     [HttpPut]
@@ -42,7 +42,7 @@ public class StudentController(
     {
         var updatedStudent = await studentsApplication.UpdateAsync(id, updatePayload);
 
-        return Ok(studentViewModelMapper.Map(updatedStudent));
+        return Ok(studentViewModelMapper.MapNonNullable(updatedStudent));
     }
 
     [HttpDelete("{id}")]

@@ -19,7 +19,7 @@ public class GradesRepository(
     public async Task<IGrade> GetByIdAsync(int id)
     {
         var grade = await GetByIdInternal(id);
-        return gradeDaoToEntityMapper.Map(grade);
+        return gradeDaoToEntityMapper.MapNonNullable(grade);
     }
 
     public async Task<IGrade> CreateAsync(IGrade grade)
@@ -41,7 +41,7 @@ public class GradesRepository(
 
         await SaveChangesAsync();
 
-        return gradeDaoToEntityMapper.Map(gradeDaoToUpdate);
+        return gradeDaoToEntityMapper.MapNonNullable(gradeDaoToUpdate);
     }
 
     public async Task DeleteAsync(int id)

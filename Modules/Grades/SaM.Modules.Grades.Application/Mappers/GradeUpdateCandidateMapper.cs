@@ -7,7 +7,7 @@ namespace SaM.Modules.Grades.Application.Mappers;
 
 public class GradeUpdateCandidateMapper : Mapper<IGradeUpdatePayload, IGradeUpdateCandidate>
 {
-    public override IGradeUpdateCandidate Map(IGradeUpdatePayload from)
+    public override IGradeUpdateCandidate MapNonNullable(IGradeUpdatePayload from)
     {
         return new GradeUpdateCandidate
         {

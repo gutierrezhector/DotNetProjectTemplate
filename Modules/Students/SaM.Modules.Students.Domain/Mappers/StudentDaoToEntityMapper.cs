@@ -11,14 +11,13 @@ public class StudentDaoToEntityMapper(
     Mapper<UserDao, IUser> userFromDaoMapper
 ) : Mapper<StudentDao, IStudent>
 {
-    public override IStudent Map(StudentDao from)
+    public override IStudent MapNonNullable(StudentDao from)
     {
         return new Student
         {
             Id = from.Id,
             UserId = from.UserId,
-            // TODO : manage null
-            User = userFromDaoMapper.Map(from.User),
+            User = userFromDaoMapper.MapNullable(from.User),
         };
     }
 }
