@@ -5,5 +5,5 @@ public enum SchoolSubject
     Undefined,
     Math,
     English,
-    French
+    French,
 }

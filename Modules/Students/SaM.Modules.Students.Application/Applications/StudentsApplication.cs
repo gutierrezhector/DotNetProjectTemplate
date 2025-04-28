@@ -7,7 +7,6 @@ using SaM.Modules.Students.Ports.InBounds.Candidates;
 using SaM.Modules.Students.Ports.InBounds.Entities;
 using SaM.Modules.Students.Ports.InBounds.Factories;
 using SaM.Modules.Students.Ports.InBounds.Payloads;
-using SaM.Modules.Students.Ports.OutBounds;
 using SaM.Modules.Students.Ports.OutBounds.Repositories;
 
 namespace SaM.Modules.Students.Application.Applications;
@@ -39,7 +38,7 @@ public class StudentsApplication(
         {
             throw new ValidationResultException(validationResult);
         }
-        
+
         var studentToCreate = studentEntityFactory.Create(creationCandidate);
 
         return await studentsRepository.Create(studentToCreate);
@@ -53,9 +52,9 @@ public class StudentsApplication(
         {
             throw new ValidationResultException(validationResult);
         }
-        
+
         var newStudent = await studentsRepository.UpdateAsync(id, updateCandidate);
-        
+
         return newStudent;
     }
 

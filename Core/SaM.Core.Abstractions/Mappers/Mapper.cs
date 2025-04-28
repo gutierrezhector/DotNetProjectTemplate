@@ -1,6 +1,6 @@
 namespace SaM.Core.Abstractions.Mappers;
 
-public abstract class Mapper<TFrom,TTo>
+public abstract class Mapper<TFrom, TTo>
 {
     public abstract TTo Map(TFrom from);
 

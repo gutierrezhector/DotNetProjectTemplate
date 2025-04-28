@@ -8,7 +8,7 @@ using SaM.Modules.Exams.Web.ViewModels;
 namespace SaM.Modules.Exams.Web.Controllers;
 
 public class ExamsController(
-    IExamsApplication application, 
+    IExamsApplication application,
     Mapper<IExam, ExamViewModel> examViewModelMapper
 ) : ControllerBase
 {
@@ -34,7 +34,7 @@ public class ExamsController(
         var newExam = await application.CreateAsync(creationPayload);
         return Created($"exams/{newExam.Id}", newExam);
     }
-    
+
     [HttpPut]
     public async Task<IActionResult> UpdateAsync(int id, [FromBody] ExamUpdatePayload updatePayload)
     {

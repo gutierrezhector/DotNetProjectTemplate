@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using SaM.Modules.Exams.Ports.OutBounds;
 using SaM.Modules.Exams.Ports.OutBounds.Repositories;
 using SaM.Modules.Grades.Ports.InBounds.Candidates;
 

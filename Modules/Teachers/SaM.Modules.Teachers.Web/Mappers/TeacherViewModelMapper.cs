@@ -8,7 +8,7 @@ namespace SaM.Modules.Teachers.Web.Mappers;
 
 public class TeacherViewModelMapper(
     Mapper<IUser, UserViewModel> userViewModelMapper
-    ) : Mapper<ITeacher, TeacherViewModel>
+) : Mapper<ITeacher, TeacherViewModel>
 {
     public override TeacherViewModel Map(ITeacher from)
     {

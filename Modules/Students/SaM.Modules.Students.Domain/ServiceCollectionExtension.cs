@@ -16,7 +16,7 @@ public static class ServiceCollectionExtension
     public static IServiceCollection RegisterStudentsDomain(this IServiceCollection services)
     {
         services.AddScoped<IStudentEntityFactory, StudentEntityFactory>();
-        
+
         services.AddScoped<IValidator<IStudentCreationCandidate>, StudentCreationCandidateValidator>();
         services.AddScoped<IValidator<IStudentUpdateCandidate>, StudentUpdateCandidateValidator>();
 

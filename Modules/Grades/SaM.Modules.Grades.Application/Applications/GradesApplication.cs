@@ -7,7 +7,6 @@ using SaM.Modules.Grades.Ports.InBounds.Candidates;
 using SaM.Modules.Grades.Ports.InBounds.Entities;
 using SaM.Modules.Grades.Ports.InBounds.Factories;
 using SaM.Modules.Grades.Ports.InBounds.Payloads;
-using SaM.Modules.Grades.Ports.OutBounds;
 using SaM.Modules.Grades.Ports.OutBounds.Repositories;
 
 namespace SaM.Modules.Grades.Application.Applications;
@@ -34,7 +33,7 @@ public class GradesApplication(
         {
             throw new ValidationResultException(validationResult);
         }
-        
+
         var gradeToCreate = gradeFactory.Create(creationCandidate);
         var newGrade = await gradesRepository.CreateAsync(gradeToCreate);
 
@@ -51,7 +50,7 @@ public class GradesApplication(
         }
 
         var newGrade = await gradesRepository.UpdateAsync(id, updateCandidate);
-        
+
         return newGrade;
     }
 

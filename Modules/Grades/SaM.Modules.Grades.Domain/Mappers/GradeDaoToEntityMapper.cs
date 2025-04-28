@@ -24,7 +24,7 @@ public class GradeDaoToEntityMapper(
             // TODO manage null
             Student = studentFromDaoMapper.Map(from.Student),
             ExamId = from.ExamId,
-            Exam = examFromDaoMapper.Map(from.Exam)
+            Exam = examFromDaoMapper.Map(from.Exam),
         };
     }
 }

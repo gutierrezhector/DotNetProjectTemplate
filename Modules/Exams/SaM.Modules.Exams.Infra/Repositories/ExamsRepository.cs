@@ -7,13 +7,12 @@ using SaM.Database.Core.Daos.Exams;
 using SaM.Modules.Exams.Infra.Factories;
 using SaM.Modules.Exams.Ports.InBounds.Candidates;
 using SaM.Modules.Exams.Ports.InBounds.Entities;
-using SaM.Modules.Exams.Ports.OutBounds;
 using SaM.Modules.Exams.Ports.OutBounds.Repositories;
 
 namespace SaM.Modules.Exams.Infra.Repositories;
 
 public class ExamsRepository(
-    SaMDbContext dbContext, 
+    SaMDbContext dbContext,
     Mapper<ExamDao, IExam> mapper
 ) : BaseRepository(dbContext), IExamsRepository
 {
@@ -26,7 +25,7 @@ public class ExamsRepository(
 
     public async Task<IExam> GetByIdAsync(int id)
     {
-        var exam =  await GetByIdInternal(id);
+        var exam = await GetByIdInternal(id);
 
         return mapper.Map(exam);
     }
@@ -34,22 +33,22 @@ public class ExamsRepository(
     public async Task<IExam> CreateAsync(IExam examToCreate)
     {
         var newExamDao = ExamDaoFactory.Create(examToCreate);
-        
+
         DbContext.Add(newExamDao);
-        
+
         await SaveChangesAsync();
 
         examToCreate.Id = newExamDao.Id;
-        
+
         return examToCreate;
     }
 
     public async Task<IExam> UpdateAsync(int id, IExamUpdateCandidate updateCandidate)
     {
         var examDaoToUpdate = await GetByIdInternal(id);
-        
+
         examDaoToUpdate.UpdateFromCandidate(updateCandidate);
-        
+
         await SaveChangesAsync();
 
         return mapper.Map(examDaoToUpdate);
@@ -60,10 +59,10 @@ public class ExamsRepository(
         var examDao = await GetByIdInternal(id);
 
         Set<ExamDao>().Remove(examDao);
-        
+
         await SaveChangesAsync();
     }
-    
+
     private async Task<ExamDao> GetByIdInternal(int id)
     {
         var examDao = await Set<ExamDao>()

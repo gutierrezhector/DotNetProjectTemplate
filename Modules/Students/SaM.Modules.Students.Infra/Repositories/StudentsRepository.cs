@@ -7,7 +7,6 @@ using SaM.Database.Core.Daos.Students;
 using SaM.Modules.Students.Infra.Factories;
 using SaM.Modules.Students.Ports.InBounds.Candidates;
 using SaM.Modules.Students.Ports.InBounds.Entities;
-using SaM.Modules.Students.Ports.OutBounds;
 using SaM.Modules.Students.Ports.OutBounds.Repositories;
 
 namespace SaM.Modules.Students.Infra.Repositories;
@@ -41,7 +40,7 @@ public class StudentsRepository(
     public async Task<IStudent> Create(IStudent studentToCreate)
     {
         var newStudentDao = StudentFactory.Create(studentToCreate);
-        
+
         DbContext.Add(newStudentDao);
         await SaveChangesAsync();
 
@@ -51,9 +50,9 @@ public class StudentsRepository(
     public async Task<IStudent> UpdateAsync(int id, IStudentUpdateCandidate updateCandidate)
     {
         var studentDaoToUpdate = await GetByIdInternal(id);
-        
+
         studentDaoToUpdate.UpdateFromCandidate(updateCandidate);
-        
+
         await SaveChangesAsync();
 
         return studentDaoToStudentMapper.Map(studentDaoToUpdate);
@@ -64,10 +63,10 @@ public class StudentsRepository(
         var studentDao = await GetByIdInternal(id);
 
         Set<StudentDao>().Remove(studentDao);
-        
+
         await SaveChangesAsync();
     }
-    
+
     private async Task<StudentDao> GetByIdInternal(int id)
     {
         var studentDao = await Set<StudentDao>()

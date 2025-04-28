@@ -8,7 +8,6 @@ using SaM.Modules.Exams.Domain.Validators;
 using SaM.Modules.Exams.Ports.InBounds.Candidates;
 using SaM.Modules.Exams.Ports.InBounds.Entities;
 using SaM.Modules.Exams.Ports.InBounds.Factories;
-using SaM.Modules.Exams.Ports.InBounds.Payloads;
 
 namespace SaM.Modules.Exams.Domain;
 
@@ -18,7 +17,7 @@ public static class ServiceCollectionExtension
     {
         services.AddScoped<IValidator<IExamCreationCandidate>, ExamCreationCandidateValidator>();
         services.AddScoped<IValidator<IExamUpdateCandidate>, ExamUpdateCandidateValidator>();
-        
+
         services.AddScoped<Mapper<ExamDao, IExam>, ExamDaoToExamEntityMapper>();
 
         services.AddScoped<IExamFactory, ExamFactory>();

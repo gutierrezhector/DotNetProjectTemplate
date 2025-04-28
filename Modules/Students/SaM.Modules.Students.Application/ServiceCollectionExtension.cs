@@ -17,7 +17,7 @@ public static class ServiceCollectionExtension
 
         services.AddScoped<Mapper<IStudentCreationPayload, IStudentCreationCandidate>, StudentCreationCandidateMapper>();
         services.AddScoped<Mapper<IStudentUpdatePayload, IStudentUpdateCandidate>, StudentUpdateCandidateMapper>();
-        
+
         return services;
     }
 }

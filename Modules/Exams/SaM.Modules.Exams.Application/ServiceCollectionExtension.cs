@@ -13,10 +13,10 @@ public static class ServiceCollectionExtension
     public static IServiceCollection RegisterExamsApplication(this IServiceCollection services)
     {
         services.AddScoped<IExamsApplication, ExamsApplication>();
-        
+
         services.AddScoped<Mapper<IExamCreationPayload, IExamCreationCandidate>, ExamCreationCandidateMapper>();
         services.AddScoped<Mapper<IExamUpdatePayload, IExamUpdateCandidate>, ExamUpdateCandidateMapper>();
-        
+
         return services;
     }
 }

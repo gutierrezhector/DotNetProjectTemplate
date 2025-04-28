@@ -1,5 +1,4 @@
 using SaM.Modules.Exams.Ports.InBounds.Entities;
-using SaM.Modules.Teachers.Domain.Entities;
 using SaM.Modules.Teachers.Ports.InBounds.Entities;
 
 namespace SaM.Modules.Exams.Domain.Entities;

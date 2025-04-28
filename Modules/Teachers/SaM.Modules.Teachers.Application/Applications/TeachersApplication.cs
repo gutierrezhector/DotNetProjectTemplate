@@ -6,7 +6,6 @@ using SaM.Modules.Teachers.Ports.InBounds.Candidates;
 using SaM.Modules.Teachers.Ports.InBounds.Entities;
 using SaM.Modules.Teachers.Ports.InBounds.Factories;
 using SaM.Modules.Teachers.Ports.InBounds.Payloads;
-using SaM.Modules.Teachers.Ports.OuBounds;
 using SaM.Modules.Teachers.Ports.OuBounds.Repositories;
 
 namespace SaM.Modules.Teachers.Application.Applications;
@@ -54,14 +53,14 @@ public class TeachersApplication(
         {
             throw new ValidationResultException(validationResult);
         }
-        
+
         var teacher = await teacherRepository.GetByIdAsync(id);
-        
+
         teacher.SchoolSubject = updateCandidate.SchoolSubject;
         teacher.UserId = updateCandidate.UserId;
-        
+
         var newTeacher = await teacherRepository.UpdateAsync(teacher);
-        
+
         return newTeacher;
     }
 

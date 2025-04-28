@@ -16,9 +16,9 @@ public static class ServiceCollectionExtension
     public static IServiceCollection RegisterTeachersDomain(this IServiceCollection services)
     {
         services.AddScoped<ITeacherEntityFactory, TeacherEntityFactory>();
-        
+
         services.AddScoped<Mapper<TeacherDao, ITeacher>, TeacherDaoToEntityMapper>();
-        
+
         services.AddScoped<IValidator<ITeacherCreationCandidate>, TeacherCreationCandidateValidator>();
         services.AddScoped<IValidator<ITeacherUpdateCandidate>, TeacherUpdateCandidateValidator>();
 

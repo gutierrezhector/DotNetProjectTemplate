@@ -36,7 +36,7 @@ public class StudentController(
 
         return Created($"students/{createdStudent.Id}", studentViewModelMapper.Map(createdStudent));
     }
-    
+
     [HttpPut]
     public async Task<IActionResult> UpdateAsync(int id, [FromBody] StudentUpdatePayload updatePayload)
     {
@@ -44,7 +44,7 @@ public class StudentController(
 
         return Ok(studentViewModelMapper.Map(updatedStudent));
     }
-    
+
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync(int id)
     {

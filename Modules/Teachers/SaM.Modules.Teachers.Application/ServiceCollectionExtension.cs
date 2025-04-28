@@ -2,7 +2,6 @@ using Microsoft.Extensions.DependencyInjection;
 using SaM.Core.Abstractions.Mappers;
 using SaM.Modules.Teachers.Application.Applications;
 using SaM.Modules.Teachers.Application.Mappers;
-using SaM.Modules.Teachers.Ports.InBounds;
 using SaM.Modules.Teachers.Ports.InBounds.Applications;
 using SaM.Modules.Teachers.Ports.InBounds.Candidates;
 using SaM.Modules.Teachers.Ports.InBounds.Payloads;
@@ -14,7 +13,7 @@ public static class ServiceCollectionExtension
     public static IServiceCollection RegisterTeachersApplication(this IServiceCollection services)
     {
         services.AddScoped<ITeachersApplication, TeachersApplication>();
-        
+
         services.AddScoped<Mapper<ITeacherCreationPayload, ITeacherCreationCandidate>, TeacherCreationCandidateMapper>();
         services.AddScoped<Mapper<ITeacherUpdatePayload, ITeacherUpdateCandidate>, TeacherUpdateCandidateMapper>();
 

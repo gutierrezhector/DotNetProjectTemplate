@@ -1,7 +1,6 @@
-namespace SaM.Database.Utils.Interfaces
+namespace SaM.Database.Utils.Interfaces;
+
+public interface IHasId
 {
-    public interface IHasId
-    {
-        int Id { get; set; }
-    }
+    int Id { get; set; }
 }

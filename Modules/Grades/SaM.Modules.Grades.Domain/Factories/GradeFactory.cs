@@ -13,7 +13,7 @@ public class GradeFactory : IGradeFactory
         {
             Notation = creationCandidate.Notation,
             ExamId = creationCandidate.ExamId,
-            StudentId = creationCandidate.StudentId
+            StudentId = creationCandidate.StudentId,
         };
     }
 }

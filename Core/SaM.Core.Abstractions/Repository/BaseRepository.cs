@@ -11,7 +11,7 @@ public abstract class BaseRepository(SaMDbContext dbContext)
     {
         return DbContext.Set<T>();
     }
-    
+
     protected Task SaveChangesAsync()
     {
         return DbContext.SaveChangesAsync();

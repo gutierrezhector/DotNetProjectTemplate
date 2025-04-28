@@ -1,4 +1,3 @@
-using SaM.Modules.Exams.Domain.Entities;
 using SaM.Modules.Exams.Ports.InBounds.Entities;
 using SaM.Modules.Grades.Ports.InBounds.Entities;
 using SaM.Modules.Students.Ports.InBounds.Entities;

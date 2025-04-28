@@ -11,7 +11,7 @@ public class StudentEntityFactory : IStudentEntityFactory
     {
         return new Student
         {
-            UserId = candidate.UserId
+            UserId = candidate.UserId,
         };
     }
 }

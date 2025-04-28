@@ -17,7 +17,7 @@ public class StudentViewModelMapper(
             Id = from.Id,
             UserId = from.Id,
             // TODO : manage null
-            User = userViewModelMapper.Map(from.User)
+            User = userViewModelMapper.Map(from.User),
         };
     }
 }

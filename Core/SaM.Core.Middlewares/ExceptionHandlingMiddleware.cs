@@ -28,7 +28,7 @@ public class ExceptionHandlingMiddleware(RequestDelegate next)
         {
             return ProblemDetailsHelper.GenerateProblemDetailsFromSaMException(saMException);
         }
-        
+
         return ProblemDetailsHelper.GenerateProblemDetailsFromDotnetException();
     }
 }

@@ -21,7 +21,7 @@ public class ExamViewModelMapper(
             MaxPoints = exam.MaxPoints,
             ResponsibleTeacherId = exam.ResponsibleTeacherId,
             // TODO : manage null
-            ResponsibleTeacher = teacherViewModelMapper.Map(exam.ResponsibleTeacher)
+            ResponsibleTeacher = teacherViewModelMapper.Map(exam.ResponsibleTeacher),
         };
     }
 }

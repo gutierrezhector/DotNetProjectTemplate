@@ -11,7 +11,7 @@ public static class ServiceCollectionExtension
     public static IServiceCollection RegisterTeachersWeb(this IServiceCollection services)
     {
         services.AddScoped<Mapper<ITeacher, TeacherViewModel>, TeacherViewModelMapper>();
-        
+
         return services;
     }
 }
