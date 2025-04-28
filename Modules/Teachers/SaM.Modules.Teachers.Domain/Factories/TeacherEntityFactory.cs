@@ -12,7 +12,7 @@ public class TeacherEntityFactory : ITeacherEntityFactory
         return new Teacher
         {
             SchoolSubject = creationCandidate.SchoolSubject,
-            UserId = creationCandidate.UserId
+            UserId = creationCandidate.UserId,
         };
     }
 }

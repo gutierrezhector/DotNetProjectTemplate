@@ -6,7 +6,6 @@ using SaM.Database.Core;
 using SaM.Database.Core.Daos.Teachers;
 using SaM.Modules.Teachers.Infra.Factories;
 using SaM.Modules.Teachers.Ports.InBounds.Entities;
-using SaM.Modules.Teachers.Ports.OuBounds;
 using SaM.Modules.Teachers.Ports.OuBounds.Repositories;
 
 namespace SaM.Modules.Teachers.Infra.Repositories;
@@ -41,21 +40,21 @@ public class TeacherRepository(
     public async Task<ITeacher> Create(ITeacher newTeacher)
     {
         var newTeacherDao = TeacherDaoFactory.Create(newTeacher);
-        
+
         DbContext.Add(newTeacherDao);
         await SaveChangesAsync();
 
         newTeacher.Id = newTeacherDao.Id;
-        
+
         return newTeacher;
     }
 
     public async Task<ITeacher> UpdateAsync(ITeacher teacher)
     {
         var teacherDaoToUpdate = await GetByIdInternal(teacher.Id);
-        
+
         teacherDaoToUpdate.UpdateFromDomainEntity(teacher);
-        
+
         await SaveChangesAsync();
 
         return teacher;
@@ -66,7 +65,7 @@ public class TeacherRepository(
         var teacherDao = await GetByIdInternal(id);
 
         Set<TeacherDao>().Remove(teacherDao);
-        
+
         await SaveChangesAsync();
     }
 
@@ -75,7 +74,7 @@ public class TeacherRepository(
         return await Set<TeacherDao>()
             .AnyAsync(t => t.UserId == id);
     }
-    
+
     private async Task<TeacherDao> GetByIdInternal(int id)
     {
         var teacherDao = await Set<TeacherDao>()

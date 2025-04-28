@@ -34,7 +34,7 @@ public static class RegisterServices
             .RegisterUsersApplication()
             .RegisterUsersInfra()
             .RegisterUsersDomain();
-        
+
         webApplicationBuilder.Services
             .RegisterStudentsWeb()
             .RegisterStudentsApplication()

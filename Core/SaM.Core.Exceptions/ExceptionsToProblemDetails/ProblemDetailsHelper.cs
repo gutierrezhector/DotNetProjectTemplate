@@ -14,10 +14,10 @@ public static class ProblemDetailsHelper
             UnauthorizedException => ProblemDetailsFactory.Unauthorized(),
             NotFoundException => ProblemDetailsFactory.NotFound(),
             ValidationResultException validationResultException => ProblemDetailsFactory.ValidationFailed(validationResultException),
-            _ => throw new ArgumentOutOfRangeException(nameof(exception))
+            _ => throw new ArgumentOutOfRangeException(nameof(exception)),
         };
     }
-    
+
     public static ProblemDetails GenerateProblemDetailsFromDotnetException()
     {
         return ProblemDetailsFactory.DotnetException();

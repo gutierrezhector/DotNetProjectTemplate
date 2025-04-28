@@ -11,8 +11,8 @@ using SaM.Modules.Users.Ports.OutBounds.Repositories;
 namespace SaM.Modules.Users.Application.Applications;
 
 public class UsersApplication(
-    IUsersRepository usersRepository, 
-    IUserEntityFactory userEntityFactory, 
+    IUsersRepository usersRepository,
+    IUserEntityFactory userEntityFactory,
     IValidator<IUserCreationCandidate> userCreationCandidateValidator,
     IValidator<IUserUpdateCandidate> userUpdateCandidateValidator,
     Mapper<IUserCreationPayload, IUserCreationCandidate> userCreationCandidateMapper,
@@ -32,7 +32,7 @@ public class UsersApplication(
         {
             throw new ValidationResultException(validationResult);
         }
-        
+
         var userToCreate = userEntityFactory.Create(creationCandidate);
         return await usersRepository.CreateAsync(userToCreate);
     }
@@ -45,7 +45,7 @@ public class UsersApplication(
         {
             throw new ValidationResultException(validationResult);
         }
-        
+
         return await usersRepository.UpdateAsync(id, updateCandidate);
     }
 

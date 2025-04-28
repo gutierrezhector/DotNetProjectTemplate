@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using SaM.Core.Abstractions.Mappers;
-using SaM.Modules.Users.Ports.InBounds;
 using SaM.Modules.Users.Ports.InBounds.Applications;
 using SaM.Modules.Users.Ports.InBounds.Entities;
 using SaM.Modules.Users.Web.Payloads;
@@ -32,7 +31,7 @@ public class UsersController(
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateAsync(int id,[FromBody] UserUpdatePayload updatePayload)
+    public async Task<IActionResult> UpdateAsync(int id, [FromBody] UserUpdatePayload updatePayload)
     {
         var updatedUser = await usersApplication.UpdateAsync(id, updatePayload);
 

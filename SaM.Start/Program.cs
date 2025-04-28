@@ -1,5 +1,5 @@
-using SaM.Start;
 using SaM.Core.Middlewares;
+using SaM.Start;
 
 var builder = WebApplication.CreateBuilder(args);
 

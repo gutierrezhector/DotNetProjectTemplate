@@ -11,9 +11,9 @@ public class UserDaoToEntityMapper : Mapper<UserDao, IUser>
     {
         return new User
         {
-             Id = from.Id,
-             FirstName = from.FirstName,
-             LastName = from.LastName,
+            Id = from.Id,
+            FirstName = from.FirstName,
+            LastName = from.LastName,
         };
     }
 }

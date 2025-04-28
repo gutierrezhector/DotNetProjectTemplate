@@ -6,7 +6,6 @@ using SaM.Modules.Exams.Ports.InBounds.Candidates;
 using SaM.Modules.Exams.Ports.InBounds.Entities;
 using SaM.Modules.Exams.Ports.InBounds.Factories;
 using SaM.Modules.Exams.Ports.InBounds.Payloads;
-using SaM.Modules.Exams.Ports.OutBounds;
 using SaM.Modules.Exams.Ports.OutBounds.Repositories;
 
 namespace SaM.Modules.Exams.Application.Applications;
@@ -38,7 +37,7 @@ public class ExamsApplication(
         {
             throw new ValidationResultException(validationResult);
         }
-        
+
         var examToCreate = examFactory.Create(creationCandidate);
 
         return await repository.CreateAsync(examToCreate);
@@ -52,7 +51,7 @@ public class ExamsApplication(
         {
             throw new ValidationResultException(validationResult);
         }
-        
+
         return await repository.UpdateAsync(id, updateCandidate);
     }
 

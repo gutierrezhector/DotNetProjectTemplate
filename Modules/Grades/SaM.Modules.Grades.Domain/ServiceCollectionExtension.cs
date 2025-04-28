@@ -16,7 +16,7 @@ public static class ServiceCollectionExtension
     public static IServiceCollection RegisterGradesDomain(this IServiceCollection services)
     {
         services.AddScoped<IGradeFactory, GradeFactory>();
-        
+
         services.AddScoped<Mapper<GradeDao, IGrade>, GradeDaoToEntityMapper>();
 
         services.AddScoped<IValidator<IGradeCreationCandidate>, GradeCreationCandidateValidator>();

@@ -9,9 +9,9 @@ public class TeachersConfiguration : IEntityTypeConfiguration<TeacherDao>
     public void Configure(EntityTypeBuilder<TeacherDao> builder)
     {
         builder.ToTable("Teachers");
-        
+
         builder.HasKey(x => x.Id);
-        
+
         builder.Property(teacher => teacher.SchoolSubject)
             .HasConversion<string>();
 

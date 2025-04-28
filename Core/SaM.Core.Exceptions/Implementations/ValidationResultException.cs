@@ -1,4 +1,3 @@
-
 using FluentValidation.Results;
 
 namespace SaM.Core.Exceptions.Implementations;

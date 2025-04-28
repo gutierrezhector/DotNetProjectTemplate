@@ -20,14 +20,14 @@ public class GradesController(
 
         return Ok(gradeViewModelMapper.Map(grade));
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> CreateAsync([FromBody] GradeCreationPayload creationPayload)
     {
         var newGrade = await gradesApplication.CreateAsync(creationPayload);
         return Created($"grades/{newGrade.Id}", gradeViewModelMapper.Map(newGrade));
     }
-    
+
     [HttpPut]
     public async Task<IActionResult> UpdateAsync(int id, [FromBody] GradeUpdatePayload updatePayload)
     {

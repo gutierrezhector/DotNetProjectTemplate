@@ -20,7 +20,7 @@ public class GradeViewModelMapper(
             Exam = null,
             StudentId = from.StudentId,
             // TODO manage null
-            Student = studentViewModelMapper.Map(from.Student)
+            Student = studentViewModelMapper.Map(from.Student),
         };
     }
 }

@@ -18,7 +18,7 @@ public class StudentDaoToEntityMapper(
             Id = from.Id,
             UserId = from.UserId,
             // TODO : manage null
-            User = userFromDaoMapper.Map(from.User)
+            User = userFromDaoMapper.Map(from.User),
         };
     }
 }

@@ -16,9 +16,9 @@ public static class ServiceCollectionExtension
     public static IServiceCollection RegisterUsersDomain(this IServiceCollection services)
     {
         services.AddScoped<IUserEntityFactory, UserEntityFactory>();
-        
+
         services.AddScoped<Mapper<UserDao, IUser>, UserDaoToEntityMapper>();
-        
+
         services.AddScoped<IValidator<IUserCreationCandidate>, UserCreationCandidateValidator>();
         services.AddScoped<IValidator<IUserUpdateCandidate>, UserUpdateCandidateValidator>();
 

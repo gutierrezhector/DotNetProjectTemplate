@@ -13,7 +13,7 @@ public static class ServiceCollectionExtension
                     "Server=DYOUGI;Database=SaM;Trusted_Connection=True;TrustServerCertificate=True;",
                     o => o.MigrationsAssembly("SaM.Database.Migrations"))
             );
-        
+
         return services;
     }
 }

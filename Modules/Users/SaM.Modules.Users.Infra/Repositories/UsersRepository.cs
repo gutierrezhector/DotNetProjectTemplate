@@ -19,28 +19,28 @@ public class UsersRepository(
     public async Task<IUser> GetByIdAsync(int id)
     {
         var userDao = await GetByIdInternal(id);
-        
+
         return userDaoToUserEntityMapper.Map(userDao);
     }
 
     public async Task<IUser> CreateAsync(IUser user)
     {
         var newUserDao = UserDaoFactory.Create(user);
-        
+
         DbContext.Add(newUserDao);
         await SaveChangesAsync();
 
         user.Id = newUserDao.Id;
-        
+
         return user;
     }
 
     public async Task<IUser> UpdateAsync(int id, IUserUpdateCandidate updateCandidate)
     {
         var userDaoToUpdate = await GetByIdInternal(id);
-        
+
         userDaoToUpdate.UpdateFromCandidate(updateCandidate);
-        
+
         await SaveChangesAsync();
 
         return userDaoToUserEntityMapper.Map(userDaoToUpdate);
@@ -51,7 +51,7 @@ public class UsersRepository(
         var userDao = await GetByIdInternal(id);
 
         Set<UserDao>().Remove(userDao);
-        
+
         await SaveChangesAsync();
     }
 

@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using SaM.Core.Exceptions.Implementations;
-using SaM.Core.Middlewares;
 
 namespace SaM.Core.Exceptions.ExceptionsToProblemDetails;
 

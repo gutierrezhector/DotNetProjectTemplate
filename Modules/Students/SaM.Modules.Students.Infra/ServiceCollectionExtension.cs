@@ -1,6 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
 using SaM.Modules.Students.Infra.Repositories;
-using SaM.Modules.Students.Ports.OutBounds;
 using SaM.Modules.Students.Ports.OutBounds.Repositories;
 
 namespace SaM.Modules.Students.Infra;

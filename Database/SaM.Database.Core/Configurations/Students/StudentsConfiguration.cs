@@ -9,7 +9,7 @@ public class StudentsConfiguration : IEntityTypeConfiguration<StudentDao>
     public void Configure(EntityTypeBuilder<StudentDao> builder)
     {
         builder.ToTable("Students");
-        
+
         builder.HasKey(x => x.Id);
 
         builder.HasOne(s => s.User);
