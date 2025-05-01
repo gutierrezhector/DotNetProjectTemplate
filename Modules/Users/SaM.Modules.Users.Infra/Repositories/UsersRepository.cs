@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Abstractions.Repository;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.Types.Entities.Users;
 using SaM.Database.Core;
 using SaM.Database.Core.Daos.Users;
+using SaM.Modules.Users.Domain.Factories;
 using SaM.Modules.Users.Infra.Factories;
 using SaM.Modules.Users.Ports.InBounds.Candidates;
 using SaM.Modules.Users.Ports.OutBounds.Repositories;
@@ -13,19 +13,20 @@ namespace SaM.Modules.Users.Infra.Repositories;
 
 public class UsersRepository(
     SaMDbContext dbContext,
-    Mapper<UserDao, User> userDaoToUserEntityMapper
-) : BaseRepository(dbContext), IUsersRepository
+    UserEntityFactory userEntityFactory,
+    UserDaoFactory userDaoFactory
+) : BaseRepository<UserDao>(dbContext), IUsersRepository
 {
     public async Task<User> GetByIdAsync(int id)
     {
         var userDao = await GetByIdInternal(id);
 
-        return userDaoToUserEntityMapper.MapNonNullable(userDao);
+        return userEntityFactory.CreateFromDao(userDao);
     }
 
     public async Task<User> CreateAsync(User user)
     {
-        var newUserDao = UserDaoFactory.Create(user);
+        var newUserDao = userDaoFactory.CreateFromEntity(user);
 
         DbContext.Add(newUserDao);
         await SaveChangesAsync();
@@ -39,25 +40,25 @@ public class UsersRepository(
     {
         var userDaoToUpdate = await GetByIdInternal(id);
 
-        UserDaoFactory.Update(userDaoToUpdate, updateCandidate);
+        userDaoFactory.UpdateFromCandidate(userDaoToUpdate, updateCandidate);
 
         await SaveChangesAsync();
 
-        return userDaoToUserEntityMapper.MapNonNullable(userDaoToUpdate);
+        return userEntityFactory.CreateFromDao(userDaoToUpdate);
     }
 
     public async Task DeleteAsync(int id)
     {
         var userDao = await GetByIdInternal(id);
 
-        Set<UserDao>().Remove(userDao);
+        SetWithoutIncludes().Remove(userDao);
 
         await SaveChangesAsync();
     }
 
     private async Task<UserDao> GetByIdInternal(int id)
     {
-        var userDao = await Set<UserDao>()
+        var userDao = await SetWithIncludes()
             .Where(u => u.Id == id)
             .FirstOrDefaultAsync();
 
@@ -67,5 +68,10 @@ public class UsersRepository(
         }
 
         return userDao;
+    }
+
+    protected override IQueryable<UserDao> ApplyIncludes(DbSet<UserDao> set)
+    {
+        return set;
     }
 }

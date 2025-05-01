@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Abstractions.Repository;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.Types.Entities.Grades;
 using SaM.Database.Core;
 using SaM.Database.Core.Daos.Grades;
+using SaM.Modules.Grades.Domain.Factories;
 using SaM.Modules.Grades.Infra.Factories;
 using SaM.Modules.Grades.Ports.InBounds.Candidates;
 using SaM.Modules.Grades.Ports.OutBounds.Repositories;
@@ -13,18 +13,19 @@ namespace SaM.Modules.Grades.Infra.Repositories;
 
 public class GradesRepository(
     SaMDbContext dbContext,
-    Mapper<GradeDao, Grade> gradeDaoToGradeEntityMapper
-) : BaseRepository(dbContext), IGradesRepository
+    GradeEntityFactory gradeEntityFactory,
+    GradeDaoFactory gradeDaoFactory
+) : BaseRepository<GradeDao>(dbContext), IGradesRepository
 {
     public async Task<Grade> GetByIdAsync(int id)
     {
         var grade = await GetByIdInternal(id);
-        return gradeDaoToGradeEntityMapper.MapNonNullable(grade);
+        return gradeEntityFactory.CreateFromDao(grade);
     }
 
     public async Task<Grade> CreateAsync(Grade grade)
     {
-        var newGradeDao = GradeDaoFactory.Create(grade);
+        var newGradeDao = gradeDaoFactory.CreateFromEntity(grade);
 
         DbContext.Add(newGradeDao);
 
@@ -37,25 +38,25 @@ public class GradesRepository(
     {
         var gradeDaoToUpdate = await GetByIdInternal(id);
 
-        GradeDaoFactory.Update(gradeDaoToUpdate, updateCandidate);
+        gradeDaoFactory.UpdateFromCandidate(gradeDaoToUpdate, updateCandidate);
 
         await SaveChangesAsync();
 
-        return gradeDaoToGradeEntityMapper.MapNonNullable(gradeDaoToUpdate);
+        return gradeEntityFactory.CreateFromDao(gradeDaoToUpdate);
     }
 
     public async Task DeleteAsync(int id)
     {
         var gradeDao = await GetByIdInternal(id);
 
-        Set<GradeDao>().Remove(gradeDao);
+        SetWithoutIncludes().Remove(gradeDao);
 
         await SaveChangesAsync();
     }
 
     private async Task<GradeDao> GetByIdInternal(int id)
     {
-        var studentDao = await SetIncludeAll()
+        var studentDao = await SetWithIncludes()
             .Where(u => u.Id == id)
             .FirstOrDefaultAsync();
 
@@ -66,12 +67,10 @@ public class GradesRepository(
 
         return studentDao;
     }
-    
-    private IQueryable<GradeDao> SetIncludeAll()
+
+    protected override IQueryable<GradeDao> ApplyIncludes(DbSet<GradeDao> set)
     {
-        return Set<GradeDao>()
-            .Include(g => g.Exam)
-            .Include(g => g.Student)
-            .AsQueryable();
+        return set.Include(g => g.Exam)
+            .Include(g => g.Student);
     }
 }

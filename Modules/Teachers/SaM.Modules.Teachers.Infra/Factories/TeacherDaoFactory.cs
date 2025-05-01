@@ -1,24 +1,25 @@
-﻿using SaM.Core.Types.Entities.Teachers;
+﻿using SaM.Core.Abstractions.Factories;
+using SaM.Core.Types.Entities.Teachers;
 using SaM.Database.Core.Daos.Teachers;
 using SaM.Modules.Teachers.Ports.InBounds.Candidates;
 
 namespace SaM.Modules.Teachers.Infra.Factories;
 
-public static class TeacherDaoFactory
+public  class TeacherDaoFactory : DaoFactory<TeacherDao, Teacher, ITeacherUpdateCandidate>
 {
-    public static TeacherDao Create(Teacher teacher)
+    public override TeacherDao CreateFromEntity(Teacher entity)
     {
         return new TeacherDao
         {
-            Id = teacher.Id,
-            SchoolSubject = teacher.SchoolSubject,
-            UserId = teacher.UserId,
+            Id = entity.Id,
+            SchoolSubject = entity.SchoolSubject,
+            UserId = entity.UserId,
         };
     }
-    
-    public static void Update(TeacherDao dao, ITeacherUpdateCandidate updateCandidate)
+
+    public override void UpdateFromCandidate(TeacherDao daoToUpdate, ITeacherUpdateCandidate updateCandidate)
     {
-        dao.UserId = updateCandidate.UserId;
-        dao.SchoolSubject = updateCandidate.SchoolSubject;
+        daoToUpdate.UserId = updateCandidate.UserId;
+        daoToUpdate.SchoolSubject = updateCandidate.SchoolSubject;
     }
 }

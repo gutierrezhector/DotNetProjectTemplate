@@ -3,11 +3,18 @@ using SaM.Database.Core;
 
 namespace SaM.Core.Abstractions.Repository;
 
-public abstract class BaseRepository(SaMDbContext dbContext)
+public abstract class BaseRepository<T>(SaMDbContext dbContext) where T : class
 {
     protected readonly SaMDbContext DbContext = dbContext;
 
-    protected DbSet<T> Set<T>() where T : class
+    protected abstract IQueryable<T> ApplyIncludes(DbSet<T> set);
+    
+    protected IQueryable<T> SetWithIncludes()
+    {
+        return ApplyIncludes(DbContext.Set<T>());
+    }
+    
+    protected DbSet<T> SetWithoutIncludes()
     {
         return DbContext.Set<T>();
     }

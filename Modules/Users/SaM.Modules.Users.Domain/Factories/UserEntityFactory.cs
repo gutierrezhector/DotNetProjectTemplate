@@ -1,17 +1,26 @@
+using SaM.Core.Abstractions.Factories;
+using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Types.Entities.Users;
+using SaM.Database.Core.Daos.Users;
 using SaM.Modules.Users.Ports.InBounds.Candidates;
-using SaM.Modules.Users.Ports.InBounds.Factories;
 
 namespace SaM.Modules.Users.Domain.Factories;
 
-public class UserEntityFactory : IUserEntityFactory
+public class UserEntityFactory(
+    Mapper<UserDao, User> userDaoToUserEntityMapper
+) : EntityFactory<User, UserDao, IUserCreationCandidate>
 {
-    public User Create(IUserCreationCandidate creationCandidate)
+    public override User CreateFromCandidate(IUserCreationCandidate creationCandidate)
     {
         return new User
         {
             FirstName = creationCandidate.FirstName,
             LastName = creationCandidate.LastName,
         };
+    }
+
+    public override User CreateFromDao(UserDao from)
+    {
+        return userDaoToUserEntityMapper.MapNonNullable(from);
     }
 }

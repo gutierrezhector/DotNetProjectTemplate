@@ -2,9 +2,9 @@ using FluentValidation;
 using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.Types.Entities.Students;
+using SaM.Modules.Students.Domain.Factories;
 using SaM.Modules.Students.Ports.InBounds.Applications;
 using SaM.Modules.Students.Ports.InBounds.Candidates;
-using SaM.Modules.Students.Ports.InBounds.Factories;
 using SaM.Modules.Students.Ports.InBounds.Payloads;
 using SaM.Modules.Students.Ports.OutBounds.Repositories;
 
@@ -12,7 +12,7 @@ namespace SaM.Modules.Students.Application.Applications;
 
 public class StudentsApplication(
     IStudentsRepository studentsRepository,
-    IStudentEntityFactory studentEntityFactory,
+    StudentEntityFactory studentEntityFactory,
     IValidator<IStudentCreationCandidate> studentCreationCandidateValidator,
     IValidator<IStudentUpdateCandidate> studentUpdateCandidateValidator,
     Mapper<IStudentCreationPayload, IStudentCreationCandidate> studentCreationCandidateMapper,
@@ -38,7 +38,7 @@ public class StudentsApplication(
             throw new ValidationResultException(validationResult);
         }
 
-        var studentToCreate = studentEntityFactory.Create(creationCandidate);
+        var studentToCreate = studentEntityFactory.CreateFromCandidate(creationCandidate);
 
         return await studentsRepository.Create(studentToCreate);
     }

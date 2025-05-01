@@ -1,7 +1,7 @@
-﻿using SaM.Modules.Exams.Web.ViewModels;
-using SaM.Modules.Students.Web.ViewModels;
+﻿using SaM.Core.Types.ViewModels.Exams;
+using SaM.Core.Types.ViewModels.Students;
 
-namespace SaM.Modules.Grades.Web.ViewModels;
+namespace SaM.Core.Types.ViewModels.Grades;
 
 public record GradeViewModel
 {

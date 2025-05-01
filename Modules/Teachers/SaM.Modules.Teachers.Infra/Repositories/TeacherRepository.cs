@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Abstractions.Repository;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.Types.Entities.Teachers;
 using SaM.Database.Core;
 using SaM.Database.Core.Daos.Teachers;
+using SaM.Modules.Teachers.Domain.Factories;
 using SaM.Modules.Teachers.Infra.Factories;
 using SaM.Modules.Teachers.Ports.InBounds.Candidates;
 using SaM.Modules.Teachers.Ports.OuBounds.Repositories;
@@ -13,34 +13,33 @@ namespace SaM.Modules.Teachers.Infra.Repositories;
 
 public class TeacherRepository(
     SaMDbContext dbContext,
-    Mapper<TeacherDao, Teacher> teacherDaoToTeacherEntityMapper
-) : BaseRepository(dbContext), ITeacherRepository
+    TeacherEntityFactory teacherEntityFactory,
+    TeacherDaoFactory teacherDaoFactory
+) : BaseRepository<TeacherDao>(dbContext), ITeacherRepository
 {
     public async Task<List<Teacher>> GetAllAsync()
     {
-        var teachers = await Set<TeacherDao>()
+        var teachers = await SetWithIncludes()
             .ToListAsync();
 
-        return teacherDaoToTeacherEntityMapper.MapNonNullable(teachers);
+        return teacherEntityFactory.CreateFromDao(teachers);
     }
 
     public async Task<Teacher> GetByIdAsync(int id)
     {
-        var teacher = await Set<TeacherDao>()
-            .Where(t => t.Id == id)
-            .FirstOrDefaultAsync();
+        var teacher = await GetByIdInternalAsync(id);
 
         if (teacher == null)
         {
             throw new NotFoundException($"teacher with id '{id}' not found.'");
         }
 
-        return teacherDaoToTeacherEntityMapper.MapNonNullable(teacher);
+        return teacherEntityFactory.CreateFromDao(teacher);
     }
 
     public async Task<Teacher> Create(Teacher newTeacher)
     {
-        var newTeacherDao = TeacherDaoFactory.Create(newTeacher);
+        var newTeacherDao = teacherDaoFactory.CreateFromEntity(newTeacher);
 
         DbContext.Add(newTeacherDao);
         await SaveChangesAsync();
@@ -52,33 +51,33 @@ public class TeacherRepository(
 
     public async Task<Teacher> UpdateAsync(int id, ITeacherUpdateCandidate updateCandidate)
     {
-        var teacherDaoToUpdate = await GetByIdInternal(id);
+        var teacherDaoToUpdate = await GetByIdInternalAsync(id);
 
-        TeacherDaoFactory.Update(teacherDaoToUpdate, updateCandidate);
+        teacherDaoFactory.UpdateFromCandidate(teacherDaoToUpdate, updateCandidate);
 
         await SaveChangesAsync();
 
-        return teacherDaoToTeacherEntityMapper.MapNonNullable(teacherDaoToUpdate);
+        return teacherEntityFactory.CreateFromDao(teacherDaoToUpdate);
     }
 
     public async Task DeleteAsync(int id)
     {
-        var teacherDao = await GetByIdInternal(id);
+        var teacherDao = await GetByIdInternalAsync(id);
 
-        Set<TeacherDao>().Remove(teacherDao);
+        SetWithoutIncludes().Remove(teacherDao);
 
         await SaveChangesAsync();
     }
 
     public async Task<bool> ExistAsync(int id)
     {
-        return await Set<TeacherDao>()
+        return await SetWithoutIncludes()
             .AnyAsync(t => t.UserId == id);
     }
 
-    private async Task<TeacherDao> GetByIdInternal(int id)
+    private async Task<TeacherDao> GetByIdInternalAsync(int id)
     {
-        var teacherDao = await Set<TeacherDao>()
+        var teacherDao = await SetWithIncludes()
             .Where(u => u.Id == id)
             .FirstOrDefaultAsync();
 
@@ -88,5 +87,11 @@ public class TeacherRepository(
         }
 
         return teacherDao;
+    }
+
+    protected override IQueryable<TeacherDao> ApplyIncludes(DbSet<TeacherDao> set)
+    {
+        return set.Include(t => t.User)
+            .Include(t => t.Exams);
     }
 }

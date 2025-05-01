@@ -1,6 +1,6 @@
 ﻿using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Types.Entities.Users;
-using SaM.Modules.Users.Web.ViewModels;
+using SaM.Core.Types.ViewModels.Users;
 
 namespace SaM.Modules.Users.Web.Mappers;
 

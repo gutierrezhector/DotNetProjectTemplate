@@ -1,25 +1,26 @@
-﻿using SaM.Core.Types.Entities.Grades;
+﻿using SaM.Core.Abstractions.Factories;
+using SaM.Core.Types.Entities.Grades;
 using SaM.Database.Core.Daos.Grades;
 using SaM.Modules.Grades.Ports.InBounds.Candidates;
 
 namespace SaM.Modules.Grades.Infra.Factories;
 
-public static class GradeDaoFactory
+public class GradeDaoFactory : DaoFactory<GradeDao, Grade, IGradeUpdateCandidate>
 {
-    public static GradeDao Create(Grade grade)
+    public override GradeDao CreateFromEntity(Grade entity)
     {
         return new GradeDao
         {
-            Notation = grade.Notation,
-            ExamId = grade.ExamId,
-            StudentId = grade.StudentId,
+            Notation = entity.Notation,
+            ExamId = entity.ExamId,
+            StudentId = entity.StudentId,
         };
     }
-    
-    public static void Update(GradeDao dao, IGradeUpdateCandidate updateCandidate)
+
+    public override void UpdateFromCandidate(GradeDao daoToUpdate, IGradeUpdateCandidate updateCandidate)
     {
-        dao.Notation = updateCandidate.Notation;
-        dao.ExamId = updateCandidate.ExamId;
-        dao.StudentId = updateCandidate.StudentId;
+        daoToUpdate.Notation = updateCandidate.Notation;
+        daoToUpdate.ExamId = updateCandidate.ExamId;
+        daoToUpdate.StudentId = updateCandidate.StudentId;
     }
 }

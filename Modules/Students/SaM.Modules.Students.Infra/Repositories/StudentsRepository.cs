@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Abstractions.Repository;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.Types.Entities.Students;
 using SaM.Database.Core;
 using SaM.Database.Core.Daos.Students;
+using SaM.Modules.Students.Domain.Factories;
 using SaM.Modules.Students.Infra.Factories;
 using SaM.Modules.Students.Ports.InBounds.Candidates;
 using SaM.Modules.Students.Ports.OutBounds.Repositories;
@@ -13,33 +13,34 @@ namespace SaM.Modules.Students.Infra.Repositories;
 
 public class StudentsRepository(
     SaMDbContext dbContext,
-    Mapper<StudentDao, Student> studentDaoToStudentEntityMapper
-) : BaseRepository(dbContext), IStudentsRepository
+    StudentEntityFactory studentEntityFactory,
+    StudentDaoFactory studentDaoFactory
+) : BaseRepository<StudentDao>(dbContext), IStudentsRepository
 {
     public async Task<List<Student>> GetAllAsync()
     {
-        var studentsDao = await Set<StudentDao>()
+        var studentsDao = await SetWithIncludes()
             .ToListAsync();
 
-        return studentDaoToStudentEntityMapper.MapNonNullable(studentsDao);
+        return studentEntityFactory.CreateFromDao(studentsDao);
     }
 
     public async Task<Student> GetByIdAsync(int studentId)
     {
         var studentDao = await GetByIdInternal(studentId);
 
-        return studentDaoToStudentEntityMapper.MapNonNullable(studentDao);
+        return studentEntityFactory.CreateFromDao(studentDao);
     }
 
     public async Task<bool> ExistAsync(int userId)
     {
-        return await Set<StudentDao>()
+        return await SetWithoutIncludes()
             .AnyAsync(s => s.UserId == userId);
     }
 
     public async Task<Student> Create(Student studentToCreate)
     {
-        var newStudentDao = StudentDaoFactory.Create(studentToCreate);
+        var newStudentDao = studentDaoFactory.CreateFromEntity(studentToCreate);
 
         DbContext.Add(newStudentDao);
         await SaveChangesAsync();
@@ -51,25 +52,25 @@ public class StudentsRepository(
     {
         var studentDaoToUpdate = await GetByIdInternal(id);
 
-        StudentDaoFactory.Update(studentDaoToUpdate,  updateCandidate);
+        studentDaoFactory.UpdateFromCandidate(studentDaoToUpdate,  updateCandidate);
 
         await SaveChangesAsync();
 
-        return studentDaoToStudentEntityMapper.MapNonNullable(studentDaoToUpdate);
+        return studentEntityFactory.CreateFromDao(studentDaoToUpdate);
     }
 
     public async Task DeleteAsync(int id)
     {
         var studentDao = await GetByIdInternal(id);
 
-        Set<StudentDao>().Remove(studentDao);
+        SetWithoutIncludes().Remove(studentDao);
 
         await SaveChangesAsync();
     }
 
     private async Task<StudentDao> GetByIdInternal(int id)
     {
-        var studentDao = await Set<StudentDao>()
+        var studentDao = await SetWithIncludes()
             .Where(u => u.Id == id)
             .FirstOrDefaultAsync();
 
@@ -79,5 +80,11 @@ public class StudentsRepository(
         }
 
         return studentDao;
+    }
+
+    protected override IQueryable<StudentDao> ApplyIncludes(DbSet<StudentDao> set)
+    {
+        return set.Include(s => s.User)
+            .Include(s => s.Grades);
     }
 }
