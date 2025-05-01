@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SaM.Core.Abstractions.Mappers;
-using SaM.Modules.Teachers.Ports.InBounds.Entities;
+using SaM.Core.Types.Entities.Teachers;
 using SaM.Modules.Teachers.Web.Mappers;
 using SaM.Modules.Teachers.Web.ViewModels;
 
@@ -10,7 +10,7 @@ public static class ServiceCollectionExtension
 {
     public static IServiceCollection RegisterTeachersWeb(this IServiceCollection services)
     {
-        services.AddScoped<Mapper<ITeacher, TeacherViewModel>, TeacherViewModelMapper>();
+        services.AddScoped<Mapper<Teacher, TeacherViewModel>, TeacherViewModelMapper>();
 
         return services;
     }

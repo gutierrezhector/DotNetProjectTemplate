@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
 using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Exceptions.Implementations;
+using SaM.Core.Types.Entities.Exams;
 using SaM.Modules.Exams.Ports.InBounds.Applications;
 using SaM.Modules.Exams.Ports.InBounds.Candidates;
-using SaM.Modules.Exams.Ports.InBounds.Entities;
 using SaM.Modules.Exams.Ports.InBounds.Factories;
 using SaM.Modules.Exams.Ports.InBounds.Payloads;
 using SaM.Modules.Exams.Ports.OutBounds.Repositories;
@@ -19,17 +19,17 @@ public class ExamsApplication(
     Mapper<IExamUpdatePayload, IExamUpdateCandidate> examUpdatePayloadMapper
 ) : IExamsApplication
 {
-    public async Task<List<IExam>> GetAllAsync()
+    public async Task<List<Exam>> GetAllAsync()
     {
         return await repository.GetAllAsync();
     }
 
-    public async Task<IExam> GetByIdAsync(int id)
+    public async Task<Exam> GetByIdAsync(int id)
     {
         return await repository.GetByIdAsync(id);
     }
 
-    public async Task<IExam> CreateAsync(IExamCreationPayload creationPayload)
+    public async Task<Exam> CreateAsync(IExamCreationPayload creationPayload)
     {
         var creationCandidate = examCreationPayloadMapper.MapNonNullable(creationPayload);
         var validationResult = await examCreationCandidateValidator.ValidateAsync(creationCandidate);
@@ -43,7 +43,7 @@ public class ExamsApplication(
         return await repository.CreateAsync(examToCreate);
     }
 
-    public async Task<IExam> UpdateAsync(int id, IExamUpdatePayload updatePayload)
+    public async Task<Exam> UpdateAsync(int id, IExamUpdatePayload updatePayload)
     {
         var updateCandidate = examUpdatePayloadMapper.MapNonNullable(updatePayload);
         var validationResult = await examUpdateCandidateValidator.ValidateAsync(updateCandidate);

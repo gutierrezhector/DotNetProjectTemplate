@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SaM.Core.Abstractions.Mappers;
+using SaM.Core.Types.Entities.Exams;
 using SaM.Modules.Exams.Ports.InBounds.Applications;
-using SaM.Modules.Exams.Ports.InBounds.Entities;
 using SaM.Modules.Exams.Web.Payloads;
 using SaM.Modules.Exams.Web.ViewModels;
 
@@ -9,7 +9,7 @@ namespace SaM.Modules.Exams.Web.Controllers;
 
 public class ExamsController(
     IExamsApplication application,
-    Mapper<IExam, ExamViewModel> examViewModelMapper
+    Mapper<Exam, ExamViewModel> examViewModelMapper
 ) : ControllerBase
 {
     [HttpGet]

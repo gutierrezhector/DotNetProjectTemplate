@@ -1,13 +1,12 @@
-using SaM.Modules.Users.Domain.Entities;
+using SaM.Core.Types.Entities.Users;
 using SaM.Modules.Users.Ports.InBounds.Candidates;
-using SaM.Modules.Users.Ports.InBounds.Entities;
 using SaM.Modules.Users.Ports.InBounds.Factories;
 
 namespace SaM.Modules.Users.Domain.Factories;
 
 public class UserEntityFactory : IUserEntityFactory
 {
-    public IUser Create(IUserCreationCandidate creationCandidate)
+    public User Create(IUserCreationCandidate creationCandidate)
     {
         return new User
         {

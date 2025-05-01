@@ -1,9 +1,9 @@
-﻿using SaM.Modules.Exams.Ports.InBounds.Candidates;
-using SaM.Modules.Exams.Ports.InBounds.Entities;
+﻿using SaM.Core.Types.Entities.Exams;
+using SaM.Modules.Exams.Ports.InBounds.Candidates;
 
 namespace SaM.Modules.Exams.Ports.InBounds.Factories;
 
 public interface IExamFactory
 {
-    IExam Create(IExamCreationCandidate candidate);
+    Exam Create(IExamCreationCandidate candidate);
 }

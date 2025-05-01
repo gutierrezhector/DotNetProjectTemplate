@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SaM.Core.Abstractions.Mappers;
+using SaM.Core.Types.Entities.Users;
 using SaM.Modules.Users.Ports.InBounds.Applications;
-using SaM.Modules.Users.Ports.InBounds.Entities;
 using SaM.Modules.Users.Web.Payloads;
 using SaM.Modules.Users.Web.ViewModels;
 
@@ -11,7 +11,7 @@ namespace SaM.Modules.Users.Web.Controllers;
 [Route("api/users")]
 public class UsersController(
     IUsersApplication usersApplication,
-    Mapper<IUser, UserViewModel> userEntityViewModelMapper
+    Mapper<User, UserViewModel> userEntityViewModelMapper
 ) : ControllerBase
 {
     [HttpGet("{id}")]

@@ -2,28 +2,29 @@ using Microsoft.EntityFrameworkCore;
 using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Abstractions.Repository;
 using SaM.Core.Exceptions.Implementations;
+using SaM.Core.Types.Entities.Teachers;
 using SaM.Database.Core;
 using SaM.Database.Core.Daos.Teachers;
 using SaM.Modules.Teachers.Infra.Factories;
-using SaM.Modules.Teachers.Ports.InBounds.Entities;
+using SaM.Modules.Teachers.Ports.InBounds.Candidates;
 using SaM.Modules.Teachers.Ports.OuBounds.Repositories;
 
 namespace SaM.Modules.Teachers.Infra.Repositories;
 
 public class TeacherRepository(
     SaMDbContext dbContext,
-    Mapper<TeacherDao, ITeacher> mapper
+    Mapper<TeacherDao, Teacher> teacherDaoToTeacherEntityMapper
 ) : BaseRepository(dbContext), ITeacherRepository
 {
-    public async Task<List<ITeacher>> GetAllAsync()
+    public async Task<List<Teacher>> GetAllAsync()
     {
         var teachers = await Set<TeacherDao>()
             .ToListAsync();
 
-        return mapper.MapNonNullable(teachers);
+        return teacherDaoToTeacherEntityMapper.MapNonNullable(teachers);
     }
 
-    public async Task<ITeacher> GetByIdAsync(int id)
+    public async Task<Teacher> GetByIdAsync(int id)
     {
         var teacher = await Set<TeacherDao>()
             .Where(t => t.Id == id)
@@ -34,10 +35,10 @@ public class TeacherRepository(
             throw new NotFoundException($"teacher with id '{id}' not found.'");
         }
 
-        return mapper.MapNonNullable(teacher);
+        return teacherDaoToTeacherEntityMapper.MapNonNullable(teacher);
     }
 
-    public async Task<ITeacher> Create(ITeacher newTeacher)
+    public async Task<Teacher> Create(Teacher newTeacher)
     {
         var newTeacherDao = TeacherDaoFactory.Create(newTeacher);
 
@@ -49,15 +50,15 @@ public class TeacherRepository(
         return newTeacher;
     }
 
-    public async Task<ITeacher> UpdateAsync(ITeacher teacher)
+    public async Task<Teacher> UpdateAsync(int id, ITeacherUpdateCandidate updateCandidate)
     {
-        var teacherDaoToUpdate = await GetByIdInternal(teacher.Id);
+        var teacherDaoToUpdate = await GetByIdInternal(id);
 
-        teacherDaoToUpdate.UpdateFromDomainEntity(teacher);
+        TeacherDaoFactory.Update(teacherDaoToUpdate, updateCandidate);
 
         await SaveChangesAsync();
 
-        return teacher;
+        return teacherDaoToTeacherEntityMapper.MapNonNullable(teacherDaoToUpdate);
     }
 
     public async Task DeleteAsync(int id)

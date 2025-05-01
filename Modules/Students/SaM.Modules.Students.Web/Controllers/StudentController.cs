@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SaM.Core.Abstractions.Mappers;
-using SaM.Modules.Students.Ports.InBounds;
+using SaM.Core.Types.Entities.Students;
 using SaM.Modules.Students.Ports.InBounds.Applications;
-using SaM.Modules.Students.Ports.InBounds.Entities;
 using SaM.Modules.Students.Web.Payloads;
 using SaM.Modules.Students.Web.ViewModels;
 
@@ -10,7 +9,7 @@ namespace SaM.Modules.Students.Web.Controllers;
 
 public class StudentController(
     IStudentsApplication studentsApplication,
-    Mapper<IStudent, StudentViewModel> studentViewModelMapper
+    Mapper<Student, StudentViewModel> studentViewModelMapper
 ) : ControllerBase
 {
     [HttpGet]

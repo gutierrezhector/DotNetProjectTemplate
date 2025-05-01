@@ -2,7 +2,6 @@
 using SaM.Core.Abstractions.Mappers;
 using SaM.Modules.Students.Application.Applications;
 using SaM.Modules.Students.Application.Mappers;
-using SaM.Modules.Students.Ports.InBounds;
 using SaM.Modules.Students.Ports.InBounds.Applications;
 using SaM.Modules.Students.Ports.InBounds.Candidates;
 using SaM.Modules.Students.Ports.InBounds.Payloads;

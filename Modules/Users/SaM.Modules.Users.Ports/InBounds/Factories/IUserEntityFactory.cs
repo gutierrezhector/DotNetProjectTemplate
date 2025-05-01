@@ -1,9 +1,9 @@
-﻿using SaM.Modules.Users.Ports.InBounds.Candidates;
-using SaM.Modules.Users.Ports.InBounds.Entities;
+﻿using SaM.Core.Types.Entities.Users;
+using SaM.Modules.Users.Ports.InBounds.Candidates;
 
 namespace SaM.Modules.Users.Ports.InBounds.Factories;
 
 public interface IUserEntityFactory
 {
-    IUser Create(IUserCreationCandidate creationCandidate);
+    User Create(IUserCreationCandidate creationCandidate);
 }

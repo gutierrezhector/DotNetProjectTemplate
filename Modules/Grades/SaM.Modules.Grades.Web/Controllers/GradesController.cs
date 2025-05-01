@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SaM.Core.Abstractions.Mappers;
-using SaM.Modules.Grades.Ports.InBounds;
+using SaM.Core.Types.Entities.Grades;
 using SaM.Modules.Grades.Ports.InBounds.Applications;
-using SaM.Modules.Grades.Ports.InBounds.Entities;
 using SaM.Modules.Grades.Web.Payloads;
 using SaM.Modules.Grades.Web.ViewModels;
 
@@ -10,7 +9,7 @@ namespace SaM.Modules.Grades.Web.Controllers;
 
 public class GradesController(
     IGradesApplication gradesApplication,
-    Mapper<IGrade, GradeViewModel> gradeViewModelMapper
+    Mapper<Grade, GradeViewModel> gradeViewModelMapper
 ) : ControllerBase
 {
     [HttpGet("{id}")]

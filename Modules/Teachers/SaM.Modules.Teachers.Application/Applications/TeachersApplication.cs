@@ -1,9 +1,9 @@
 using FluentValidation;
 using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Exceptions.Implementations;
+using SaM.Core.Types.Entities.Teachers;
 using SaM.Modules.Teachers.Ports.InBounds.Applications;
 using SaM.Modules.Teachers.Ports.InBounds.Candidates;
-using SaM.Modules.Teachers.Ports.InBounds.Entities;
 using SaM.Modules.Teachers.Ports.InBounds.Factories;
 using SaM.Modules.Teachers.Ports.InBounds.Payloads;
 using SaM.Modules.Teachers.Ports.OuBounds.Repositories;
@@ -19,17 +19,17 @@ public class TeachersApplication(
     Mapper<ITeacherUpdatePayload, ITeacherUpdateCandidate> teacherUpdateCandidateMapper
 ) : ITeachersApplication
 {
-    public async Task<List<ITeacher>> GetAllAsync()
+    public async Task<List<Teacher>> GetAllAsync()
     {
         return await teacherRepository.GetAllAsync();
     }
 
-    public async Task<ITeacher> GetByIdAsync(int id)
+    public async Task<Teacher> GetByIdAsync(int id)
     {
         return await teacherRepository.GetByIdAsync(id);
     }
 
-    public async Task<ITeacher> Create(ITeacherCreationPayload creationPayload)
+    public async Task<Teacher> Create(ITeacherCreationPayload creationPayload)
     {
         var creationCandidate = teacherCreationCandidateMapper.MapNonNullable(creationPayload);
         var validationResult = await teacherCandidateValidator.ValidateAsync(creationCandidate);
@@ -45,7 +45,7 @@ public class TeachersApplication(
         return newTeacher;
     }
 
-    public async Task<ITeacher> UpdateAsync(int id, ITeacherUpdatePayload updatePayload)
+    public async Task<Teacher> UpdateAsync(int id, ITeacherUpdatePayload updatePayload)
     {
         var updateCandidate = teacherUpdateCandidateMapper.MapNonNullable(updatePayload);
         var validationResult = await teacherUpdateCandidateValidator.ValidateAsync(updateCandidate);
@@ -54,12 +54,7 @@ public class TeachersApplication(
             throw new ValidationResultException(validationResult);
         }
 
-        var teacher = await teacherRepository.GetByIdAsync(id);
-
-        teacher.SchoolSubject = updateCandidate.SchoolSubject;
-        teacher.UserId = updateCandidate.UserId;
-
-        var newTeacher = await teacherRepository.UpdateAsync(teacher);
+        var newTeacher = await teacherRepository.UpdateAsync(id, updateCandidate);
 
         return newTeacher;
     }

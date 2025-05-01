@@ -2,33 +2,33 @@
 using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Abstractions.Repository;
 using SaM.Core.Exceptions.Implementations;
+using SaM.Core.Types.Entities.Students;
 using SaM.Database.Core;
 using SaM.Database.Core.Daos.Students;
 using SaM.Modules.Students.Infra.Factories;
 using SaM.Modules.Students.Ports.InBounds.Candidates;
-using SaM.Modules.Students.Ports.InBounds.Entities;
 using SaM.Modules.Students.Ports.OutBounds.Repositories;
 
 namespace SaM.Modules.Students.Infra.Repositories;
 
 public class StudentsRepository(
     SaMDbContext dbContext,
-    Mapper<StudentDao, IStudent> studentDaoToStudentMapper
+    Mapper<StudentDao, Student> studentDaoToStudentEntityMapper
 ) : BaseRepository(dbContext), IStudentsRepository
 {
-    public async Task<List<IStudent>> GetAllAsync()
+    public async Task<List<Student>> GetAllAsync()
     {
         var studentsDao = await Set<StudentDao>()
             .ToListAsync();
 
-        return studentDaoToStudentMapper.MapNonNullable(studentsDao);
+        return studentDaoToStudentEntityMapper.MapNonNullable(studentsDao);
     }
 
-    public async Task<IStudent> GetByIdAsync(int studentId)
+    public async Task<Student> GetByIdAsync(int studentId)
     {
         var studentDao = await GetByIdInternal(studentId);
 
-        return studentDaoToStudentMapper.MapNonNullable(studentDao);
+        return studentDaoToStudentEntityMapper.MapNonNullable(studentDao);
     }
 
     public async Task<bool> ExistAsync(int userId)
@@ -37,9 +37,9 @@ public class StudentsRepository(
             .AnyAsync(s => s.UserId == userId);
     }
 
-    public async Task<IStudent> Create(IStudent studentToCreate)
+    public async Task<Student> Create(Student studentToCreate)
     {
-        var newStudentDao = StudentFactory.Create(studentToCreate);
+        var newStudentDao = StudentDaoFactory.Create(studentToCreate);
 
         DbContext.Add(newStudentDao);
         await SaveChangesAsync();
@@ -47,15 +47,15 @@ public class StudentsRepository(
         return studentToCreate;
     }
 
-    public async Task<IStudent> UpdateAsync(int id, IStudentUpdateCandidate updateCandidate)
+    public async Task<Student> UpdateAsync(int id, IStudentUpdateCandidate updateCandidate)
     {
         var studentDaoToUpdate = await GetByIdInternal(id);
 
-        studentDaoToUpdate.UpdateFromCandidate(updateCandidate);
+        StudentDaoFactory.Update(studentDaoToUpdate,  updateCandidate);
 
         await SaveChangesAsync();
 
-        return studentDaoToStudentMapper.MapNonNullable(studentDaoToUpdate);
+        return studentDaoToStudentEntityMapper.MapNonNullable(studentDaoToUpdate);
     }
 
     public async Task DeleteAsync(int id)
