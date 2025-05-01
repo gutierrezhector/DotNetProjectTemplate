@@ -1,8 +1,6 @@
-using SaM.Modules.Users.Ports.InBounds.Entities;
+namespace SaM.Core.Types.Entities.Users;
 
-namespace SaM.Modules.Users.Domain.Entities;
-
-public class User : IUser
+public class User
 {
     public int Id { get; set; }
     public required string FirstName { get; set; }

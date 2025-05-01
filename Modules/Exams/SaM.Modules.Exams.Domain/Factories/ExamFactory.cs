@@ -1,13 +1,12 @@
-using SaM.Modules.Exams.Domain.Entities;
+using SaM.Core.Types.Entities.Exams;
 using SaM.Modules.Exams.Ports.InBounds.Candidates;
-using SaM.Modules.Exams.Ports.InBounds.Entities;
 using SaM.Modules.Exams.Ports.InBounds.Factories;
 
 namespace SaM.Modules.Exams.Domain.Factories;
 
 public class ExamFactory : IExamFactory
 {
-    public IExam Create(IExamCreationCandidate candidate)
+    public Exam Create(IExamCreationCandidate candidate)
     {
         return new Exam
         {

@@ -1,10 +1,9 @@
 using FluentValidation;
 using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Exceptions.Implementations;
-using SaM.Modules.Students.Ports.InBounds;
+using SaM.Core.Types.Entities.Students;
 using SaM.Modules.Students.Ports.InBounds.Applications;
 using SaM.Modules.Students.Ports.InBounds.Candidates;
-using SaM.Modules.Students.Ports.InBounds.Entities;
 using SaM.Modules.Students.Ports.InBounds.Factories;
 using SaM.Modules.Students.Ports.InBounds.Payloads;
 using SaM.Modules.Students.Ports.OutBounds.Repositories;
@@ -20,17 +19,17 @@ public class StudentsApplication(
     Mapper<IStudentUpdatePayload, IStudentUpdateCandidate> studentUpdateCandidateMapper
 ) : IStudentsApplication
 {
-    public async Task<List<IStudent>> GetAllAsync()
+    public async Task<List<Student>> GetAllAsync()
     {
         return await studentsRepository.GetAllAsync();
     }
 
-    public async Task<IStudent> GetByIdAsync(int studentId)
+    public async Task<Student> GetByIdAsync(int studentId)
     {
         return await studentsRepository.GetByIdAsync(studentId);
     }
 
-    public async Task<IStudent> CreateAsync(IStudentCreationPayload creationPayload)
+    public async Task<Student> CreateAsync(IStudentCreationPayload creationPayload)
     {
         var creationCandidate = studentCreationCandidateMapper.MapNonNullable(creationPayload);
         var validationResult = await studentCreationCandidateValidator.ValidateAsync(creationCandidate);
@@ -44,7 +43,7 @@ public class StudentsApplication(
         return await studentsRepository.Create(studentToCreate);
     }
 
-    public async Task<IStudent> UpdateAsync(int id, IStudentUpdatePayload updatePayload)
+    public async Task<Student> UpdateAsync(int id, IStudentUpdatePayload updatePayload)
     {
         var updateCandidate = studentUpdateCandidateMapper.MapNonNullable(updatePayload);
         var validationResult = await studentUpdateCandidateValidator.ValidateAsync(updateCandidate);

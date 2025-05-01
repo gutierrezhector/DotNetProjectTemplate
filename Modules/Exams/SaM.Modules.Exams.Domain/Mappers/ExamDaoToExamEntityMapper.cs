@@ -1,20 +1,32 @@
 using SaM.Core.Abstractions.Mappers;
+using SaM.Core.Types.Entities.Exams;
+using SaM.Core.Types.Entities.Grades;
+using SaM.Core.Types.Entities.Teachers;
 using SaM.Database.Core.Daos.Exams;
 using SaM.Database.Core.Daos.Grades;
 using SaM.Database.Core.Daos.Teachers;
-using SaM.Modules.Exams.Domain.Entities;
-using SaM.Modules.Exams.Ports.InBounds.Entities;
-using SaM.Modules.Grades.Ports.InBounds.Entities;
-using SaM.Modules.Teachers.Ports.InBounds.Entities;
 
 namespace SaM.Modules.Exams.Domain.Mappers;
 
-public class ExamDaoToExamEntityMapper(
-    Mapper<TeacherDao, ITeacher> teacherDaoToExamEntityMapper,
-    Mapper<GradeDao, IGrade> gradeFromDaoMapper
-) : Mapper<ExamDao, IExam>
+public class ExamPopulator(
+    Mapper<TeacherDao, Teacher> teacherDaoToExamEntityMapper,
+    Mapper<GradeDao, Grade> gradeDaoToGradeEntityMapper,
+    Mapper<ExamDao, Exam> examDaoToExamEntityMapper
+)
 {
-    public override IExam MapNonNullable(ExamDao from)
+    public Exam Assemble(ExamDao from)
+    {
+        var exam = examDaoToExamEntityMapper.MapNonNullable(from);
+        
+        exam.ResponsibleTeacher = teacherDaoToExamEntityMapper.MapNullable(from.ResponsibleTeacher);
+        exam.Grades =  gradeDaoToGradeEntityMapper.MapNullable(from.Grades);
+        return exam;
+    }
+}
+
+public class ExamDaoToExamEntityMapper : Mapper<ExamDao, Exam>
+{
+    public override Exam MapNonNullable(ExamDao from)
     {
         return new Exam
         {
@@ -24,8 +36,8 @@ public class ExamDaoToExamEntityMapper(
             Title = from.Title,
             MaxPoints = from.MaxPoints,
             ResponsibleTeacherId = from.ResponsibleTeacherId,
-            ResponsibleTeacher = teacherDaoToExamEntityMapper.MapNullable(from.ResponsibleTeacher),
-            Grades = gradeFromDaoMapper.MapNullable(from.Grades),
+            // ResponsibleTeacher = teacherDaoToExamEntityMapper.MapNullable(from.ResponsibleTeacher),
+            // Grades = gradeDaoToGradeEntityMapper.MapNullable(from.Grades),
         };
     }
 }

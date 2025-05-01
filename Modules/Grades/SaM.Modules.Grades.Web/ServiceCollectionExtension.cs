@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SaM.Core.Abstractions.Mappers;
-using SaM.Modules.Grades.Ports.InBounds.Entities;
+using SaM.Core.Types.Entities.Grades;
 using SaM.Modules.Grades.Web.Mappers;
 using SaM.Modules.Grades.Web.ViewModels;
 
@@ -10,7 +10,7 @@ public static class ServiceCollectionExtension
 {
     public static IServiceCollection RegisterGradesWeb(this IServiceCollection services)
     {
-        services.AddScoped<Mapper<IGrade, GradeViewModel>, GradeViewModelMapper>();
+        services.AddScoped<Mapper<Grade, GradeViewModel>, GradeViewModelMapper>();
 
         return services;
     }

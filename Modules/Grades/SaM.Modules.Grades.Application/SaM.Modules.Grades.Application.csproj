@@ -7,10 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\..\Core\SaM.Core.Abstractions\SaM.Core.Abstractions.csproj" />
         <ProjectReference Include="..\..\..\Core\SaM.Core.Exceptions\SaM.Core.Exceptions.csproj" />
-        <ProjectReference Include="..\..\Exams\SaM.Modules.Exams.Application\SaM.Modules.Exams.Application.csproj" />
         <ProjectReference Include="..\SaM.Modules.Grades.Ports\SaM.Modules.Grades.Ports.csproj" />
-        <ProjectReference Include="..\SaM.Modules.Grades.Web\SaM.Modules.Grades.Web.csproj"/>
     </ItemGroup>
 
 </Project>

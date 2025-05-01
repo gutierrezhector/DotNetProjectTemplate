@@ -1,13 +1,12 @@
 using SaM.Core.Abstractions.Mappers;
+using SaM.Core.Types.Entities.Users;
 using SaM.Database.Core.Daos.Users;
-using SaM.Modules.Users.Domain.Entities;
-using SaM.Modules.Users.Ports.InBounds.Entities;
 
 namespace SaM.Modules.Users.Domain.Mappers;
 
-public class UserDaoToEntityMapper : Mapper<UserDao, IUser>
+public class UserDaoToUserEntityMapper : Mapper<UserDao, User>
 {
-    public override IUser MapNonNullable(UserDao from)
+    public override User MapNonNullable(UserDao from)
     {
         return new User
         {

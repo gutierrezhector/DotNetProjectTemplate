@@ -18,13 +18,21 @@
     <ItemGroup>
       <ProjectReference Include="..\Core\SaM.Core.Middlewares\SaM.Core.Middlewares.csproj" />
       <ProjectReference Include="..\Database\SaM.Database.Core\SaM.Database.Core.csproj" />
+      <ProjectReference Include="..\Modules\Exams\SaM.Modules.Exams.Application\SaM.Modules.Exams.Application.csproj" />
+      <ProjectReference Include="..\Modules\Exams\SaM.Modules.Exams.Domain\SaM.Modules.Exams.Domain.csproj" />
       <ProjectReference Include="..\Modules\Exams\SaM.Modules.Exams.Infra\SaM.Modules.Exams.Infra.csproj" />
       <ProjectReference Include="..\Modules\Grades\SaM.Modules.Grades.Application\SaM.Modules.Grades.Application.csproj" />
       <ProjectReference Include="..\Modules\Grades\SaM.Modules.Grades.Domain\SaM.Modules.Grades.Domain.csproj" />
       <ProjectReference Include="..\Modules\Grades\SaM.Modules.Grades.Infra\SaM.Modules.Grades.Infra.csproj" />
       <ProjectReference Include="..\Modules\Grades\SaM.Modules.Grades.Web\SaM.Modules.Grades.Web.csproj" />
+      <ProjectReference Include="..\Modules\Students\SaM.Modules.Students.Application\SaM.Modules.Students.Application.csproj" />
+      <ProjectReference Include="..\Modules\Students\SaM.Modules.Students.Domain\SaM.Modules.Students.Domain.csproj" />
       <ProjectReference Include="..\Modules\Students\SaM.Modules.Students.Infra\SaM.Modules.Students.Infra.csproj" />
+      <ProjectReference Include="..\Modules\Teachers\SaM.Modules.Teachers.Application\SaM.Modules.Teachers.Application.csproj" />
+      <ProjectReference Include="..\Modules\Teachers\SaM.Modules.Teachers.Domain\SaM.Modules.Teachers.Domain.csproj" />
       <ProjectReference Include="..\Modules\Teachers\SaM.Modules.Teachers.Infra\SaM.Modules.Teachers.Infra.csproj" />
+      <ProjectReference Include="..\Modules\Users\SaM.Modules.Users.Application\SaM.Modules.Users.Application.csproj" />
+      <ProjectReference Include="..\Modules\Users\SaM.Modules.Users.Domain\SaM.Modules.Users.Domain.csproj" />
       <ProjectReference Include="..\Modules\Users\SaM.Modules.Users.Infra\SaM.Modules.Users.Infra.csproj" />
     </ItemGroup>
 

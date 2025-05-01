@@ -1,9 +1,9 @@
-﻿using SaM.Modules.Students.Ports.InBounds.Candidates;
-using SaM.Modules.Students.Ports.InBounds.Entities;
+﻿using SaM.Core.Types.Entities.Students;
+using SaM.Modules.Students.Ports.InBounds.Candidates;
 
 namespace SaM.Modules.Students.Ports.InBounds.Factories;
 
 public interface IStudentEntityFactory
 {
-    IStudent Create(IStudentCreationCandidate candidate);
+    Student Create(IStudentCreationCandidate candidate);
 }

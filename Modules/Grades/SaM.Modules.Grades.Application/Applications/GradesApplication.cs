@@ -1,10 +1,9 @@
 using FluentValidation;
 using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Exceptions.Implementations;
-using SaM.Modules.Grades.Ports.InBounds;
+using SaM.Core.Types.Entities.Grades;
 using SaM.Modules.Grades.Ports.InBounds.Applications;
 using SaM.Modules.Grades.Ports.InBounds.Candidates;
-using SaM.Modules.Grades.Ports.InBounds.Entities;
 using SaM.Modules.Grades.Ports.InBounds.Factories;
 using SaM.Modules.Grades.Ports.InBounds.Payloads;
 using SaM.Modules.Grades.Ports.OutBounds.Repositories;
@@ -20,12 +19,12 @@ public class GradesApplication(
     Mapper<IGradeUpdatePayload, IGradeUpdateCandidate> gradeUpdateCandidateMapper
 ) : IGradesApplication
 {
-    public async Task<IGrade> GetByIdAsync(int id)
+    public async Task<Grade> GetByIdAsync(int id)
     {
         return await gradesRepository.GetByIdAsync(id);
     }
 
-    public async Task<IGrade> CreateAsync(IGradeCreationPayload creationPayload)
+    public async Task<Grade> CreateAsync(IGradeCreationPayload creationPayload)
     {
         var creationCandidate = gradeCreationCandidateMapper.MapNonNullable(creationPayload);
         var validationResult = await gradeCreationCandidateValidator.ValidateAsync(creationCandidate);
@@ -40,7 +39,7 @@ public class GradesApplication(
         return newGrade;
     }
 
-    public async Task<IGrade> UpdateAsync(int id, IGradeUpdatePayload updatePayload)
+    public async Task<Grade> UpdateAsync(int id, IGradeUpdatePayload updatePayload)
     {
         var updateCandidate = gradeUpdateCandidateMapper.MapNonNullable(updatePayload);
         var validationResult = await gradeUpdateCandidateValidator.ValidateAsync(updateCandidate);

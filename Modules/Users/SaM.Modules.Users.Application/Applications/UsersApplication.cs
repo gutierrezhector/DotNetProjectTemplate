@@ -1,9 +1,9 @@
 using FluentValidation;
 using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Exceptions.Implementations;
+using SaM.Core.Types.Entities.Users;
 using SaM.Modules.Users.Ports.InBounds.Applications;
 using SaM.Modules.Users.Ports.InBounds.Candidates;
-using SaM.Modules.Users.Ports.InBounds.Entities;
 using SaM.Modules.Users.Ports.InBounds.Factories;
 using SaM.Modules.Users.Ports.InBounds.Payloads;
 using SaM.Modules.Users.Ports.OutBounds.Repositories;
@@ -19,12 +19,12 @@ public class UsersApplication(
     Mapper<IUserUpdatePayload, IUserUpdateCandidate> userUpdateCandidateMapper
 ) : IUsersApplication
 {
-    public async Task<IUser> GetByIdAsync(int id)
+    public async Task<User> GetByIdAsync(int id)
     {
         return await usersRepository.GetByIdAsync(id);
     }
 
-    public async Task<IUser> CreateAsync(IUserCreationPayload creationPayload)
+    public async Task<User> CreateAsync(IUserCreationPayload creationPayload)
     {
         var creationCandidate = userCreationCandidateMapper.MapNonNullable(creationPayload);
         var validationResult = await userCreationCandidateValidator.ValidateAsync(creationCandidate);
@@ -37,7 +37,7 @@ public class UsersApplication(
         return await usersRepository.CreateAsync(userToCreate);
     }
 
-    public async Task<IUser> UpdateAsync(int id, IUserUpdatePayload updatePayload)
+    public async Task<User> UpdateAsync(int id, IUserUpdatePayload updatePayload)
     {
         var updateCandidate = userUpdateCandidateMapper.MapNonNullable(updatePayload);
         var validationResult = await userUpdateCandidateValidator.ValidateAsync(updateCandidate);

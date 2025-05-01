@@ -1,12 +1,12 @@
 ﻿using SaM.Core.Abstractions.Mappers;
-using SaM.Modules.Users.Ports.InBounds.Entities;
+using SaM.Core.Types.Entities.Users;
 using SaM.Modules.Users.Web.ViewModels;
 
 namespace SaM.Modules.Users.Web.Mappers;
 
-public class UserEntityViewModelMapper : Mapper<IUser, UserViewModel>
+public class UserEntityViewModelMapper : Mapper<User, UserViewModel>
 {
-    public override UserViewModel MapNonNullable(IUser from)
+    public override UserViewModel MapNonNullable(User from)
     {
         return new UserViewModel
         {

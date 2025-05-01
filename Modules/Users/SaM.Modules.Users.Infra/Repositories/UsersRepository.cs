@@ -2,28 +2,28 @@ using Microsoft.EntityFrameworkCore;
 using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Abstractions.Repository;
 using SaM.Core.Exceptions.Implementations;
+using SaM.Core.Types.Entities.Users;
 using SaM.Database.Core;
 using SaM.Database.Core.Daos.Users;
 using SaM.Modules.Users.Infra.Factories;
 using SaM.Modules.Users.Ports.InBounds.Candidates;
-using SaM.Modules.Users.Ports.InBounds.Entities;
 using SaM.Modules.Users.Ports.OutBounds.Repositories;
 
 namespace SaM.Modules.Users.Infra.Repositories;
 
 public class UsersRepository(
     SaMDbContext dbContext,
-    Mapper<UserDao, IUser> userDaoToUserEntityMapper
+    Mapper<UserDao, User> userDaoToUserEntityMapper
 ) : BaseRepository(dbContext), IUsersRepository
 {
-    public async Task<IUser> GetByIdAsync(int id)
+    public async Task<User> GetByIdAsync(int id)
     {
         var userDao = await GetByIdInternal(id);
 
         return userDaoToUserEntityMapper.MapNonNullable(userDao);
     }
 
-    public async Task<IUser> CreateAsync(IUser user)
+    public async Task<User> CreateAsync(User user)
     {
         var newUserDao = UserDaoFactory.Create(user);
 
@@ -35,11 +35,11 @@ public class UsersRepository(
         return user;
     }
 
-    public async Task<IUser> UpdateAsync(int id, IUserUpdateCandidate updateCandidate)
+    public async Task<User> UpdateAsync(int id, IUserUpdateCandidate updateCandidate)
     {
         var userDaoToUpdate = await GetByIdInternal(id);
 
-        userDaoToUpdate.UpdateFromCandidate(updateCandidate);
+        UserDaoFactory.Update(userDaoToUpdate, updateCandidate);
 
         await SaveChangesAsync();
 

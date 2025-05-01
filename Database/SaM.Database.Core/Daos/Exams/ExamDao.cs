@@ -1,6 +1,5 @@
 using SaM.Database.Core.Daos.Grades;
 using SaM.Database.Core.Daos.Teachers;
-using SaM.Modules.Exams.Ports.InBounds.Candidates;
 
 namespace SaM.Database.Core.Daos.Exams;
 
@@ -14,13 +13,4 @@ public class ExamDao
     public required int ResponsibleTeacherId { get; set; }
     public TeacherDao? ResponsibleTeacher { get; set; }
     public List<GradeDao>? Grades { get; set; }
-
-    public void UpdateFromCandidate(IExamUpdateCandidate updateCandidate)
-    {
-        Title = updateCandidate.Title;
-        StartDate = updateCandidate.StartDate;
-        EndDate = updateCandidate.EndDate;
-        MaxPoints = updateCandidate.MaxPoints;
-        ResponsibleTeacherId = updateCandidate.ResponsibleTeacherId;
-    }
 }

@@ -1,36 +1,40 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Abstractions.Repository;
 using SaM.Core.Exceptions.Implementations;
+using SaM.Core.Types.Entities.Exams;
 using SaM.Database.Core;
 using SaM.Database.Core.Daos.Exams;
+using SaM.Database.Core.Daos.Grades;
 using SaM.Modules.Exams.Infra.Factories;
 using SaM.Modules.Exams.Ports.InBounds.Candidates;
-using SaM.Modules.Exams.Ports.InBounds.Entities;
 using SaM.Modules.Exams.Ports.OutBounds.Repositories;
 
 namespace SaM.Modules.Exams.Infra.Repositories;
 
 public class ExamsRepository(
     SaMDbContext dbContext,
-    Mapper<ExamDao, IExam> mapper
+    Mapper<ExamDao, Exam> examDaoToExamEntityMapper
 ) : BaseRepository(dbContext), IExamsRepository
 {
-    public async Task<List<IExam>> GetAllAsync()
+    
+    public async Task<List<Exam>> GetAllAsync()
     {
-        var exams = await Set<ExamDao>().ToListAsync();
+        var exams = await SetIncludeAll()
+            .ToListAsync();
 
-        return mapper.MapNonNullable(exams);
+        return examDaoToExamEntityMapper.MapNonNullable(exams);
     }
 
-    public async Task<IExam> GetByIdAsync(int id)
+    public async Task<Exam> GetByIdAsync(int id)
     {
         var exam = await GetByIdInternal(id);
 
-        return mapper.MapNonNullable(exam);
+        return examDaoToExamEntityMapper.MapNonNullable(exam);
     }
 
-    public async Task<IExam> CreateAsync(IExam examToCreate)
+    public async Task<Exam> CreateAsync(Exam examToCreate)
     {
         var newExamDao = ExamDaoFactory.Create(examToCreate);
 
@@ -43,15 +47,15 @@ public class ExamsRepository(
         return examToCreate;
     }
 
-    public async Task<IExam> UpdateAsync(int id, IExamUpdateCandidate updateCandidate)
+    public async Task<Exam> UpdateAsync(int id, IExamUpdateCandidate updateCandidate)
     {
         var examDaoToUpdate = await GetByIdInternal(id);
 
-        examDaoToUpdate.UpdateFromCandidate(updateCandidate);
+        ExamDaoFactory.Update(examDaoToUpdate, updateCandidate);
 
         await SaveChangesAsync();
 
-        return mapper.MapNonNullable(examDaoToUpdate);
+        return examDaoToExamEntityMapper.MapNonNullable(examDaoToUpdate);
     }
 
     public async Task DeleteAsync(int id)
@@ -65,7 +69,7 @@ public class ExamsRepository(
 
     private async Task<ExamDao> GetByIdInternal(int id)
     {
-        var examDao = await Set<ExamDao>()
+        var examDao = await SetIncludeAll()
             .Where(u => u.Id == id)
             .FirstOrDefaultAsync();
 
@@ -75,5 +79,11 @@ public class ExamsRepository(
         }
 
         return examDao;
+    }
+
+    private IIncludableQueryable<ExamDao, List<GradeDao>?> SetIncludeAll()
+    {
+        return Set<ExamDao>()
+            .Include(e => e.Grades);
     }
 }
