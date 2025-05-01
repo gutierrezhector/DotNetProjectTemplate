@@ -2,9 +2,9 @@
 using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.Types.Entities.Exams;
+using SaM.Modules.Exams.Domain.Factories;
 using SaM.Modules.Exams.Ports.InBounds.Applications;
 using SaM.Modules.Exams.Ports.InBounds.Candidates;
-using SaM.Modules.Exams.Ports.InBounds.Factories;
 using SaM.Modules.Exams.Ports.InBounds.Payloads;
 using SaM.Modules.Exams.Ports.OutBounds.Repositories;
 
@@ -12,7 +12,7 @@ namespace SaM.Modules.Exams.Application.Applications;
 
 public class ExamsApplication(
     IExamsRepository repository,
-    IExamFactory examFactory,
+    ExamEntityFactory examEntityFactory,
     IValidator<IExamCreationCandidate> examCreationCandidateValidator,
     IValidator<IExamUpdateCandidate> examUpdateCandidateValidator,
     Mapper<IExamCreationPayload, IExamCreationCandidate> examCreationPayloadMapper,
@@ -38,7 +38,7 @@ public class ExamsApplication(
             throw new ValidationResultException(validationResult);
         }
 
-        var examToCreate = examFactory.Create(creationCandidate);
+        var examToCreate = examEntityFactory.CreateFromCandidate(creationCandidate);
 
         return await repository.CreateAsync(examToCreate);
     }

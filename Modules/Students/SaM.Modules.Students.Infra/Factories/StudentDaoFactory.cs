@@ -1,21 +1,22 @@
+using SaM.Core.Abstractions.Factories;
 using SaM.Core.Types.Entities.Students;
 using SaM.Database.Core.Daos.Students;
 using SaM.Modules.Students.Ports.InBounds.Candidates;
 
 namespace SaM.Modules.Students.Infra.Factories;
 
-public static class StudentDaoFactory
+public class StudentDaoFactory : DaoFactory<StudentDao, Student, IStudentUpdateCandidate>
 {
-    public static StudentDao Create(Student student)
+    public override StudentDao CreateFromEntity(Student entity)
     {
         return new StudentDao
         {
-            UserId = student.UserId,
+            UserId = entity.UserId,
         };
     }
 
-    public static void Update(StudentDao dao, IStudentUpdateCandidate updateCandidate)
+    public override void UpdateFromCandidate(StudentDao daoToUpdate, IStudentUpdateCandidate updateCandidate)
     {
-        dao.UserId = updateCandidate.UserId;
+        daoToUpdate.UserId = updateCandidate.UserId;
     }
 }

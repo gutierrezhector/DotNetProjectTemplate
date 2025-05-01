@@ -1,15 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SaM.Core.Abstractions.Mappers;
-using SaM.Core.Types.Entities.Students;
 using SaM.Modules.Students.Ports.InBounds.Applications;
+using SaM.Modules.Students.Web.Factories;
 using SaM.Modules.Students.Web.Payloads;
-using SaM.Modules.Students.Web.ViewModels;
 
 namespace SaM.Modules.Students.Web.Controllers;
 
 public class StudentController(
     IStudentsApplication studentsApplication,
-    Mapper<Student, StudentViewModel> studentViewModelMapper
+    StudentViewModelFactory studentViewModelFactory
 ) : ControllerBase
 {
     [HttpGet]
@@ -17,7 +15,7 @@ public class StudentController(
     {
         var students = await studentsApplication.GetAllAsync();
 
-        return Ok(studentViewModelMapper.MapNonNullable(students));
+        return Ok(studentViewModelFactory.CreateFromEntity(students));
     }
 
     [HttpGet("{id}")]
@@ -25,7 +23,7 @@ public class StudentController(
     {
         var student = await studentsApplication.GetByIdAsync(id);
 
-        return Ok(studentViewModelMapper.MapNonNullable(student));
+        return Ok(studentViewModelFactory.CreateFromEntity(student));
     }
 
     [HttpPost]
@@ -33,7 +31,7 @@ public class StudentController(
     {
         var createdStudent = await studentsApplication.CreateAsync(creationPayload);
 
-        return Created($"students/{createdStudent.Id}", studentViewModelMapper.MapNonNullable(createdStudent));
+        return Created($"students/{createdStudent.Id}", studentViewModelFactory.CreateFromEntity(createdStudent));
     }
 
     [HttpPut]
@@ -41,7 +39,7 @@ public class StudentController(
     {
         var updatedStudent = await studentsApplication.UpdateAsync(id, updatePayload);
 
-        return Ok(studentViewModelMapper.MapNonNullable(updatedStudent));
+        return Ok(studentViewModelFactory.CreateFromEntity(updatedStudent));
     }
 
     [HttpDelete("{id}")]

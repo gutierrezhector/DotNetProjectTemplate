@@ -1,9 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using SaM.Core.Abstractions.Mappers;
-using SaM.Core.Types.Entities.Users;
 using SaM.Modules.Users.Ports.InBounds.Applications;
+using SaM.Modules.Users.Web.Factories;
 using SaM.Modules.Users.Web.Payloads;
-using SaM.Modules.Users.Web.ViewModels;
 
 namespace SaM.Modules.Users.Web.Controllers;
 
@@ -11,7 +9,7 @@ namespace SaM.Modules.Users.Web.Controllers;
 [Route("api/users")]
 public class UsersController(
     IUsersApplication usersApplication,
-    Mapper<User, UserViewModel> userEntityViewModelMapper
+    UserViewModelFactory userViewModelFactory
 ) : ControllerBase
 {
     [HttpGet("{id}")]
@@ -19,7 +17,7 @@ public class UsersController(
     {
         var user = await usersApplication.GetByIdAsync(id);
 
-        return Ok(userEntityViewModelMapper.MapNonNullable(user));
+        return Ok(userViewModelFactory.CreateFromEntity(user));
     }
 
     [HttpPost]
@@ -27,7 +25,7 @@ public class UsersController(
     {
         var newUser = await usersApplication.CreateAsync(creationPayload);
 
-        return Created($"users/{newUser.Id}", userEntityViewModelMapper.MapNonNullable(newUser));
+        return Created($"users/{newUser.Id}", userViewModelFactory.CreateFromEntity(newUser));
     }
 
     [HttpPut("{id}")]
@@ -35,7 +33,7 @@ public class UsersController(
     {
         var updatedUser = await usersApplication.UpdateAsync(id, updatePayload);
 
-        return Ok(userEntityViewModelMapper.MapNonNullable(updatedUser));
+        return Ok(userViewModelFactory.CreateFromEntity(updatedUser));
     }
 
     [HttpDelete("{id}")]

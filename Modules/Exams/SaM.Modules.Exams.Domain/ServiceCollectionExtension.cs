@@ -7,7 +7,6 @@ using SaM.Modules.Exams.Domain.Factories;
 using SaM.Modules.Exams.Domain.Mappers;
 using SaM.Modules.Exams.Domain.Validators;
 using SaM.Modules.Exams.Ports.InBounds.Candidates;
-using SaM.Modules.Exams.Ports.InBounds.Factories;
 
 namespace SaM.Modules.Exams.Domain;
 
@@ -20,8 +19,7 @@ public static class ServiceCollectionExtension
 
         services.AddScoped<Mapper<ExamDao, Exam>, ExamDaoToExamEntityMapper>();
 
-        services.AddScoped<IExamFactory, ExamFactory>();
-        services.AddScoped<ExamPopulator>();
+        services.AddScoped<ExamEntityFactory>();
 
         return services;
     }

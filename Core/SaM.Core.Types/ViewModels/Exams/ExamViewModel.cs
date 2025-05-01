@@ -1,6 +1,7 @@
-﻿using SaM.Modules.Teachers.Web.ViewModels;
+﻿using SaM.Core.Types.ViewModels.Grades;
+using SaM.Core.Types.ViewModels.Teachers;
 
-namespace SaM.Modules.Exams.Web.ViewModels;
+namespace SaM.Core.Types.ViewModels.Exams;
 
 public record ExamViewModel
 {
@@ -11,4 +12,5 @@ public record ExamViewModel
     public required decimal MaxPoints { get; set; }
     public required int ResponsibleTeacherId { get; set; }
     public TeacherViewModel? ResponsibleTeacher { get; set; }
+    public List<GradeViewModel>? Grades { get; set; }
 }

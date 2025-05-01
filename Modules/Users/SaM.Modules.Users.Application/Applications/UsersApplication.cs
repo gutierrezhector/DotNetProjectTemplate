@@ -2,9 +2,9 @@ using FluentValidation;
 using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.Types.Entities.Users;
+using SaM.Modules.Users.Domain.Factories;
 using SaM.Modules.Users.Ports.InBounds.Applications;
 using SaM.Modules.Users.Ports.InBounds.Candidates;
-using SaM.Modules.Users.Ports.InBounds.Factories;
 using SaM.Modules.Users.Ports.InBounds.Payloads;
 using SaM.Modules.Users.Ports.OutBounds.Repositories;
 
@@ -12,7 +12,7 @@ namespace SaM.Modules.Users.Application.Applications;
 
 public class UsersApplication(
     IUsersRepository usersRepository,
-    IUserEntityFactory userEntityFactory,
+    UserEntityFactory userEntityFactory,
     IValidator<IUserCreationCandidate> userCreationCandidateValidator,
     IValidator<IUserUpdateCandidate> userUpdateCandidateValidator,
     Mapper<IUserCreationPayload, IUserCreationCandidate> userCreationCandidateMapper,
@@ -33,7 +33,7 @@ public class UsersApplication(
             throw new ValidationResultException(validationResult);
         }
 
-        var userToCreate = userEntityFactory.Create(creationCandidate);
+        var userToCreate = userEntityFactory.CreateFromCandidate(creationCandidate);
         return await usersRepository.CreateAsync(userToCreate);
     }
 

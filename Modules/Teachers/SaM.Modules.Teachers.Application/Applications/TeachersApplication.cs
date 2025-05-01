@@ -2,9 +2,9 @@ using FluentValidation;
 using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.Types.Entities.Teachers;
+using SaM.Modules.Teachers.Domain.Factories;
 using SaM.Modules.Teachers.Ports.InBounds.Applications;
 using SaM.Modules.Teachers.Ports.InBounds.Candidates;
-using SaM.Modules.Teachers.Ports.InBounds.Factories;
 using SaM.Modules.Teachers.Ports.InBounds.Payloads;
 using SaM.Modules.Teachers.Ports.OuBounds.Repositories;
 
@@ -12,7 +12,7 @@ namespace SaM.Modules.Teachers.Application.Applications;
 
 public class TeachersApplication(
     ITeacherRepository teacherRepository,
-    ITeacherEntityFactory teacherEntityFactory,
+    TeacherEntityFactory teacherEntityFactory,
     IValidator<ITeacherCreationCandidate> teacherCandidateValidator,
     IValidator<ITeacherUpdateCandidate> teacherUpdateCandidateValidator,
     Mapper<ITeacherCreationPayload, ITeacherCreationCandidate> teacherCreationCandidateMapper,
@@ -39,7 +39,7 @@ public class TeachersApplication(
             throw new BadRequestException(string.Join(", ", errors));
         }
 
-        var newTeacher = teacherEntityFactory.Create(creationCandidate);
+        var newTeacher = teacherEntityFactory.CreateFromCandidate(creationCandidate);
         await teacherRepository.Create(newTeacher);
 
         return newTeacher;

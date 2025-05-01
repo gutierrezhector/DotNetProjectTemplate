@@ -7,7 +7,6 @@ using SaM.Modules.Students.Domain.Factories;
 using SaM.Modules.Students.Domain.Mappers;
 using SaM.Modules.Students.Domain.Validators;
 using SaM.Modules.Students.Ports.InBounds.Candidates;
-using SaM.Modules.Students.Ports.InBounds.Factories;
 
 namespace SaM.Modules.Students.Domain;
 
@@ -15,7 +14,7 @@ public static class ServiceCollectionExtension
 {
     public static IServiceCollection RegisterStudentsDomain(this IServiceCollection services)
     {
-        services.AddScoped<IStudentEntityFactory, StudentEntityFactory>();
+        services.AddScoped<StudentEntityFactory>();
 
         services.AddScoped<IValidator<IStudentCreationCandidate>, StudentCreationCandidateValidator>();
         services.AddScoped<IValidator<IStudentUpdateCandidate>, StudentUpdateCandidateValidator>();

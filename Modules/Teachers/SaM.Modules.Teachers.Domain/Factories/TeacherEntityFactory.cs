@@ -1,17 +1,33 @@
+using SaM.Core.Abstractions.Factories;
+using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Types.Entities.Teachers;
+using SaM.Core.Types.Entities.Users;
+using SaM.Database.Core.Daos.Teachers;
+using SaM.Database.Core.Daos.Users;
 using SaM.Modules.Teachers.Ports.InBounds.Candidates;
-using SaM.Modules.Teachers.Ports.InBounds.Factories;
 
 namespace SaM.Modules.Teachers.Domain.Factories;
 
-public class TeacherEntityFactory : ITeacherEntityFactory
+public class TeacherEntityFactory(
+    Mapper<TeacherDao, Teacher> teacherDaoToExamEntityMapper,
+    Mapper<UserDao, User> userDaoToUserEntityMapper
+) : EntityFactory<Teacher, TeacherDao, ITeacherCreationCandidate>
 {
-    public Teacher Create(ITeacherCreationCandidate creationCandidate)
+    public override Teacher CreateFromCandidate(ITeacherCreationCandidate creationCandidate)
     {
         return new Teacher
         {
             SchoolSubject = creationCandidate.SchoolSubject,
             UserId = creationCandidate.UserId,
         };
+    }
+
+    public override Teacher CreateFromDao(TeacherDao from)
+    {
+        var teacher = teacherDaoToExamEntityMapper.MapNonNullable(from);
+        
+        teacher.User = userDaoToUserEntityMapper.MapNullable(from.User);
+        
+        return teacher;
     }
 }

@@ -1,6 +1,6 @@
-﻿using SaM.Modules.Users.Web.ViewModels;
+﻿using SaM.Core.Types.ViewModels.Users;
 
-namespace SaM.Modules.Students.Web.ViewModels;
+namespace SaM.Core.Types.ViewModels.Students;
 
 public record StudentViewModel
 {

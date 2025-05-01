@@ -1,24 +1,25 @@
-﻿using SaM.Core.Types.Entities.Users;
+﻿using SaM.Core.Abstractions.Factories;
+using SaM.Core.Types.Entities.Users;
 using SaM.Database.Core.Daos.Users;
 using SaM.Modules.Users.Ports.InBounds.Candidates;
 
 namespace SaM.Modules.Users.Infra.Factories;
 
-public static class UserDaoFactory
+public class UserDaoFactory : DaoFactory<UserDao, User, IUserUpdateCandidate>
 {
-    public static UserDao Create(User user)
+    public override UserDao CreateFromEntity(User entity)
     {
         return new UserDao
         {
-            Id = user.Id,
-            FirstName = user.FirstName,
-            LastName = user.LastName,
+            Id = entity.Id,
+            FirstName = entity.FirstName,
+            LastName = entity.LastName,
         };
     }
 
-    public static void Update(UserDao userDao, IUserUpdateCandidate updateCandidate)
+    public override void UpdateFromCandidate(UserDao daoToUpdate, IUserUpdateCandidate updateCandidate)
     {
-        userDao.FirstName = updateCandidate.FirstName;
-        userDao.LastName = updateCandidate.LastName;
+        daoToUpdate.FirstName = updateCandidate.FirstName;
+        daoToUpdate.LastName = updateCandidate.LastName;
     }
 }

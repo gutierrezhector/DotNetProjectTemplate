@@ -1,14 +1,10 @@
 using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Types.Entities.Exams;
-using SaM.Core.Types.Entities.Teachers;
-using SaM.Modules.Exams.Web.ViewModels;
-using SaM.Modules.Teachers.Web.ViewModels;
+using SaM.Core.Types.ViewModels.Exams;
 
 namespace SaM.Modules.Exams.Web.Mappers;
 
-public class ExamViewModelMapper(
-    Mapper<Teacher, TeacherViewModel> teacherViewModelMapper
-) : Mapper<Exam, ExamViewModel>
+public class ExamViewModelMapper: Mapper<Exam, ExamViewModel>
 {
     public override ExamViewModel MapNonNullable(Exam exam)
     {
@@ -20,7 +16,6 @@ public class ExamViewModelMapper(
             EndDate = exam.EndDate,
             MaxPoints = exam.MaxPoints,
             ResponsibleTeacherId = exam.ResponsibleTeacherId,
-            ResponsibleTeacher = teacherViewModelMapper.MapNullable(exam.ResponsibleTeacher),
         };
     }
 }

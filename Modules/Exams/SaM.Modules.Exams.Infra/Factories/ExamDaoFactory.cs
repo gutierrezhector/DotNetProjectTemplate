@@ -1,26 +1,25 @@
-﻿using SaM.Core.Types.Entities.Exams;
+﻿using SaM.Core.Abstractions.Factories;
+using SaM.Core.Types.Entities.Exams;
 using SaM.Database.Core.Daos.Exams;
 using SaM.Modules.Exams.Ports.InBounds.Candidates;
 
 namespace SaM.Modules.Exams.Infra.Factories;
 
-public class ExamDaoFactory(
-    
-    )
+public class ExamDaoFactory : DaoFactory<ExamDao, Exam, IExamUpdateCandidate>
 {
-    public static ExamDao Create(Exam exam)
+    public override ExamDao CreateFromEntity(Exam entity)
     {
         return new ExamDao
         {
-            Title = exam.Title,
-            StartDate = exam.StartDate,
-            EndDate = exam.EndDate,
-            MaxPoints = exam.MaxPoints,
-            ResponsibleTeacherId = exam.ResponsibleTeacherId,
+            Title = entity.Title,
+            StartDate = entity.StartDate,
+            EndDate = entity.EndDate,
+            MaxPoints = entity.MaxPoints,
+            ResponsibleTeacherId = entity.ResponsibleTeacherId,
         };
     }
 
-    public static void Update(ExamDao daoToUpdate, IExamUpdateCandidate updateCandidate)
+    public override void UpdateFromCandidate(ExamDao daoToUpdate, IExamUpdateCandidate updateCandidate)
     {
         daoToUpdate.Title = updateCandidate.Title;
         daoToUpdate.StartDate = updateCandidate.StartDate;

@@ -1,15 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
-using SaM.Core.Abstractions.Mappers;
-using SaM.Core.Types.Entities.Exams;
 using SaM.Modules.Exams.Ports.InBounds.Applications;
+using SaM.Modules.Exams.Web.Factories;
 using SaM.Modules.Exams.Web.Payloads;
-using SaM.Modules.Exams.Web.ViewModels;
 
 namespace SaM.Modules.Exams.Web.Controllers;
 
 public class ExamsController(
     IExamsApplication application,
-    Mapper<Exam, ExamViewModel> examViewModelMapper
+    ExamViewModelFactory examViewModelFactory
 ) : ControllerBase
 {
     [HttpGet]
@@ -17,7 +15,7 @@ public class ExamsController(
     {
         var exams = await application.GetAllAsync();
 
-        return Ok(examViewModelMapper.MapNonNullable(exams));
+        return Ok(examViewModelFactory.CreateFromEntity(exams));
     }
 
     [HttpGet("{id}")]
@@ -25,7 +23,7 @@ public class ExamsController(
     {
         var exam = await application.GetByIdAsync(id);
 
-        return Ok(examViewModelMapper.MapNonNullable(exam));
+        return Ok(examViewModelFactory.CreateFromEntity(exam));
     }
 
     [HttpPost]
@@ -40,7 +38,7 @@ public class ExamsController(
     {
         var updatedExam = await application.UpdateAsync(id, updatePayload);
 
-        return Ok(examViewModelMapper.MapNonNullable(updatedExam));
+        return Ok(examViewModelFactory.CreateFromEntity(updatedExam));
     }
 
     [HttpDelete("{id}")]

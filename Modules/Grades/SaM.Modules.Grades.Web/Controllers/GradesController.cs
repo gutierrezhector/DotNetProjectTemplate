@@ -1,15 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
-using SaM.Core.Abstractions.Mappers;
-using SaM.Core.Types.Entities.Grades;
 using SaM.Modules.Grades.Ports.InBounds.Applications;
+using SaM.Modules.Grades.Web.Factories;
 using SaM.Modules.Grades.Web.Payloads;
-using SaM.Modules.Grades.Web.ViewModels;
 
 namespace SaM.Modules.Grades.Web.Controllers;
 
 public class GradesController(
     IGradesApplication gradesApplication,
-    Mapper<Grade, GradeViewModel> gradeViewModelMapper
+    GradeViewModelFactory gradeViewModelFactory
 ) : ControllerBase
 {
     [HttpGet("{id}")]
@@ -17,14 +15,14 @@ public class GradesController(
     {
         var grade = await gradesApplication.GetByIdAsync(id);
 
-        return Ok(gradeViewModelMapper.MapNonNullable(grade));
+        return Ok(gradeViewModelFactory.CreateFromEntity(grade));
     }
 
     [HttpPost]
     public async Task<IActionResult> CreateAsync([FromBody] GradeCreationPayload creationPayload)
     {
         var newGrade = await gradesApplication.CreateAsync(creationPayload);
-        return Created($"grades/{newGrade.Id}", gradeViewModelMapper.MapNonNullable(newGrade));
+        return Created($"grades/{newGrade.Id}", gradeViewModelFactory.CreateFromEntity(newGrade));
     }
 
     [HttpPut]
@@ -32,7 +30,7 @@ public class GradesController(
     {
         var updatedGrade = await gradesApplication.UpdateAsync(id, updatePayload);
 
-        return Ok(gradeViewModelMapper.MapNonNullable(updatedGrade));
+        return Ok(gradeViewModelFactory.CreateFromEntity(updatedGrade));
     }
 
     [HttpDelete("{id}")]
