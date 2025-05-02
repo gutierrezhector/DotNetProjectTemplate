@@ -26,8 +26,10 @@ public static class RegisterServices
 {
     public static void Register(WebApplicationBuilder webApplicationBuilder)
     {
+        var connectionString = GetConnectionStringOrThrow(webApplicationBuilder);
+
         webApplicationBuilder.Services
-            .RegisterEntityFramework();
+            .RegisterEntityFramework(connectionString);
 
         webApplicationBuilder.Services
             .RegisterUsersWeb()
@@ -58,5 +60,17 @@ public static class RegisterServices
             .RegisterGradesApplication()
             .RegisterGradesInfra()
             .RegisterGradesDomain();
+    }
+
+    private static string GetConnectionStringOrThrow(WebApplicationBuilder webApplicationBuilder)
+    {
+        var connectionString = webApplicationBuilder.Configuration.GetConnectionString("DefaultConnection");
+
+        if (string.IsNullOrEmpty(connectionString))
+        {
+            throw new ApplicationException("connectionString is null or empty");
+        }
+
+        return connectionString;
     }
 }

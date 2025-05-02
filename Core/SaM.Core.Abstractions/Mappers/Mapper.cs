@@ -17,7 +17,7 @@ public abstract class Mapper<TFrom, TTo>
     
     public TTo? MapNullable(TFrom? from)
     {
-        if (from == null)
+        if (from is null)
         {
             return default;
         }
