@@ -18,6 +18,7 @@
     <ItemGroup>
       <ProjectReference Include="..\Core\SaM.Core.Middlewares\SaM.Core.Middlewares.csproj" />
       <ProjectReference Include="..\Database\SaM.Database.Core\SaM.Database.Core.csproj" />
+      <ProjectReference Include="..\Database\SaM.Database.Migrations\SaM.Database.Migrations.csproj" />
       <ProjectReference Include="..\Modules\Exams\SaM.Modules.Exams.Application\SaM.Modules.Exams.Application.csproj" />
       <ProjectReference Include="..\Modules\Exams\SaM.Modules.Exams.Domain\SaM.Modules.Exams.Domain.csproj" />
       <ProjectReference Include="..\Modules\Exams\SaM.Modules.Exams.Infra\SaM.Modules.Exams.Infra.csproj" />
