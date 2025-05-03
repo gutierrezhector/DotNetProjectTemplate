@@ -9,7 +9,7 @@ public class SaMDbContextFactory : IDesignTimeDbContextFactory<SaMDbContext>
 {
     public SaMDbContext CreateDbContext(string[] args)
     {
-        var basePath = Path.Combine(Directory.GetCurrentDirectory(), @"..\..", "SaM.Start");
+        var basePath = Path.Combine(Directory.GetCurrentDirectory(), "../..", "SaM.Start/Configs");
         var configuration = new ConfigurationBuilder()
             .SetBasePath(basePath)
             .AddJsonFile("appsettings.json")
@@ -19,6 +19,7 @@ public class SaMDbContextFactory : IDesignTimeDbContextFactory<SaMDbContext>
         if (string.IsNullOrEmpty(connectionString))
         {
             throw new ApplicationException("connectionString is null or empty");
+            
         }
         
         var optionsBuilder = new DbContextOptionsBuilder<SaMDbContext>();
