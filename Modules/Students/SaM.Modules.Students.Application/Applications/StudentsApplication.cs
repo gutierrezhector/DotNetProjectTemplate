@@ -3,6 +3,7 @@ using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.Types.Entities.Students;
 using SaM.Modules.Students.Domain.Factories;
+using SaM.Modules.Students.Domain.Validators;
 using SaM.Modules.Students.Ports.InBounds.Applications;
 using SaM.Modules.Students.Ports.InBounds.Candidates;
 using SaM.Modules.Students.Ports.InBounds.Payloads;
@@ -14,7 +15,7 @@ public class StudentsApplication(
     IStudentsRepository studentsRepository,
     StudentEntityFactory studentEntityFactory,
     IValidator<IStudentCreationCandidate> studentCreationCandidateValidator,
-    IValidator<IStudentUpdateCandidate> studentUpdateCandidateValidator,
+    IValidator<TeacherUpdateWrapper> studentUpdateCandidateValidator,
     Mapper<IStudentCreationPayload, IStudentCreationCandidate> studentCreationCandidateMapper,
     Mapper<IStudentUpdatePayload, IStudentUpdateCandidate> studentUpdateCandidateMapper
 ) : IStudentsApplication
@@ -46,7 +47,8 @@ public class StudentsApplication(
     public async Task<Student> UpdateAsync(int id, IStudentUpdatePayload updatePayload)
     {
         var updateCandidate = studentUpdateCandidateMapper.MapNonNullable(updatePayload);
-        var validationResult = await studentUpdateCandidateValidator.ValidateAsync(updateCandidate);
+        var currentStudent = await studentsRepository.GetByIdAsync(id);
+        var validationResult = await studentUpdateCandidateValidator.ValidateAsync(new TeacherUpdateWrapper(updateCandidate, currentStudent));
         if (!validationResult.IsValid)
         {
             throw new ValidationResultException(validationResult);

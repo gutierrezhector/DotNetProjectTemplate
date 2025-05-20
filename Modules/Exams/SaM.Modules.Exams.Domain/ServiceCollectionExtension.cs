@@ -15,7 +15,7 @@ public static class ServiceCollectionExtension
     public static IServiceCollection RegisterExamsDomain(this IServiceCollection services)
     {
         services.AddScoped<IValidator<IExamCreationCandidate>, ExamCreationCandidateValidator>();
-        services.AddScoped<IValidator<IExamUpdateCandidate>, ExamUpdateCandidateValidator>();
+        services.AddScoped<IValidator<TeacherUpdateWrapper>, ExamUpdateCandidateValidator>();
 
         services.AddScoped<Mapper<ExamDao, Exam>, ExamDaoToExamEntityMapper>();
 

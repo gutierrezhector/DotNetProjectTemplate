@@ -1,18 +1,22 @@
 ﻿using FluentValidation;
+using SaM.Core.Types.Entities.Exams;
 using SaM.Modules.Exams.Ports.InBounds.Candidates;
 using SaM.Modules.Teachers.Ports.OuBounds.Repositories;
 
 namespace SaM.Modules.Exams.Domain.Validators;
 
-public class ExamUpdateCandidateValidator : AbstractValidator<IExamUpdateCandidate>
+public record TeacherUpdateWrapper(IExamUpdateCandidate Candidate, Exam Entity);
+
+public class ExamUpdateCandidateValidator : AbstractValidator<TeacherUpdateWrapper>
 {
     public ExamUpdateCandidateValidator(ITeacherRepository teacherRepository)
     {
-        RuleFor(e => e.MaxPoints).LessThanOrEqualTo(20);
-        RuleFor(e => e.StartDate).NotEmpty();
-        RuleFor(e => e.StartDate).LessThan(e => e.EndDate);
-        RuleFor(e => e.ResponsibleTeacherId)
+        RuleFor(wrapper => wrapper.Candidate.MaxPoints).LessThanOrEqualTo(20);
+        RuleFor(wrapper => wrapper.Candidate.StartDate).NotEmpty();
+        RuleFor(wrapper => wrapper.Candidate.StartDate).LessThan(wrapper => wrapper.Candidate.EndDate);
+        RuleFor(wrapper => wrapper.Candidate.ResponsibleTeacherId)
             .MustAsync(async (responsibleTeacherId, _) => await teacherRepository.ExistAsync(responsibleTeacherId))
+            .When(wrapper => wrapper.Entity.ResponsibleTeacherId != wrapper.Candidate.ResponsibleTeacherId)
             .WithMessage("Responsible Teacher must exists.");
     }
 }

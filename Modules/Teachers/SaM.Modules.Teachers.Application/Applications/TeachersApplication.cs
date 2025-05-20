@@ -3,6 +3,7 @@ using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.Types.Entities.Teachers;
 using SaM.Modules.Teachers.Domain.Factories;
+using SaM.Modules.Teachers.Domain.Validators;
 using SaM.Modules.Teachers.Ports.InBounds.Applications;
 using SaM.Modules.Teachers.Ports.InBounds.Candidates;
 using SaM.Modules.Teachers.Ports.InBounds.Payloads;
@@ -13,8 +14,8 @@ namespace SaM.Modules.Teachers.Application.Applications;
 public class TeachersApplication(
     ITeacherRepository teacherRepository,
     TeacherEntityFactory teacherEntityFactory,
-    IValidator<ITeacherCreationCandidate> teacherCandidateValidator,
-    IValidator<ITeacherUpdateCandidate> teacherUpdateCandidateValidator,
+    IValidator<ITeacherCreationCandidate> teacherCreationCandidateValidator,
+    IValidator<TeacherUpdateWrapper> teacherUpdateCandidateValidator,
     Mapper<ITeacherCreationPayload, ITeacherCreationCandidate> teacherCreationCandidateMapper,
     Mapper<ITeacherUpdatePayload, ITeacherUpdateCandidate> teacherUpdateCandidateMapper
 ) : ITeachersApplication
@@ -32,11 +33,10 @@ public class TeachersApplication(
     public async Task<Teacher> Create(ITeacherCreationPayload creationPayload)
     {
         var creationCandidate = teacherCreationCandidateMapper.MapNonNullable(creationPayload);
-        var validationResult = await teacherCandidateValidator.ValidateAsync(creationCandidate);
+        var validationResult = await teacherCreationCandidateValidator.ValidateAsync(creationCandidate);
         if (!validationResult.IsValid)
         {
-            var errors = validationResult.Errors.Select(x => x.ErrorMessage);
-            throw new BadRequestException(string.Join(", ", errors));
+            throw new ValidationResultException(validationResult);
         }
 
         var newTeacher = teacherEntityFactory.CreateFromCandidate(creationCandidate);
@@ -48,7 +48,8 @@ public class TeachersApplication(
     public async Task<Teacher> UpdateAsync(int id, ITeacherUpdatePayload updatePayload)
     {
         var updateCandidate = teacherUpdateCandidateMapper.MapNonNullable(updatePayload);
-        var validationResult = await teacherUpdateCandidateValidator.ValidateAsync(updateCandidate);
+        var currentTeacher = await teacherRepository.GetByIdAsync(id);
+        var validationResult = await teacherUpdateCandidateValidator.ValidateAsync(new TeacherUpdateWrapper(updateCandidate, currentTeacher));
         if (!validationResult.IsValid)
         {
             throw new ValidationResultException(validationResult);

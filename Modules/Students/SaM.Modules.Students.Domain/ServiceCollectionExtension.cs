@@ -17,7 +17,7 @@ public static class ServiceCollectionExtension
         services.AddScoped<StudentEntityFactory>();
 
         services.AddScoped<IValidator<IStudentCreationCandidate>, StudentCreationCandidateValidator>();
-        services.AddScoped<IValidator<IStudentUpdateCandidate>, StudentUpdateCandidateValidator>();
+        services.AddScoped<IValidator<TeacherUpdateWrapper>, StudentUpdateCandidateValidator>();
 
         services.AddScoped<Mapper<StudentDao, Student>, StudentDaoToStudentEntityMapper>();
 
