@@ -45,6 +45,8 @@ public class StudentsRepository(
         DbContext.Add(newStudentDao);
         await SaveChangesAsync();
 
+        studentToCreate.Id = newStudentDao.Id;
+        
         return studentToCreate;
     }
 

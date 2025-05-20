@@ -5,6 +5,8 @@ using SaM.Modules.Exams.Web.Payloads;
 
 namespace SaM.Modules.Exams.Web.Controllers;
 
+[ApiController]
+[Route("api/exams")]
 public class ExamsController(
     IExamsApplication application,
     ExamViewModelFactory examViewModelFactory

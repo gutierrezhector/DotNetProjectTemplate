@@ -12,7 +12,7 @@ public static class ProblemDetailsHelper
             ConflictException => ProblemDetailsFactory.Conflict(),
             ForbiddenException => ProblemDetailsFactory.Forbidden(),
             UnauthorizedException => ProblemDetailsFactory.Unauthorized(),
-            NotFoundException => ProblemDetailsFactory.NotFound(),
+            NotFoundException notFoundException => ProblemDetailsFactory.NotFound(notFoundException),
             ValidationResultException validationResultException => ProblemDetailsFactory.ValidationFailed(validationResultException),
             _ => throw new ArgumentOutOfRangeException(nameof(exception)),
         };

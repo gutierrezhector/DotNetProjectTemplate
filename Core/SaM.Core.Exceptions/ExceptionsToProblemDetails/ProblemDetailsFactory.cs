@@ -16,13 +16,13 @@ public static class ProblemDetailsFactory
         };
     }
 
-    public static ProblemDetails NotFound()
+    public static ProblemDetails NotFound(NotFoundException notFoundException)
     {
         return new ProblemDetails
         {
             Status = 404,
-            Title = "Not Found",
-            Detail = "Resource was not found.",
+            Title = "Not found",
+            Detail = notFoundException.Message,
             Type = ProblemTypeUris.NotFound,
         };
     }

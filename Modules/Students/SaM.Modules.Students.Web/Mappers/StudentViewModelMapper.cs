@@ -11,7 +11,7 @@ public class StudentViewModelMapper: Mapper<Student, StudentViewModel>
         return new StudentViewModel
         {
             Id = from.Id,
-            UserId = from.Id,
+            UserId = from.UserId,
         };
     }
 }

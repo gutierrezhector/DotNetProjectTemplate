@@ -5,6 +5,8 @@ using SaM.Modules.Teachers.Web.Payloads;
 
 namespace SaM.Modules.Teachers.Web.Controllers;
 
+[ApiController]
+[Route("api/teachers")]
 public class TeachersController(
     ITeachersApplication teachersApplication,
     TeacherViewModelFactory teacherViewModelFactory
@@ -33,7 +35,7 @@ public class TeachersController(
         return Created($"teachers/{newTeacher.Id}", teacherViewModelFactory.CreateFromEntity(newTeacher));
     }
 
-    [HttpPut]
+    [HttpPut("{id}")]
     public async Task<IActionResult> UpdateAsync(int id, [FromBody] TeacherUpdatePayload teacherUpdatePayload)
     {
         var updatedTeacher = await teachersApplication.UpdateAsync(id, teacherUpdatePayload);

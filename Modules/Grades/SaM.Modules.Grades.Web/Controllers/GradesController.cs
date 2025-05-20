@@ -5,6 +5,8 @@ using SaM.Modules.Grades.Web.Payloads;
 
 namespace SaM.Modules.Grades.Web.Controllers;
 
+[ApiController]
+[Route("api/grades")]
 public class GradesController(
     IGradesApplication gradesApplication,
     GradeViewModelFactory gradeViewModelFactory
