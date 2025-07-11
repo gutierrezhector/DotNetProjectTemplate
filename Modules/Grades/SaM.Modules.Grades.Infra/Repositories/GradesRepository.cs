@@ -54,6 +54,12 @@ public class GradesRepository(
         await SaveChangesAsync();
     }
 
+    public async Task<bool> ExistAsync(int examId, int studentId)
+    {
+        return await SetWithoutIncludes()
+            .AnyAsync(g => g.ExamId == examId && g.StudentId == studentId);
+    }
+
     private async Task<GradeDao> GetByIdInternal(int id)
     {
         var studentDao = await SetWithIncludes()

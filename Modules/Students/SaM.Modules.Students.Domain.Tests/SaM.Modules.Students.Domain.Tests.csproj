@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentAssertions" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" />
+        <PackageReference Include="Moq" />
+        <PackageReference Include="xunit" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\SaM.Modules.Students.Application\SaM.Modules.Students.Application.csproj" />
+      <ProjectReference Include="..\SaM.Modules.Students.Domain\SaM.Modules.Students.Domain.csproj" />
+    </ItemGroup>
+    
+</Project>

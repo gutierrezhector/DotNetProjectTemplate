@@ -3,6 +3,7 @@ using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.Types.Entities.Grades;
 using SaM.Modules.Grades.Domain.Factories;
+using SaM.Modules.Grades.Domain.Validators;
 using SaM.Modules.Grades.Ports.InBounds.Applications;
 using SaM.Modules.Grades.Ports.InBounds.Candidates;
 using SaM.Modules.Grades.Ports.InBounds.Payloads;
@@ -14,7 +15,7 @@ public class GradesApplication(
     IGradesRepository gradesRepository,
     GradeEntityFactory gradeEntityFactory,
     IValidator<IGradeCreationCandidate> gradeCreationCandidateValidator,
-    IValidator<IGradeUpdateCandidate> gradeUpdateCandidateValidator,
+    IValidator<GradeUpdateWrapper> gradeUpdateCandidateValidator,
     Mapper<IGradeCreationPayload, IGradeCreationCandidate> gradeCreationCandidateMapper,
     Mapper<IGradeUpdatePayload, IGradeUpdateCandidate> gradeUpdateCandidateMapper
 ) : IGradesApplication
@@ -42,7 +43,8 @@ public class GradesApplication(
     public async Task<Grade> UpdateAsync(int id, IGradeUpdatePayload updatePayload)
     {
         var updateCandidate = gradeUpdateCandidateMapper.MapNonNullable(updatePayload);
-        var validationResult = await gradeUpdateCandidateValidator.ValidateAsync(updateCandidate);
+        var currentGarde = await gradesRepository.GetByIdAsync(id);
+        var validationResult = await gradeUpdateCandidateValidator.ValidateAsync(new GradeUpdateWrapper(updateCandidate, currentGarde));
         if (!validationResult.IsValid)
         {
             throw new ValidationResultException(validationResult);
