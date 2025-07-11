@@ -25,9 +25,9 @@ public class TeacherEntityFactory(
     public override Teacher CreateFromDao(TeacherDao from)
     {
         var teacher = teacherDaoToExamEntityMapper.MapNonNullable(from);
-        
+
         teacher.User = userDaoToUserEntityMapper.MapNullable(from.User);
-        
+
         return teacher;
     }
 }

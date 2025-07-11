@@ -14,7 +14,7 @@ public class TeacherUpdateCandidateValidator : AbstractValidator<TeacherUpdateWr
         RuleFor(wrapper => wrapper.Candidate.SchoolSubject)
             .NotEqual(SchoolSubject.Undefined)
             .WithMessage("SchoolSubject needs to be defined.");
-        
+
         RuleFor(wrapper => wrapper)
             .Must(NotTryToUpdateUserId)
             .WithMessage("Can't update UserId, create a new teacher.");

@@ -9,6 +9,7 @@ public static class DbContextOptionsBuilderExtensions
         optionsBuilder.UseSqlServer(
             connectionString,
             o => o.MigrationsAssembly("SaM.Database.Migrations"));
+
         return optionsBuilder;
     }
 }

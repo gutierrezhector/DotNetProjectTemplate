@@ -14,11 +14,11 @@ public class TeacherViewModelFactory(
 {
 
     public override TeacherViewModel CreateFromEntity(Teacher entity)
-    {        
+    {
         var viewModel = teacherViewModelMapper.MapNonNullable(entity);
 
         viewModel.User = userViewModelMapper.MapNullable(entity.User);
-        
+
         return viewModel;
     }
 }

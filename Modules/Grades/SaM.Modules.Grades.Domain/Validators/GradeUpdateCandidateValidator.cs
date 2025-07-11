@@ -10,9 +10,9 @@ public record GradeUpdateWrapper(IGradeUpdateCandidate Candidate, Grade Entity);
 
 public class GradeUpdateCandidateValidator : AbstractValidator<GradeUpdateWrapper>
 {
-    private readonly IGradesRepository _gradesRepository;
     private readonly IExamsRepository _examsRepository;
-    
+    private readonly IGradesRepository _gradesRepository;
+
     public GradeUpdateCandidateValidator(
         IGradesRepository gradesRepository,
         IExamsRepository examsRepository
@@ -20,23 +20,23 @@ public class GradeUpdateCandidateValidator : AbstractValidator<GradeUpdateWrappe
     {
         _gradesRepository = gradesRepository;
         _examsRepository = examsRepository;
-        
+
         RuleFor(w => w.Candidate.Notation)
             .Must(NotBeNegative)
             .WithMessage("Notation must not be negative.");
-        
+
         RuleFor(c => c)
             .MustAsync(ExamMustNotAlreadyHaveAGradeForStudent)
             .WithMessage("This exam already have a grade for this student.");
-        
+
         RuleFor(c => c)
             .MustAsync(BeInferiorOrEqualToMaxPoints)
             .WithMessage("Grade notation must be inferior or equal to exam max points.");
-        
+
         RuleFor(w => w)
             .Must(NotTryToUpdateExamId)
             .WithMessage("Can't change exam of grade, delete the grade and create a new one.");
-        
+
         RuleFor(w => w)
             .Must(NotTryToUpdateStudentId)
             .WithMessage("Can't change student of grade, delete the grade and create a new one.");
@@ -56,7 +56,7 @@ public class GradeUpdateCandidateValidator : AbstractValidator<GradeUpdateWrappe
     {
         return wrapper.Candidate.StudentId == wrapper.Entity.StudentId;
     }
-    
+
     private async Task<bool> ExamMustNotAlreadyHaveAGradeForStudent(GradeUpdateWrapper wrapper, CancellationToken _)
     {
         return !await _gradesRepository.ExistAsync(wrapper.Candidate.ExamId, wrapper.Candidate.StudentId);

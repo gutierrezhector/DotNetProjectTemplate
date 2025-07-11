@@ -1,6 +1,6 @@
 using SaM.Modules.Exams.Ports.InBounds.Candidates;
 
-namespace SaM.Modules.Exams.Domain.Candidates;
+namespace SaM.Modules.Exams.Application.Candidates;
 
 public record ExamCreationCandidate : IExamCreationCandidate
 {

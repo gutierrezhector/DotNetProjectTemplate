@@ -13,7 +13,7 @@ namespace SaM.Modules.Grades.Domain.Factories;
 public class GradeEntityFactory(
     Mapper<GradeDao, Grade> gradeDaoToGradeEntityMapper,
     Mapper<StudentDao, Student> studentDaoToStudentEntityMapper,
-    Mapper<ExamDao, Exam> examDaoToExamEntityMapper    
+    Mapper<ExamDao, Exam> examDaoToExamEntityMapper
 ) : EntityFactory<Grade,  GradeDao, IGradeCreationCandidate>
 {
     public override Grade CreateFromCandidate(IGradeCreationCandidate creationCandidate)
@@ -32,7 +32,7 @@ public class GradeEntityFactory(
 
         grade.Exam = examDaoToExamEntityMapper.MapNullable(from.Exam);
         grade.Student = studentDaoToStudentEntityMapper.MapNullable(from.Student);
-        
+
         return grade;
     }
 }

@@ -49,7 +49,9 @@ public class TeachersApplication(
     {
         var updateCandidate = teacherUpdateCandidateMapper.MapNonNullable(updatePayload);
         var currentTeacher = await teacherRepository.GetByIdAsync(id);
-        var validationResult = await teacherUpdateCandidateValidator.ValidateAsync(new TeacherUpdateWrapper(updateCandidate, currentTeacher));
+        var validationResult =
+            await teacherUpdateCandidateValidator.ValidateAsync(new TeacherUpdateWrapper(updateCandidate, currentTeacher));
+
         if (!validationResult.IsValid)
         {
             throw new ValidationResultException(validationResult);

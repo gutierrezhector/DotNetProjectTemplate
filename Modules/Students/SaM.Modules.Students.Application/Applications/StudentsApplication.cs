@@ -48,7 +48,9 @@ public class StudentsApplication(
     {
         var updateCandidate = studentUpdateCandidateMapper.MapNonNullable(updatePayload);
         var currentStudent = await studentsRepository.GetByIdAsync(id);
-        var validationResult = await studentUpdateCandidateValidator.ValidateAsync(new StudentUpdateWrapper(updateCandidate, currentStudent));
+        var validationResult =
+            await studentUpdateCandidateValidator.ValidateAsync(new StudentUpdateWrapper(updateCandidate, currentStudent));
+
         if (!validationResult.IsValid)
         {
             throw new ValidationResultException(validationResult);

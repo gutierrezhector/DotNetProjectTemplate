@@ -1,6 +1,6 @@
 using SaM.Modules.Grades.Ports.InBounds.Candidates;
 
-namespace SaM.Modules.Grades.Domain.Candidates;
+namespace SaM.Modules.Grades.Application.Candidates;
 
 public record GradeCreationCandidate : IGradeCreationCandidate
 {

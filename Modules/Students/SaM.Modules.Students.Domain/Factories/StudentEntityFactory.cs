@@ -26,7 +26,7 @@ public class StudentEntityFactory(
         var student = studentDaoToStudentEntityMapper.MapNonNullable(from);
 
         student.User = userDaoToUserEntityMapper.MapNullable(from.User);
-        
+
         return student;
     }
 }

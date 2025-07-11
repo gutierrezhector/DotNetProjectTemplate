@@ -2,7 +2,7 @@
 using Moq;
 using SaM.Core.Types.Entities.Exams;
 using SaM.Modules.Exams.Ports.OutBounds.Repositories;
-using SaM.Modules.Grades.Domain.Candidates;
+using SaM.Modules.Grades.Application.Candidates;
 using SaM.Modules.Grades.Domain.Validators;
 using SaM.Modules.Grades.Ports.OutBounds.Repositories;
 using Xunit;
@@ -19,20 +19,21 @@ public class GradeCreationCandidateValidatorTests
         gradeRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>(), It.IsAny<int>()))
             .ReturnsAsync(false);
-        
+
         var examRepositoryMock = new Mock<IExamsRepository>();
         examRepositoryMock
             .Setup(r => r.GetByIdAsync(It.IsAny<int>()))
-            .ReturnsAsync(new Exam
-            {
-                Id = 1,
-                MaxPoints = 20,
-                StartDate = new DateTime(2000, 1, 1),
-                EndDate = new DateTime(2000, 12, 31),
-                ResponsibleTeacherId = 1,
-                Title = "title",
-            });
-        
+            .ReturnsAsync(
+                new Exam
+                {
+                    Id = 1,
+                    MaxPoints = 20,
+                    StartDate = new DateTime(2000, 1, 1),
+                    EndDate = new DateTime(2000, 12, 31),
+                    ResponsibleTeacherId = 1,
+                    Title = "title",
+                });
+
         var validator = new GradeCreationCandidateValidator(gradeRepositoryMock.Object, examRepositoryMock.Object);
 
         var candidate = new GradeCreationCandidate
@@ -41,14 +42,14 @@ public class GradeCreationCandidateValidatorTests
             ExamId = 1,
             StudentId = 1,
         };
-        
+
         // Act
         var result = await validator.ValidateAsync(candidate);
 
         // Assert
         result.IsValid.Should().BeTrue();
     }
-    
+
     [Fact]
     public async Task Notation_Should_not_be_negative()
     {
@@ -57,20 +58,21 @@ public class GradeCreationCandidateValidatorTests
         gradeRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>(), It.IsAny<int>()))
             .ReturnsAsync(false);
-        
+
         var examRepositoryMock = new Mock<IExamsRepository>();
         examRepositoryMock
             .Setup(r => r.GetByIdAsync(It.IsAny<int>()))
-            .ReturnsAsync(new Exam
-            {
-                Id = 1,
-                MaxPoints = 20,
-                StartDate = new DateTime(2000, 1, 1),
-                EndDate = new DateTime(2000, 12, 31),
-                ResponsibleTeacherId = 1,
-                Title = "title",
-            });
-        
+            .ReturnsAsync(
+                new Exam
+                {
+                    Id = 1,
+                    MaxPoints = 20,
+                    StartDate = new DateTime(2000, 1, 1),
+                    EndDate = new DateTime(2000, 12, 31),
+                    ResponsibleTeacherId = 1,
+                    Title = "title",
+                });
+
         var validator = new GradeCreationCandidateValidator(gradeRepositoryMock.Object, examRepositoryMock.Object);
 
         var candidate = new GradeCreationCandidate
@@ -79,7 +81,7 @@ public class GradeCreationCandidateValidatorTests
             ExamId = 1,
             StudentId = 1,
         };
-        
+
         // Act
         var result = await validator.ValidateAsync(candidate);
 
@@ -88,7 +90,7 @@ public class GradeCreationCandidateValidatorTests
         result.Errors.Should().HaveCount(1);
         result.Errors.First().ErrorMessage.Should().Be("Notation must not be negative.");
     }
-    
+
     [Fact]
     public async Task Notation_Should_not_be_superior_to_exam_max_points()
     {
@@ -97,20 +99,21 @@ public class GradeCreationCandidateValidatorTests
         gradeRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>(), It.IsAny<int>()))
             .ReturnsAsync(false);
-        
+
         var examRepositoryMock = new Mock<IExamsRepository>();
         examRepositoryMock
             .Setup(r => r.GetByIdAsync(It.IsAny<int>()))
-            .ReturnsAsync(new Exam
-            {
-                Id = 1,
-                MaxPoints = 20,
-                StartDate = new DateTime(2000, 1, 1),
-                EndDate = new DateTime(2000, 12, 31),
-                ResponsibleTeacherId = 1,
-                Title = "title",
-            });
-        
+            .ReturnsAsync(
+                new Exam
+                {
+                    Id = 1,
+                    MaxPoints = 20,
+                    StartDate = new DateTime(2000, 1, 1),
+                    EndDate = new DateTime(2000, 12, 31),
+                    ResponsibleTeacherId = 1,
+                    Title = "title",
+                });
+
         var validator = new GradeCreationCandidateValidator(gradeRepositoryMock.Object, examRepositoryMock.Object);
 
         var candidate = new GradeCreationCandidate
@@ -119,7 +122,7 @@ public class GradeCreationCandidateValidatorTests
             ExamId = 1,
             StudentId = 1,
         };
-        
+
         // Act
         var result = await validator.ValidateAsync(candidate);
 
@@ -128,7 +131,7 @@ public class GradeCreationCandidateValidatorTests
         result.Errors.Should().HaveCount(1);
         result.Errors.First().ErrorMessage.Should().Be("Grade notation must be inferior or equal to exam max points.");
     }
-    
+
     [Fact]
     public async Task Grade_Should_not_already_exist_for_a_student_exam()
     {
@@ -137,20 +140,21 @@ public class GradeCreationCandidateValidatorTests
         gradeRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>(), It.IsAny<int>()))
             .ReturnsAsync(true);
-        
+
         var examRepositoryMock = new Mock<IExamsRepository>();
         examRepositoryMock
             .Setup(r => r.GetByIdAsync(It.IsAny<int>()))
-            .ReturnsAsync(new Exam
-            {
-                Id = 1,
-                MaxPoints = 20,
-                StartDate = new DateTime(2000, 1, 1),
-                EndDate = new DateTime(2000, 12, 31),
-                ResponsibleTeacherId = 1,
-                Title = "title",
-            });
-        
+            .ReturnsAsync(
+                new Exam
+                {
+                    Id = 1,
+                    MaxPoints = 20,
+                    StartDate = new DateTime(2000, 1, 1),
+                    EndDate = new DateTime(2000, 12, 31),
+                    ResponsibleTeacherId = 1,
+                    Title = "title",
+                });
+
         var validator = new GradeCreationCandidateValidator(gradeRepositoryMock.Object, examRepositoryMock.Object);
 
         var candidate = new GradeCreationCandidate
@@ -159,7 +163,7 @@ public class GradeCreationCandidateValidatorTests
             ExamId = 1,
             StudentId = 1,
         };
-        
+
         // Act
         var result = await validator.ValidateAsync(candidate);
 

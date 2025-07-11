@@ -18,14 +18,14 @@ public class UserCreationCandidateValidatorTests
             FirstName = "Jotaro",
             LastName = "Kujo",
         };
-        
+
         // Act
         var result = await validator.ValidateAsync(candidate);
 
         // Assert
         result.IsValid.Should().BeTrue();
     }
-    
+
     [Fact]
     public async Task FirstName_Should_not_be_empty()
     {
@@ -37,7 +37,7 @@ public class UserCreationCandidateValidatorTests
             FirstName = "",
             LastName = "Kujo",
         };
-        
+
         // Act
         var result = await validator.ValidateAsync(candidate);
 
@@ -46,7 +46,7 @@ public class UserCreationCandidateValidatorTests
         result.Errors.Should().HaveCount(1);
         result.Errors.First().ErrorMessage.Should().Be("FirstName can't be empty");
     }
-    
+
     [Fact]
     public async Task LastName_Should_not_be_empty()
     {
@@ -58,7 +58,7 @@ public class UserCreationCandidateValidatorTests
             FirstName = "Jotaro",
             LastName = "",
         };
-        
+
         // Act
         var result = await validator.ValidateAsync(candidate);
 

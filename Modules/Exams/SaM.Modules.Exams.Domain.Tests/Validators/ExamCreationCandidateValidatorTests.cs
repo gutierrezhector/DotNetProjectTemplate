@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 using Moq;
-using SaM.Modules.Exams.Domain.Candidates;
+using SaM.Modules.Exams.Application.Candidates;
 using SaM.Modules.Exams.Domain.Validators;
 using SaM.Modules.Teachers.Ports.OuBounds.Repositories;
 using Xunit;
@@ -17,7 +17,7 @@ public class ExamCreationCandidateValidatorTests
         teacherRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>()))
             .ReturnsAsync(true);
-        
+
         var validator = new ExamCreationCandidateValidator(teacherRepositoryMock.Object);
 
         var candidate = new ExamCreationCandidate
@@ -28,7 +28,7 @@ public class ExamCreationCandidateValidatorTests
             ResponsibleTeacherId = 1,
             Title = "title",
         };
-        
+
         // Act
         var result = await validator.ValidateAsync(candidate);
 
@@ -44,7 +44,7 @@ public class ExamCreationCandidateValidatorTests
         teacherRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>()))
             .ReturnsAsync(true);
-        
+
         var validator = new ExamCreationCandidateValidator(teacherRepositoryMock.Object);
 
         var candidate = new ExamCreationCandidate
@@ -55,7 +55,7 @@ public class ExamCreationCandidateValidatorTests
             ResponsibleTeacherId = 1,
             Title = "",
         };
-        
+
         // Act
         var result = await validator.ValidateAsync(candidate);
 
@@ -64,7 +64,7 @@ public class ExamCreationCandidateValidatorTests
         result.Errors.Should().HaveCount(1);
         result.Errors.First().ErrorMessage.Should().Be("Title must not be empty.");
     }
-    
+
     [Fact]
     public async Task MaxPoints_Should_not_be_superior_than_20()
     {
@@ -73,7 +73,7 @@ public class ExamCreationCandidateValidatorTests
         teacherRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>()))
             .ReturnsAsync(true);
-        
+
         var validator = new ExamCreationCandidateValidator(teacherRepositoryMock.Object);
 
         var candidate = new ExamCreationCandidate
@@ -84,7 +84,7 @@ public class ExamCreationCandidateValidatorTests
             ResponsibleTeacherId = 1,
             Title = "title",
         };
-        
+
         // Act
         var result = await validator.ValidateAsync(candidate);
 
@@ -93,7 +93,7 @@ public class ExamCreationCandidateValidatorTests
         result.Errors.Should().HaveCount(1);
         result.Errors.First().ErrorMessage.Should().Be("MaxPoints must not be superior to 20.");
     }
-    
+
     [Fact]
     public async Task StartDate_Should_be_less_than_EndDate()
     {
@@ -102,7 +102,7 @@ public class ExamCreationCandidateValidatorTests
         teacherRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>()))
             .ReturnsAsync(true);
-        
+
         var validator = new ExamCreationCandidateValidator(teacherRepositoryMock.Object);
 
         var candidate = new ExamCreationCandidate
@@ -113,7 +113,7 @@ public class ExamCreationCandidateValidatorTests
             ResponsibleTeacherId = 1,
             Title = "title",
         };
-        
+
         // Act
         var result = await validator.ValidateAsync(candidate);
 
@@ -122,7 +122,7 @@ public class ExamCreationCandidateValidatorTests
         result.Errors.Should().HaveCount(1);
         result.Errors.First().ErrorMessage.Should().Be("StartDate must be less than EndDate.");
     }
-    
+
     [Fact]
     public async Task Validation_Should_Fail_When_responsible_teacher_does_not_exist()
     {
@@ -131,7 +131,7 @@ public class ExamCreationCandidateValidatorTests
         teacherRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>()))
             .ReturnsAsync(false);
-        
+
         var validator = new ExamCreationCandidateValidator(teacherRepositoryMock.Object);
 
         var candidate = new ExamCreationCandidate
@@ -142,7 +142,7 @@ public class ExamCreationCandidateValidatorTests
             ResponsibleTeacherId = 1,
             Title = "title",
         };
-        
+
         // Act
         var result = await validator.ValidateAsync(candidate);
 

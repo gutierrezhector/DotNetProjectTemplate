@@ -7,7 +7,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Configuration.AddJsonFile("Configs/appsettings.json", optional: false, reloadOnChange: true);
+builder.Configuration.AddJsonFile("Configs/appsettings.json", false, true);
 
 RegisterServices.Register(builder);
 

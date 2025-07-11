@@ -18,7 +18,7 @@ public class StudentViewModelFactory(
         var viewModel = studentViewModelMapper.MapNonNullable(entity);
 
         viewModel.User = userViewModelMapper.MapNullable(entity.User);
-        
+
         return viewModel;
     }
 }
