@@ -15,7 +15,7 @@ public class StudentsApplication(
     IStudentsRepository studentsRepository,
     StudentEntityFactory studentEntityFactory,
     IValidator<IStudentCreationCandidate> studentCreationCandidateValidator,
-    IValidator<TeacherUpdateWrapper> studentUpdateCandidateValidator,
+    IValidator<StudentUpdateWrapper> studentUpdateCandidateValidator,
     Mapper<IStudentCreationPayload, IStudentCreationCandidate> studentCreationCandidateMapper,
     Mapper<IStudentUpdatePayload, IStudentUpdateCandidate> studentUpdateCandidateMapper
 ) : IStudentsApplication
@@ -48,7 +48,7 @@ public class StudentsApplication(
     {
         var updateCandidate = studentUpdateCandidateMapper.MapNonNullable(updatePayload);
         var currentStudent = await studentsRepository.GetByIdAsync(id);
-        var validationResult = await studentUpdateCandidateValidator.ValidateAsync(new TeacherUpdateWrapper(updateCandidate, currentStudent));
+        var validationResult = await studentUpdateCandidateValidator.ValidateAsync(new StudentUpdateWrapper(updateCandidate, currentStudent));
         if (!validationResult.IsValid)
         {
             throw new ValidationResultException(validationResult);

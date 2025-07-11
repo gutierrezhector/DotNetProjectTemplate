@@ -9,4 +9,5 @@ public interface IGradesRepository
     Task<Grade> CreateAsync(Grade grade);
     Task<Grade> UpdateAsync(int id, IGradeUpdateCandidate updateCandidate);
     Task DeleteAsync(int id);
+    Task<bool> ExistAsync(int examId, int studentId);
 }

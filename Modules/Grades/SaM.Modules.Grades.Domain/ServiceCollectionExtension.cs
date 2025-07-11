@@ -19,7 +19,7 @@ public static class ServiceCollectionExtension
         services.AddScoped<Mapper<GradeDao, Grade>, GradeDaoToGradeEntityMapper>();
 
         services.AddScoped<IValidator<IGradeCreationCandidate>, GradeCreationCandidateValidator>();
-        services.AddScoped<IValidator<IGradeUpdateCandidate>, GradeUpdateCandidateValidator>();
+        services.AddScoped<IValidator<GradeUpdateWrapper>, GradeUpdateCandidateValidator>();
 
         return services;
     }

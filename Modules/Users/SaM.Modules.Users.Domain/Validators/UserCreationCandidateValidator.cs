@@ -7,7 +7,12 @@ public class UserCreationCandidateValidator : AbstractValidator<IUserCreationCan
 {
     public UserCreationCandidateValidator()
     {
-        RuleFor(u => u.FirstName).NotEmpty();
-        RuleFor(u => u.LastName).NotEmpty();
+        RuleFor(u => u.FirstName)
+            .NotEmpty()
+            .WithMessage("FirstName can't be empty");
+        RuleFor(u => u.LastName)
+            .NotEmpty()
+            .WithMessage("LastName can't be empty");
+            
     }
 }
