@@ -31,7 +31,7 @@ public class ExamEntityFactory(
     public override Exam CreateFromDao(ExamDao from)
     {
         var exam = examDaoToExamEntityMapper.MapNonNullable(from);
-        
+
         exam.ResponsibleTeacher = teacherDaoToExamEntityMapper.MapNullable(from.ResponsibleTeacher);
         exam.Grades =  gradeDaoToGradeEntityMapper.MapNullable(from.Grades);
         return exam;

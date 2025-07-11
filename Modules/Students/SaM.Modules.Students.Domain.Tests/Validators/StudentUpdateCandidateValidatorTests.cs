@@ -8,7 +8,7 @@ namespace SaM.Modules.Students.Domain.Tests.Validators;
 
 public class StudentUpdateCandidateValidatorTests
 {
-   
+
     [Fact]
     public async Task Validation_Should_work_When_candidate_respect_validator_rules()
     {
@@ -25,16 +25,16 @@ public class StudentUpdateCandidateValidatorTests
             Id = 1,
             UserId = 1,
         };
-        
+
         var wrapper = new StudentUpdateWrapper(candidate, entity);
-        
+
         // Act
         var result = await validator.ValidateAsync(wrapper);
 
         // Assert
         result.IsValid.Should().BeTrue();
     }
-    
+
     [Fact]
     public async Task UserId_Should_not_be_updatable()
     {

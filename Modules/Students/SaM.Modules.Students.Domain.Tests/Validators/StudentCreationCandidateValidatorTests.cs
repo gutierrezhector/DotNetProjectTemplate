@@ -18,26 +18,26 @@ public class StudentCreationCandidateValidatorTests
         teacherRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>()))
             .ReturnsAsync(false);
-        
+
         var studentsRepositoryMock = new Mock<IStudentsRepository>();
         studentsRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>()))
             .ReturnsAsync(false);
-        
+
         var validator = new StudentCreationCandidateValidator(teacherRepositoryMock.Object, studentsRepositoryMock.Object);
 
         var candidate = new StudentCreationCandidate
         {
             UserId = 1,
         };
-        
+
         // Act
         var result = await validator.ValidateAsync(candidate);
 
         // Assert
         result.IsValid.Should().BeTrue();
     }
-    
+
     [Fact]
     public async Task Student_Should_Not_already_exist()
     {
@@ -46,19 +46,19 @@ public class StudentCreationCandidateValidatorTests
         teacherRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>()))
             .ReturnsAsync(false);
-        
+
         var studentsRepositoryMock = new Mock<IStudentsRepository>();
         studentsRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>()))
             .ReturnsAsync(true);
-        
+
         var validator = new StudentCreationCandidateValidator(teacherRepositoryMock.Object, studentsRepositoryMock.Object);
 
         var candidate = new StudentCreationCandidate
         {
             UserId = 1,
         };
-        
+
         // Act
         var result = await validator.ValidateAsync(candidate);
 
@@ -67,8 +67,8 @@ public class StudentCreationCandidateValidatorTests
         result.Errors.Should().HaveCount(1);
         result.Errors.First().ErrorMessage.Should().Be("User is already a student.");
     }
-    
-        
+
+
     [Fact]
     public async Task User_candidate_Should_Not_already_be_a_teacher()
     {
@@ -77,19 +77,19 @@ public class StudentCreationCandidateValidatorTests
         teacherRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>()))
             .ReturnsAsync(true);
-        
+
         var studentsRepositoryMock = new Mock<IStudentsRepository>();
         studentsRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>()))
             .ReturnsAsync(false);
-        
+
         var validator = new StudentCreationCandidateValidator(teacherRepositoryMock.Object, studentsRepositoryMock.Object);
 
         var candidate = new StudentCreationCandidate
         {
             UserId = 1,
         };
-        
+
         // Act
         var result = await validator.ValidateAsync(candidate);
 

@@ -19,10 +19,10 @@ public class ExamViewModelFactory(
     public override ExamViewModel CreateFromEntity(Exam entity)
     {
         var examViewModel = examViewModelMapper.MapNonNullable(entity);
-        
+
         examViewModel.ResponsibleTeacher = teacherViewModelMapper.MapNullable(entity.ResponsibleTeacher);
         examViewModel.Grades = gradeViewModelMapper.MapNullable(entity.Grades);
-        
+
         return examViewModel;
     }
 }

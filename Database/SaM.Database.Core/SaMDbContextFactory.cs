@@ -14,14 +14,14 @@ public class SaMDbContextFactory : IDesignTimeDbContextFactory<SaMDbContext>
             .SetBasePath(basePath)
             .AddJsonFile("appsettings.json")
             .Build();
+
         var connectionString = configuration.GetConnectionString("DefaultConnection");
-        
+
         if (string.IsNullOrEmpty(connectionString))
         {
             throw new ApplicationException("connectionString is null or empty");
-            
         }
-        
+
         var optionsBuilder = new DbContextOptionsBuilder<SaMDbContext>();
         optionsBuilder.SetupSqlServer(connectionString);
 

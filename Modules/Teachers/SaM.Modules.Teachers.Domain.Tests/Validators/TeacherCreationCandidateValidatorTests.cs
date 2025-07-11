@@ -19,12 +19,12 @@ public class TeacherCreationCandidateValidatorTests
         teacherRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>()))
             .ReturnsAsync(false);
-        
+
         var studentsRepositoryMock = new Mock<IStudentsRepository>();
         studentsRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>()))
             .ReturnsAsync(false);
-        
+
         var validator = new TeacherCreationCandidateValidator(teacherRepositoryMock.Object, studentsRepositoryMock.Object);
 
         var candidate = new TeacherCreationCandidate
@@ -32,14 +32,14 @@ public class TeacherCreationCandidateValidatorTests
             SchoolSubject = SchoolSubject.English,
             UserId = 1,
         };
-        
+
         // Act
         var result = await validator.ValidateAsync(candidate);
 
         // Assert
         result.IsValid.Should().BeTrue();
     }
-    
+
     [Fact]
     public async Task SchoolSubject_Should_not_be_undefined()
     {
@@ -48,12 +48,12 @@ public class TeacherCreationCandidateValidatorTests
         teacherRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>()))
             .ReturnsAsync(false);
-        
+
         var studentsRepositoryMock = new Mock<IStudentsRepository>();
         studentsRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>()))
             .ReturnsAsync(false);
-        
+
         var validator = new TeacherCreationCandidateValidator(teacherRepositoryMock.Object, studentsRepositoryMock.Object);
 
         var candidate = new TeacherCreationCandidate
@@ -61,7 +61,7 @@ public class TeacherCreationCandidateValidatorTests
             SchoolSubject = SchoolSubject.Undefined,
             UserId = 1,
         };
-        
+
         // Act
         var result = await validator.ValidateAsync(candidate);
 
@@ -70,7 +70,7 @@ public class TeacherCreationCandidateValidatorTests
         result.Errors.Should().HaveCount(1);
         result.Errors.First().ErrorMessage.Should().Be("SchoolSubject needs to be defined.");
     }
-    
+
     [Fact]
     public async Task Teacher_Should_Not_already_exist()
     {
@@ -79,12 +79,12 @@ public class TeacherCreationCandidateValidatorTests
         teacherRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>()))
             .ReturnsAsync(true);
-        
+
         var studentsRepositoryMock = new Mock<IStudentsRepository>();
         studentsRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>()))
             .ReturnsAsync(false);
-        
+
         var validator = new TeacherCreationCandidateValidator(teacherRepositoryMock.Object, studentsRepositoryMock.Object);
 
         var candidate = new TeacherCreationCandidate
@@ -92,7 +92,7 @@ public class TeacherCreationCandidateValidatorTests
             SchoolSubject = SchoolSubject.English,
             UserId = 1,
         };
-        
+
         // Act
         var result = await validator.ValidateAsync(candidate);
 
@@ -101,7 +101,7 @@ public class TeacherCreationCandidateValidatorTests
         result.Errors.Should().HaveCount(1);
         result.Errors.First().ErrorMessage.Should().Be("Teacher already exists.");
     }
-    
+
     [Fact]
     public async Task User_candidate_Should_Not_already_be_a_student()
     {
@@ -110,12 +110,12 @@ public class TeacherCreationCandidateValidatorTests
         teacherRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>()))
             .ReturnsAsync(false);
-        
+
         var studentsRepositoryMock = new Mock<IStudentsRepository>();
         studentsRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>()))
             .ReturnsAsync(true);
-        
+
         var validator = new TeacherCreationCandidateValidator(teacherRepositoryMock.Object, studentsRepositoryMock.Object);
 
         var candidate = new TeacherCreationCandidate
@@ -123,7 +123,7 @@ public class TeacherCreationCandidateValidatorTests
             SchoolSubject = SchoolSubject.English,
             UserId = 1,
         };
-        
+
         // Act
         var result = await validator.ValidateAsync(candidate);
 

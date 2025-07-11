@@ -3,7 +3,7 @@ using Moq;
 using SaM.Core.Types.Entities.Exams;
 using SaM.Core.Types.Entities.Grades;
 using SaM.Modules.Exams.Ports.OutBounds.Repositories;
-using SaM.Modules.Grades.Domain.Candidates;
+using SaM.Modules.Grades.Application.Candidates;
 using SaM.Modules.Grades.Domain.Validators;
 using SaM.Modules.Grades.Ports.OutBounds.Repositories;
 using Xunit;
@@ -20,20 +20,21 @@ public class GradeUpdateCandidateValidatorTests
         gradeRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>(), It.IsAny<int>()))
             .ReturnsAsync(false);
-        
+
         var examRepositoryMock = new Mock<IExamsRepository>();
         examRepositoryMock
             .Setup(r => r.GetByIdAsync(It.IsAny<int>()))
-            .ReturnsAsync(new Exam
-            {
-                Id = 1,
-                MaxPoints = 20,
-                StartDate = new DateTime(2000, 1, 1),
-                EndDate = new DateTime(2000, 12, 31),
-                ResponsibleTeacherId = 1,
-                Title = "title",
-            });
-        
+            .ReturnsAsync(
+                new Exam
+                {
+                    Id = 1,
+                    MaxPoints = 20,
+                    StartDate = new DateTime(2000, 1, 1),
+                    EndDate = new DateTime(2000, 12, 31),
+                    ResponsibleTeacherId = 1,
+                    Title = "title",
+                });
+
         var validator = new GradeUpdateCandidateValidator(gradeRepositoryMock.Object, examRepositoryMock.Object);
 
         var candidate = new GradeUpdateCandidate
@@ -42,7 +43,7 @@ public class GradeUpdateCandidateValidatorTests
             ExamId = 1,
             StudentId = 1,
         };
-        
+
         var entity = new Grade
         {
             Id = 1,
@@ -52,14 +53,14 @@ public class GradeUpdateCandidateValidatorTests
         };
 
         var wrapper = new GradeUpdateWrapper(candidate, entity);
-        
+
         // Act
         var result = await validator.ValidateAsync(wrapper);
 
         // Assert
         result.IsValid.Should().BeTrue();
     }
-    
+
     [Fact]
     public async Task Notation_Should_not_be_negative()
     {
@@ -68,20 +69,21 @@ public class GradeUpdateCandidateValidatorTests
         gradeRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>(), It.IsAny<int>()))
             .ReturnsAsync(false);
-        
+
         var examRepositoryMock = new Mock<IExamsRepository>();
         examRepositoryMock
             .Setup(r => r.GetByIdAsync(It.IsAny<int>()))
-            .ReturnsAsync(new Exam
-            {
-                Id = 1,
-                MaxPoints = 20,
-                StartDate = new DateTime(2000, 1, 1),
-                EndDate = new DateTime(2000, 12, 31),
-                ResponsibleTeacherId = 1,
-                Title = "title",
-            });
-        
+            .ReturnsAsync(
+                new Exam
+                {
+                    Id = 1,
+                    MaxPoints = 20,
+                    StartDate = new DateTime(2000, 1, 1),
+                    EndDate = new DateTime(2000, 12, 31),
+                    ResponsibleTeacherId = 1,
+                    Title = "title",
+                });
+
         var validator = new GradeUpdateCandidateValidator(gradeRepositoryMock.Object, examRepositoryMock.Object);
 
         var candidate = new GradeUpdateCandidate
@@ -90,7 +92,7 @@ public class GradeUpdateCandidateValidatorTests
             ExamId = 1,
             StudentId = 1,
         };
-        
+
         var entity = new Grade
         {
             Id = 1,
@@ -100,7 +102,7 @@ public class GradeUpdateCandidateValidatorTests
         };
 
         var wrapper = new GradeUpdateWrapper(candidate, entity);
-        
+
         // Act
         var result = await validator.ValidateAsync(wrapper);
 
@@ -109,7 +111,7 @@ public class GradeUpdateCandidateValidatorTests
         result.Errors.Should().HaveCount(1);
         result.Errors.First().ErrorMessage.Should().Be("Notation must not be negative.");
     }
-    
+
     [Fact]
     public async Task Notation_Should_not_be_superior_to_exam_max_points()
     {
@@ -118,20 +120,21 @@ public class GradeUpdateCandidateValidatorTests
         gradeRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>(), It.IsAny<int>()))
             .ReturnsAsync(false);
-        
+
         var examRepositoryMock = new Mock<IExamsRepository>();
         examRepositoryMock
             .Setup(r => r.GetByIdAsync(It.IsAny<int>()))
-            .ReturnsAsync(new Exam
-            {
-                Id = 1,
-                MaxPoints = 20,
-                StartDate = new DateTime(2000, 1, 1),
-                EndDate = new DateTime(2000, 12, 31),
-                ResponsibleTeacherId = 1,
-                Title = "title",
-            });
-        
+            .ReturnsAsync(
+                new Exam
+                {
+                    Id = 1,
+                    MaxPoints = 20,
+                    StartDate = new DateTime(2000, 1, 1),
+                    EndDate = new DateTime(2000, 12, 31),
+                    ResponsibleTeacherId = 1,
+                    Title = "title",
+                });
+
         var validator = new GradeUpdateCandidateValidator(gradeRepositoryMock.Object, examRepositoryMock.Object);
 
         var candidate = new GradeUpdateCandidate
@@ -150,7 +153,7 @@ public class GradeUpdateCandidateValidatorTests
         };
 
         var wrapper = new GradeUpdateWrapper(candidate, entity);
-        
+
         // Act
         var result = await validator.ValidateAsync(wrapper);
 
@@ -168,20 +171,21 @@ public class GradeUpdateCandidateValidatorTests
         gradeRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>(), It.IsAny<int>()))
             .ReturnsAsync(false);
-        
+
         var examRepositoryMock = new Mock<IExamsRepository>();
         examRepositoryMock
             .Setup(r => r.GetByIdAsync(It.IsAny<int>()))
-            .ReturnsAsync(new Exam
-            {
-                Id = 1,
-                MaxPoints = 20,
-                StartDate = new DateTime(2000, 1, 1),
-                EndDate = new DateTime(2000, 12, 31),
-                ResponsibleTeacherId = 1,
-                Title = "title",
-            });
-        
+            .ReturnsAsync(
+                new Exam
+                {
+                    Id = 1,
+                    MaxPoints = 20,
+                    StartDate = new DateTime(2000, 1, 1),
+                    EndDate = new DateTime(2000, 12, 31),
+                    ResponsibleTeacherId = 1,
+                    Title = "title",
+                });
+
         var validator = new GradeUpdateCandidateValidator(gradeRepositoryMock.Object, examRepositoryMock.Object);
 
         var candidate = new GradeUpdateCandidate
@@ -200,7 +204,7 @@ public class GradeUpdateCandidateValidatorTests
         };
 
         var wrapper = new GradeUpdateWrapper(candidate, entity);
-        
+
         // Act
         var result = await validator.ValidateAsync(wrapper);
 
@@ -209,7 +213,7 @@ public class GradeUpdateCandidateValidatorTests
         result.Errors.Should().HaveCount(1);
         result.Errors.First().ErrorMessage.Should().Be("Can't change exam of grade, delete the grade and create a new one.");
     }
-    
+
     [Fact]
     public async Task StudentId_Should_not_be_updatable()
     {
@@ -218,20 +222,21 @@ public class GradeUpdateCandidateValidatorTests
         gradeRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>(), It.IsAny<int>()))
             .ReturnsAsync(false);
-        
+
         var examRepositoryMock = new Mock<IExamsRepository>();
         examRepositoryMock
             .Setup(r => r.GetByIdAsync(It.IsAny<int>()))
-            .ReturnsAsync(new Exam
-            {
-                Id = 1,
-                MaxPoints = 20,
-                StartDate = new DateTime(2000, 1, 1),
-                EndDate = new DateTime(2000, 12, 31),
-                ResponsibleTeacherId = 1,
-                Title = "title",
-            });
-        
+            .ReturnsAsync(
+                new Exam
+                {
+                    Id = 1,
+                    MaxPoints = 20,
+                    StartDate = new DateTime(2000, 1, 1),
+                    EndDate = new DateTime(2000, 12, 31),
+                    ResponsibleTeacherId = 1,
+                    Title = "title",
+                });
+
         var validator = new GradeUpdateCandidateValidator(gradeRepositoryMock.Object, examRepositoryMock.Object);
 
         var candidate = new GradeUpdateCandidate
@@ -250,7 +255,7 @@ public class GradeUpdateCandidateValidatorTests
         };
 
         var wrapper = new GradeUpdateWrapper(candidate, entity);
-        
+
         // Act
         var result = await validator.ValidateAsync(wrapper);
 

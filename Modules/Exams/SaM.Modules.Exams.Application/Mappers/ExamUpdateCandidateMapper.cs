@@ -1,5 +1,5 @@
 ﻿using SaM.Core.Abstractions.Mappers;
-using SaM.Modules.Exams.Domain.Candidates;
+using SaM.Modules.Exams.Application.Candidates;
 using SaM.Modules.Exams.Ports.InBounds.Candidates;
 using SaM.Modules.Exams.Ports.InBounds.Payloads;
 

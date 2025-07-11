@@ -7,8 +7,8 @@ namespace SaM.Modules.Grades.Domain.Validators;
 
 public class GradeCreationCandidateValidator : AbstractValidator<IGradeCreationCandidate>
 {
-    private readonly IGradesRepository _gradesRepository;
     private readonly IExamsRepository _examsRepository;
+    private readonly IGradesRepository _gradesRepository;
 
     public GradeCreationCandidateValidator(
         IGradesRepository gradesRepository,
@@ -21,11 +21,11 @@ public class GradeCreationCandidateValidator : AbstractValidator<IGradeCreationC
         RuleFor(c => c.Notation)
             .Must(NotBeNegative)
             .WithMessage("Notation must not be negative.");
-        
+
         RuleFor(c => c)
             .MustAsync(NotationBeInferiorOrEqualToMaxPoints)
             .WithMessage("Grade notation must be inferior or equal to exam max points.");
-        
+
         RuleFor(c => c)
             .MustAsync(ExamMustNotAlreadyHaveAGradeForStudent)
             .WithMessage("This exam already have a grade for this student.");

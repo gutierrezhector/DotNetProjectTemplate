@@ -12,7 +12,7 @@ internal class FakeBlogDaoMapper(
         return new FakeBlogDao
         {
             FakeTitle = from.FakeTitle,
-            FakePosts = fakePostDaoMapper.MapNullable(from.FakePosts)
+            FakePosts = fakePostDaoMapper.MapNullable(from.FakePosts),
         };
     }
 }

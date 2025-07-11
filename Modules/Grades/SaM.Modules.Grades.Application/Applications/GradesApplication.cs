@@ -44,7 +44,9 @@ public class GradesApplication(
     {
         var updateCandidate = gradeUpdateCandidateMapper.MapNonNullable(updatePayload);
         var currentGarde = await gradesRepository.GetByIdAsync(id);
-        var validationResult = await gradeUpdateCandidateValidator.ValidateAsync(new GradeUpdateWrapper(updateCandidate, currentGarde));
+        var validationResult =
+            await gradeUpdateCandidateValidator.ValidateAsync(new GradeUpdateWrapper(updateCandidate, currentGarde));
+
         if (!validationResult.IsValid)
         {
             throw new ValidationResultException(validationResult);

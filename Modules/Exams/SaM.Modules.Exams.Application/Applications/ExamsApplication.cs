@@ -48,7 +48,9 @@ public class ExamsApplication(
     {
         var updateCandidate = examUpdatePayloadMapper.MapNonNullable(updatePayload);
         var currentExam = await examRepository.GetByIdAsync(id);
-        var validationResult = await examUpdateCandidateValidator.ValidateAsync(new TeacherUpdateWrapper(updateCandidate, currentExam));
+        var validationResult =
+            await examUpdateCandidateValidator.ValidateAsync(new TeacherUpdateWrapper(updateCandidate, currentExam));
+
         if (!validationResult.IsValid)
         {
             throw new ValidationResultException(validationResult);

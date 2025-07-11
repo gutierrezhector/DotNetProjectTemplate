@@ -4,7 +4,7 @@ using SaM.Core.Types.ViewModels.Students;
 
 namespace SaM.Modules.Students.Web.Mappers;
 
-public class StudentViewModelMapper: Mapper<Student, StudentViewModel>
+public class StudentViewModelMapper : Mapper<Student, StudentViewModel>
 {
     public override StudentViewModel MapNonNullable(Student from)
     {

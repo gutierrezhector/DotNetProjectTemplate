@@ -36,7 +36,7 @@ public class TeacherUpdateCandidateValidatorTests
         // Assert
         result.IsValid.Should().BeTrue();
     }
-    
+
     [Fact]
     public async Task SchoolSubject_Should_not_be_undefined()
     {
@@ -66,7 +66,7 @@ public class TeacherUpdateCandidateValidatorTests
         result.Errors.Should().HaveCount(1);
         result.Errors.First().ErrorMessage.Should().Be("SchoolSubject needs to be defined.");
     }
-    
+
     [Fact]
     public async Task UserId_Should_not_be_updatable()
     {
