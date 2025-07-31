@@ -12,7 +12,7 @@ using SaM.Modules.Teachers.Ports.OuBounds.Repositories;
 namespace SaM.Modules.Teachers.Application.Applications;
 
 public class TeachersApplication(
-    ITeacherRepository teacherRepository,
+    ITeachersRepository teachersRepository,
     TeacherEntityFactory teacherEntityFactory,
     IValidator<ITeacherCreationCandidate> teacherCreationCandidateValidator,
     IValidator<TeacherUpdateWrapper> teacherUpdateCandidateValidator,
@@ -22,12 +22,12 @@ public class TeachersApplication(
 {
     public async Task<List<Teacher>> GetAllAsync()
     {
-        return await teacherRepository.GetAllAsync();
+        return await teachersRepository.GetAllAsync();
     }
 
     public async Task<Teacher> GetByIdAsync(int id)
     {
-        return await teacherRepository.GetByIdAsync(id);
+        return await teachersRepository.GetByIdAsync(id);
     }
 
     public async Task<Teacher> Create(ITeacherCreationPayload creationPayload)
@@ -48,7 +48,7 @@ public class TeachersApplication(
     public async Task<Teacher> UpdateAsync(int id, ITeacherUpdatePayload updatePayload)
     {
         var updateCandidate = teacherUpdateCandidateMapper.MapNonNullable(updatePayload);
-        var currentTeacher = await teacherRepository.GetByIdAsync(id);
+        var currentTeacher = await teachersRepository.GetByIdAsync(id);
         var validationResult =
             await teacherUpdateCandidateValidator.ValidateAsync(new TeacherUpdateWrapper(updateCandidate, currentTeacher));
 
@@ -57,13 +57,13 @@ public class TeachersApplication(
             throw new ValidationResultException(validationResult);
         }
 
-        var newTeacher = await teacherRepository.UpdateAsync(id, updateCandidate);
+        var newTeacher = await teachersRepository.UpdateAsync(id, updateCandidate);
 
         return newTeacher;
     }
 
     public async Task DeleteAsync(int id)
     {
-        await teacherRepository.DeleteAsync(id);
+        await teachersRepository.DeleteAsync(id);
     }
 }

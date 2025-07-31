@@ -10,7 +10,7 @@ public static class ServiceCollectionExtension
     public static IServiceCollection RegisterTeachersInfra(this IServiceCollection services)
     {
         services.AddScoped<TeacherDaoFactory>();
-        services.AddScoped<ITeacherRepository, TeacherRepository>();
+        services.AddScoped<ITeachersRepository, TeachersRepository>();
 
         return services;
     }

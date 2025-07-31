@@ -15,7 +15,7 @@ public class TeacherCreationCandidateValidatorTests
     public async Task Validation_Should_work_When_candidate_respect_validator_rules()
     {
         // Arrange
-        var teacherRepositoryMock = new Mock<ITeacherRepository>();
+        var teacherRepositoryMock = new Mock<ITeachersRepository>();
         teacherRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>()))
             .ReturnsAsync(false);
@@ -44,7 +44,7 @@ public class TeacherCreationCandidateValidatorTests
     public async Task SchoolSubject_Should_not_be_undefined()
     {
         // Arrange
-        var teacherRepositoryMock = new Mock<ITeacherRepository>();
+        var teacherRepositoryMock = new Mock<ITeachersRepository>();
         teacherRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>()))
             .ReturnsAsync(false);
@@ -75,7 +75,7 @@ public class TeacherCreationCandidateValidatorTests
     public async Task Teacher_Should_Not_already_exist()
     {
         // Arrange
-        var teacherRepositoryMock = new Mock<ITeacherRepository>();
+        var teacherRepositoryMock = new Mock<ITeachersRepository>();
         teacherRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>()))
             .ReturnsAsync(true);
@@ -106,7 +106,7 @@ public class TeacherCreationCandidateValidatorTests
     public async Task User_candidate_Should_Not_already_be_a_student()
     {
         // Arrange
-        var teacherRepositoryMock = new Mock<ITeacherRepository>();
+        var teacherRepositoryMock = new Mock<ITeachersRepository>();
         teacherRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>()))
             .ReturnsAsync(false);

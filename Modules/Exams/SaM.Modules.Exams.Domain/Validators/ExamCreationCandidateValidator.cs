@@ -6,7 +6,7 @@ namespace SaM.Modules.Exams.Domain.Validators;
 
 public class ExamCreationCandidateValidator : AbstractValidator<IExamCreationCandidate>
 {
-    public ExamCreationCandidateValidator(ITeacherRepository teacherRepository)
+    public ExamCreationCandidateValidator(ITeachersRepository teachersRepository)
     {
         RuleFor(e => e.Title)
             .NotEmpty()
@@ -21,7 +21,7 @@ public class ExamCreationCandidateValidator : AbstractValidator<IExamCreationCan
             .WithMessage("StartDate must be less than EndDate.");
 
         RuleFor(e => e.ResponsibleTeacherId)
-            .MustAsync(async (responsibleTeacherId, _) => await teacherRepository.ExistAsync(responsibleTeacherId))
+            .MustAsync(async (responsibleTeacherId, _) => await teachersRepository.ExistAsync(responsibleTeacherId))
             .WithMessage("Responsible Teacher must exists.");
     }
 }

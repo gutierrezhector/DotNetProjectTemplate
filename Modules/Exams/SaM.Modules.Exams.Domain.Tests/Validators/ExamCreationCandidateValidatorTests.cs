@@ -13,7 +13,7 @@ public class ExamCreationCandidateValidatorTests
     public async Task Validation_Should_work_When_candidate_respect_validator_rules()
     {
         // Arrange
-        var teacherRepositoryMock = new Mock<ITeacherRepository>();
+        var teacherRepositoryMock = new Mock<ITeachersRepository>();
         teacherRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>()))
             .ReturnsAsync(true);
@@ -40,7 +40,7 @@ public class ExamCreationCandidateValidatorTests
     public async Task Title_Should_not_be_empty()
     {
         // Arrange
-        var teacherRepositoryMock = new Mock<ITeacherRepository>();
+        var teacherRepositoryMock = new Mock<ITeachersRepository>();
         teacherRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>()))
             .ReturnsAsync(true);
@@ -69,7 +69,7 @@ public class ExamCreationCandidateValidatorTests
     public async Task MaxPoints_Should_not_be_superior_than_20()
     {
         // Arrange
-        var teacherRepositoryMock = new Mock<ITeacherRepository>();
+        var teacherRepositoryMock = new Mock<ITeachersRepository>();
         teacherRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>()))
             .ReturnsAsync(true);
@@ -98,7 +98,7 @@ public class ExamCreationCandidateValidatorTests
     public async Task StartDate_Should_be_less_than_EndDate()
     {
         // Arrange
-        var teacherRepositoryMock = new Mock<ITeacherRepository>();
+        var teacherRepositoryMock = new Mock<ITeachersRepository>();
         teacherRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>()))
             .ReturnsAsync(true);
@@ -127,7 +127,7 @@ public class ExamCreationCandidateValidatorTests
     public async Task Validation_Should_Fail_When_responsible_teacher_does_not_exist()
     {
         // Arrange
-        var teacherRepositoryMock = new Mock<ITeacherRepository>();
+        var teacherRepositoryMock = new Mock<ITeachersRepository>();
         teacherRepositoryMock
             .Setup(r => r.ExistAsync(It.IsAny<int>()))
             .ReturnsAsync(false);

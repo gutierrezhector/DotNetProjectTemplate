@@ -11,11 +11,11 @@ using SaM.Modules.Teachers.Ports.OuBounds.Repositories;
 
 namespace SaM.Modules.Teachers.Infra.Repositories;
 
-public class TeacherRepository(
+public class TeachersRepository(
     SaMDbContext dbContext,
     TeacherEntityFactory teacherEntityFactory,
     TeacherDaoFactory teacherDaoFactory
-) : BaseRepository<TeacherDao>(dbContext), ITeacherRepository
+) : BaseRepository<TeacherDao>(dbContext), ITeachersRepository
 {
     public async Task<List<Teacher>> GetAllAsync()
     {

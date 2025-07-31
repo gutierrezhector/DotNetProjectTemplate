@@ -9,7 +9,7 @@ namespace SaM.Modules.Teachers.Domain.Validators;
 public class TeacherCreationCandidateValidator : AbstractValidator<ITeacherCreationCandidate>
 {
     public TeacherCreationCandidateValidator(
-        ITeacherRepository teacherRepository,
+        ITeachersRepository teachersRepository,
         IStudentsRepository studentRepository
     )
     {
@@ -18,7 +18,7 @@ public class TeacherCreationCandidateValidator : AbstractValidator<ITeacherCreat
             .WithMessage("SchoolSubject needs to be defined.");
 
         RuleFor(c => c.UserId)
-            .MustAsync(async (userId, _) => !await teacherRepository.ExistAsync(userId))
+            .MustAsync(async (userId, _) => !await teachersRepository.ExistAsync(userId))
             .WithMessage("Teacher already exists.");
 
         RuleFor(c => c.UserId)

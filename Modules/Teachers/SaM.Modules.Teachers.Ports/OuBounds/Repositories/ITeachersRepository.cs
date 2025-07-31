@@ -3,7 +3,7 @@ using SaM.Modules.Teachers.Ports.InBounds.Candidates;
 
 namespace SaM.Modules.Teachers.Ports.OuBounds.Repositories;
 
-public interface ITeacherRepository
+public interface ITeachersRepository
 {
     Task<List<Teacher>> GetAllAsync();
     Task<Teacher> GetByIdAsync(int id);
