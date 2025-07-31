@@ -11,12 +11,20 @@ public class ExamUpdateCandidateValidator : AbstractValidator<TeacherUpdateWrapp
 {
     public ExamUpdateCandidateValidator(ITeachersRepository teachersRepository)
     {
-        RuleFor(wrapper => wrapper.Candidate.MaxPoints).LessThanOrEqualTo(20);
-        RuleFor(wrapper => wrapper.Candidate.StartDate).NotEmpty();
-        RuleFor(wrapper => wrapper.Candidate.StartDate).LessThan(wrapper => wrapper.Candidate.EndDate);
+        RuleFor(wrapper => wrapper.Candidate.Title)
+            .NotEmpty()
+            .WithMessage("Title must not be empty.");
+
+        RuleFor(wrapper => wrapper.Candidate.MaxPoints)
+            .LessThanOrEqualTo(20)
+            .WithMessage("MaxPoints must not be superior to 20.");
+
+        RuleFor(wrapper => wrapper.Candidate.StartDate)
+            .LessThan(wrapper => wrapper.Candidate.EndDate)
+            .WithMessage("StartDate must be less than EndDate.");
+
         RuleFor(wrapper => wrapper.Candidate.ResponsibleTeacherId)
             .MustAsync(async (responsibleTeacherId, _) => await teachersRepository.ExistAsync(responsibleTeacherId))
-            .When(wrapper => wrapper.Entity.ResponsibleTeacherId != wrapper.Candidate.ResponsibleTeacherId)
             .WithMessage("Responsible Teacher must exists.");
     }
 }
