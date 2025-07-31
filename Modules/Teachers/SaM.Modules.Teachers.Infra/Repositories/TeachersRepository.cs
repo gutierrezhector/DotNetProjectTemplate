@@ -71,7 +71,7 @@ public class TeachersRepository(
     public async Task<bool> ExistAsync(int id)
     {
         return await SetWithoutIncludes()
-            .AnyAsync(t => t.UserId == id);
+            .AnyAsync(t => t.Id == id);
     }
 
     private async Task<TeacherDao> GetByIdInternalAsync(int id)

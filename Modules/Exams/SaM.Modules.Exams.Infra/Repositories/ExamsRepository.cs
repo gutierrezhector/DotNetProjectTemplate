@@ -72,7 +72,7 @@ public class ExamsRepository(
 
         if (examDao == null)
         {
-            throw new NotFoundException($"grade with id '{id}' not found.");
+            throw new NotFoundException($"exam with id '{id}' not found.");
         }
 
         return examDao;
