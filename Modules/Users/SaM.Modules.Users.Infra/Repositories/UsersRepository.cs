@@ -56,6 +56,12 @@ public class UsersRepository(
         await SaveChangesAsync();
     }
 
+    public async Task<bool> ExistAsync(int userId)
+    {
+        return await SetWithoutIncludes()
+            .AnyAsync(u => u.Id == userId);
+    }
+
     private async Task<UserDao> GetByIdInternal(int id)
     {
         var userDao = await SetWithIncludes()

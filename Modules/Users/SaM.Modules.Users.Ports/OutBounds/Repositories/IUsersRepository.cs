@@ -9,4 +9,5 @@ public interface IUsersRepository
     Task<User> CreateAsync(User user);
     Task<User> UpdateAsync(int id, IUserUpdateCandidate updateCandidate);
     Task DeleteAsync(int id);
+    Task<bool> ExistAsync(int userId);
 }
