@@ -35,7 +35,7 @@ public class ExamsController(
         return Created($"exams/{newExam.Id}", newExam);
     }
 
-    [HttpPut]
+    [HttpPut("{id}")]
     public async Task<IActionResult> UpdateAsync(int id, [FromBody] ExamUpdatePayload updatePayload)
     {
         var updatedExam = await application.UpdateAsync(id, updatePayload);
