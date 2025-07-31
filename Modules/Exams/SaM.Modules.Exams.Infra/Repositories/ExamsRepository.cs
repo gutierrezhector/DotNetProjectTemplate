@@ -80,6 +80,9 @@ public class ExamsRepository(
 
     protected override IQueryable<ExamDao> ApplyIncludes(DbSet<ExamDao> set)
     {
-        return set.Include(e => e.Grades);
+        return set
+            .Include(e => e.ResponsibleTeacher)
+            .ThenInclude(e => e!.User)
+            .Include(e => e.Grades);
     }
 }
