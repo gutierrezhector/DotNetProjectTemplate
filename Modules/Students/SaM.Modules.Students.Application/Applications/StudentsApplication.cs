@@ -56,9 +56,7 @@ public class StudentsApplication(
             throw new ValidationResultException(validationResult);
         }
 
-        var newStudent = await studentsRepository.UpdateAsync(id, updateCandidate);
-
-        return newStudent;
+        return await studentsRepository.UpdateAsync(id, updateCandidate);
     }
 
     public async Task DeleteAsync(int id)

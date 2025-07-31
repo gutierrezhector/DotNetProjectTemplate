@@ -40,9 +40,7 @@ public class TeachersApplication(
         }
 
         var newTeacher = teacherEntityFactory.CreateFromCandidate(creationCandidate);
-        await teacherRepository.Create(newTeacher);
-
-        return newTeacher;
+        return await teachersRepository.Create(newTeacher);
     }
 
     public async Task<Teacher> UpdateAsync(int id, ITeacherUpdatePayload updatePayload)

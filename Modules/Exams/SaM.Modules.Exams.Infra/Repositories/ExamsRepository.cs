@@ -40,9 +40,8 @@ public class ExamsRepository(
 
         await SaveChangesAsync();
 
-        examToCreate.Id = newExamDao.Id;
-
-        return examToCreate;
+        var examCratedDao = await GetByIdInternal(newExamDao.Id);
+        return examEntityFactory.CreateFromDao(examCratedDao);
     }
 
     public async Task<Exam> UpdateAsync(int id, IExamUpdateCandidate updateCandidate)

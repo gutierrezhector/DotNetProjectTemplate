@@ -44,9 +44,8 @@ public class TeachersRepository(
         DbContext.Add(newTeacherDao);
         await SaveChangesAsync();
 
-        newTeacher.Id = newTeacherDao.Id;
-
-        return newTeacher;
+        var teacherCreatedDao = await GetByIdInternalAsync(newTeacherDao.Id);
+        return teacherEntityFactory.CreateFromDao(teacherCreatedDao);
     }
 
     public async Task<Teacher> UpdateAsync(int id, ITeacherUpdateCandidate updateCandidate)

@@ -31,9 +31,8 @@ public class UsersRepository(
         DbContext.Add(newUserDao);
         await SaveChangesAsync();
 
-        user.Id = newUserDao.Id;
-
-        return user;
+        var userCreatedDao = await GetByIdInternal(newUserDao.Id);
+        return userEntityFactory.CreateFromDao(userCreatedDao);
     }
 
     public async Task<User> UpdateAsync(int id, IUserUpdateCandidate updateCandidate)

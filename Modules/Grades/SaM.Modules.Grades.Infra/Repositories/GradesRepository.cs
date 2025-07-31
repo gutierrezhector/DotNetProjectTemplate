@@ -31,7 +31,8 @@ public class GradesRepository(
 
         await SaveChangesAsync();
 
-        return grade;
+        var gradeCreatedDao = await GetByIdInternal(newGradeDao.Id);
+        return gradeEntityFactory.CreateFromDao(gradeCreatedDao);
     }
 
     public async Task<Grade> UpdateAsync(int id, IGradeUpdateCandidate updateCandidate)
