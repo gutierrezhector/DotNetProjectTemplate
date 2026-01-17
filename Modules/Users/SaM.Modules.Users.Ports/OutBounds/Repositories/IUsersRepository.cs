@@ -10,4 +10,6 @@ public interface IUsersRepository
     Task<User> UpdateAsync(int id, IUserUpdateCandidate updateCandidate);
     Task DeleteAsync(int id);
     Task<bool> ExistAsync(int userId);
+    Task<bool> IsUserLinkedToTeacherAsync(int userId);
+    Task<bool> IsUserLinkedToStudentAsync(int userId);
 }

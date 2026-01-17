@@ -5,8 +5,10 @@ using SaM.Core.Types.Entities.Users;
 using SaM.Database.Core.Daos.Users;
 using SaM.Modules.Users.Domain.Factories;
 using SaM.Modules.Users.Domain.Mappers;
+using SaM.Modules.Users.Domain.Services;
 using SaM.Modules.Users.Domain.Validators;
 using SaM.Modules.Users.Ports.InBounds.Candidates;
+using SaM.Modules.Users.Ports.InBounds.Services;
 
 namespace SaM.Modules.Users.Domain;
 
@@ -20,6 +22,8 @@ public static class ServiceCollectionExtension
 
         services.AddScoped<IValidator<IUserCreationCandidate>, UserCreationCandidateValidator>();
         services.AddScoped<IValidator<IUserUpdateCandidate>, UserUpdateCandidateValidator>();
+
+        services.AddScoped<IUserDeletableService, UserDeletableService>();
 
         return services;
     }

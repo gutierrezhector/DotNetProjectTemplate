@@ -6,6 +6,7 @@ using SaM.Modules.Users.Domain.Factories;
 using SaM.Modules.Users.Ports.InBounds.Applications;
 using SaM.Modules.Users.Ports.InBounds.Candidates;
 using SaM.Modules.Users.Ports.InBounds.Payloads;
+using SaM.Modules.Users.Ports.InBounds.Services;
 using SaM.Modules.Users.Ports.OutBounds.Repositories;
 
 namespace SaM.Modules.Users.Application.Applications;
@@ -13,6 +14,7 @@ namespace SaM.Modules.Users.Application.Applications;
 public class UsersApplication(
     IUsersRepository usersRepository,
     UserEntityFactory userEntityFactory,
+    IUserDeletableService userDeletableService,
     IValidator<IUserCreationCandidate> userCreationCandidateValidator,
     IValidator<IUserUpdateCandidate> userUpdateCandidateValidator,
     Mapper<IUserCreationPayload, IUserCreationCandidate> userCreationCandidateMapper,
@@ -51,6 +53,11 @@ public class UsersApplication(
 
     public async Task DeleteAsync(int id)
     {
+        if (await userDeletableService.IsUserDeletableAsync(id))
+        {
+            throw new BadRequestException("Can't delete user, it is linked to a teacher or a student");
+        }
+
         await usersRepository.DeleteAsync(id);
     }
 }

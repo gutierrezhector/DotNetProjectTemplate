@@ -3,6 +3,8 @@ using SaM.Core.Abstractions.Repository;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.Types.Entities.Users;
 using SaM.Database.Core;
+using SaM.Database.Core.Daos.Students;
+using SaM.Database.Core.Daos.Teachers;
 using SaM.Database.Core.Daos.Users;
 using SaM.Modules.Users.Domain.Factories;
 using SaM.Modules.Users.Infra.Factories;
@@ -59,6 +61,18 @@ public class UsersRepository(
     {
         return await SetWithoutIncludes()
             .AnyAsync(u => u.Id == userId);
+    }
+
+    public async Task<bool> IsUserLinkedToTeacherAsync(int userId)
+    {
+        return await DbContext.Set<TeacherDao>()
+            .AnyAsync(u => u.UserId == userId);
+    }
+
+    public async Task<bool> IsUserLinkedToStudentAsync(int userId)
+    {
+        return await DbContext.Set<StudentDao>()
+            .AnyAsync(u => u.UserId == userId);
     }
 
     private async Task<UserDao> GetByIdInternal(int id)
