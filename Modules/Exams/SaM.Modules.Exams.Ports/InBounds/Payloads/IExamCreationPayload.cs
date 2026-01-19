@@ -1,6 +1,8 @@
-﻿namespace SaM.Modules.Exams.Ports.InBounds.Payloads;
+﻿using MediatR;
 
-public interface IExamCreationPayload
+namespace SaM.Modules.Exams.Ports.InBounds.Payloads;
+
+public interface IExamCreationPayload : IRequest
 {
     string Title { get; init; }
     DateTimeOffset StartDate { get; init; }

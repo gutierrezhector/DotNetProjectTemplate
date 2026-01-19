@@ -10,4 +10,8 @@
       <ProjectReference Include="..\..\..\Database\SaM.Database.Core\SaM.Database.Core.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="MediatR.Contracts" />
+    </ItemGroup>
+
 </Project>
