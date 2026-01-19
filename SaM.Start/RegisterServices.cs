@@ -1,5 +1,6 @@
 using SaM.Database.Core;
 using SaM.Modules.Exams.Application;
+using SaM.Modules.Exams.Application.CQRS.Commands.Create;
 using SaM.Modules.Exams.Domain;
 using SaM.Modules.Exams.Infra;
 using SaM.Modules.Exams.Web;
@@ -26,8 +27,9 @@ public static class RegisterServices
 {
     public static void Register(WebApplicationBuilder webApplicationBuilder)
     {
-        var connectionString = GetConnectionStringOrThrow(webApplicationBuilder);
+        RegisterMediatR(webApplicationBuilder);
 
+        var connectionString = GetConnectionStringOrThrow(webApplicationBuilder);
         webApplicationBuilder.Services
             .RegisterEntityFramework(connectionString);
 
@@ -60,6 +62,16 @@ public static class RegisterServices
             .RegisterGradesApplication()
             .RegisterGradesInfra()
             .RegisterGradesDomain();
+    }
+
+    private static void RegisterMediatR(WebApplicationBuilder webApplicationBuilder)
+    {
+        webApplicationBuilder.Services.AddMediatR(
+            cfg =>
+            {
+                // with this call all handler and request from Exam namespace will be registered by reflection
+                cfg.RegisterServicesFromAssemblyContaining<CreateExamCommand>();
+            });
     }
 
     private static string GetConnectionStringOrThrow(WebApplicationBuilder webApplicationBuilder)

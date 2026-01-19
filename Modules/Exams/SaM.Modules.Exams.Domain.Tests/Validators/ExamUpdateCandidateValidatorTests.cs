@@ -40,7 +40,7 @@ public class ExamUpdateCandidateValidatorTests
             Title = "title updated",
         };
 
-        var wrapper = new TeacherUpdateWrapper(candidate, entity);
+        var wrapper = new ExamUpdateWrapper(candidate, entity);
 
         // Act
         var result = await validator.ValidateAsync(wrapper);
@@ -79,7 +79,7 @@ public class ExamUpdateCandidateValidatorTests
             Title = "",
         };
 
-        var wrapper = new TeacherUpdateWrapper(candidate, entity);
+        var wrapper = new ExamUpdateWrapper(candidate, entity);
 
         // Act
         var result = await validator.ValidateAsync(wrapper);
@@ -120,7 +120,7 @@ public class ExamUpdateCandidateValidatorTests
             Title = "title",
         };
 
-        var wrapper = new TeacherUpdateWrapper(candidate, entity);
+        var wrapper = new ExamUpdateWrapper(candidate, entity);
 
         // Act
         var result = await validator.ValidateAsync(wrapper);
@@ -161,7 +161,7 @@ public class ExamUpdateCandidateValidatorTests
             Title = "title",
         };
 
-        var wrapper = new TeacherUpdateWrapper(candidate, entity);
+        var wrapper = new ExamUpdateWrapper(candidate, entity);
 
         // Act
         var result = await validator.ValidateAsync(wrapper);
@@ -202,7 +202,7 @@ public class ExamUpdateCandidateValidatorTests
             Title = "title",
         };
 
-        var wrapper = new TeacherUpdateWrapper(candidate, entity);
+        var wrapper = new ExamUpdateWrapper(candidate, entity);
 
         // Act
         var result = await validator.ValidateAsync(wrapper);
