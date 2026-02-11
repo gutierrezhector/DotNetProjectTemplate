@@ -1,11 +1,8 @@
 ﻿using FluentValidation;
-using SaM.Core.Types.Entities.Teachers;
 using SaM.Core.Types.Enums;
-using SaM.Modules.Teachers.Ports.InBounds.Candidates;
+using SaM.Modules.Teachers.Ports.InBounds;
 
 namespace SaM.Modules.Teachers.Domain.Validators;
-
-public record TeacherUpdateWrapper(ITeacherUpdateCandidate Candidate, Teacher Entity);
 
 public class TeacherUpdateCandidateValidator : AbstractValidator<TeacherUpdateWrapper>
 {

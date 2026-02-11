@@ -9,6 +9,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\..\Core\SaM.Core.Abstractions\SaM.Core.Abstractions.csproj" />
       <ProjectReference Include="..\..\Teachers\SaM.Modules.Teachers.Ports\SaM.Modules.Teachers.Ports.csproj" />
+      <ProjectReference Include="..\..\Users\SaM.Modules.Users.Ports\SaM.Modules.Users.Ports.csproj" />
       <ProjectReference Include="..\SaM.Modules.Students.Ports\SaM.Modules.Students.Ports.csproj" />
     </ItemGroup>
 

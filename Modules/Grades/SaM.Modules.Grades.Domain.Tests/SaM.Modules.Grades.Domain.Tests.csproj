@@ -15,6 +15,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\SaM.Modules.Grades.Application\SaM.Modules.Grades.Application.csproj" />
+      <ProjectReference Include="..\SaM.Modules.Grades.Domain\SaM.Modules.Grades.Domain.csproj" />
       <ProjectReference Include="..\SaM.Modules.Grades.Ports\SaM.Modules.Grades.Ports.csproj" />
     </ItemGroup>
     

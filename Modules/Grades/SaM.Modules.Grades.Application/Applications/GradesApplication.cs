@@ -1,9 +1,10 @@
 using FluentValidation;
+using SaM.Core.Abstractions.Factories;
 using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.Types.Entities.Grades;
-using SaM.Modules.Grades.Domain.Factories;
-using SaM.Modules.Grades.Domain.Validators;
+using SaM.Database.Core.Daos.Grades;
+using SaM.Modules.Grades.Ports.InBounds;
 using SaM.Modules.Grades.Ports.InBounds.Applications;
 using SaM.Modules.Grades.Ports.InBounds.Candidates;
 using SaM.Modules.Grades.Ports.InBounds.Payloads;
@@ -13,7 +14,7 @@ namespace SaM.Modules.Grades.Application.Applications;
 
 public class GradesApplication(
     IGradesRepository gradesRepository,
-    GradeEntityFactory gradeEntityFactory,
+    EntityFactory<Grade,  GradeDao, IGradeCreationCandidate> gradeEntityFactory,
     IValidator<IGradeCreationCandidate> gradeCreationCandidateValidator,
     IValidator<GradeUpdateWrapper> gradeUpdateCandidateValidator,
     Mapper<IGradeCreationPayload, IGradeCreationCandidate> gradeCreationCandidateMapper,

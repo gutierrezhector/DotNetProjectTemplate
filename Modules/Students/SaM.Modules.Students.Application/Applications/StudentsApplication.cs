@@ -1,9 +1,10 @@
 using FluentValidation;
+using SaM.Core.Abstractions.Factories;
 using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.Types.Entities.Students;
-using SaM.Modules.Students.Domain.Factories;
-using SaM.Modules.Students.Domain.Validators;
+using SaM.Database.Core.Daos.Students;
+using SaM.Modules.Students.Ports.InBounds;
 using SaM.Modules.Students.Ports.InBounds.Applications;
 using SaM.Modules.Students.Ports.InBounds.Candidates;
 using SaM.Modules.Students.Ports.InBounds.Payloads;
@@ -13,7 +14,7 @@ namespace SaM.Modules.Students.Application.Applications;
 
 public class StudentsApplication(
     IStudentsRepository studentsRepository,
-    StudentEntityFactory studentEntityFactory,
+    EntityFactory<Student,  StudentDao, IStudentCreationCandidate> studentEntityFactory,
     IValidator<IStudentCreationCandidate> studentCreationCandidateValidator,
     IValidator<StudentUpdateWrapper> studentUpdateCandidateValidator,
     Mapper<IStudentCreationPayload, IStudentCreationCandidate> studentCreationCandidateMapper,

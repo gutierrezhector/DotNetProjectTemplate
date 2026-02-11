@@ -9,7 +9,6 @@
     <ItemGroup>
       <ProjectReference Include="..\..\..\Core\SaM.Core.Types\SaM.Core.Types.csproj" />
       <ProjectReference Include="..\..\..\Database\SaM.Database.Core\SaM.Database.Core.csproj" />
-      <ProjectReference Include="..\..\Users\SaM.Modules.Users.Ports\SaM.Modules.Users.Ports.csproj" />
     </ItemGroup>
 
 </Project>

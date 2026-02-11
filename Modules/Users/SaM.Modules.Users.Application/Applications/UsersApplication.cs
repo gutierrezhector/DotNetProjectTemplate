@@ -1,8 +1,9 @@
 using FluentValidation;
+using SaM.Core.Abstractions.Factories;
 using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.Types.Entities.Users;
-using SaM.Modules.Users.Domain.Factories;
+using SaM.Database.Core.Daos.Users;
 using SaM.Modules.Users.Ports.InBounds.Applications;
 using SaM.Modules.Users.Ports.InBounds.Candidates;
 using SaM.Modules.Users.Ports.InBounds.Payloads;
@@ -13,7 +14,7 @@ namespace SaM.Modules.Users.Application.Applications;
 
 public class UsersApplication(
     IUsersRepository usersRepository,
-    UserEntityFactory userEntityFactory,
+    EntityFactory<User, UserDao, IUserCreationCandidate> userEntityFactory,
     IUserDeletableService userDeletableService,
     IValidator<IUserCreationCandidate> userCreationCandidateValidator,
     IValidator<IUserUpdateCandidate> userUpdateCandidateValidator,

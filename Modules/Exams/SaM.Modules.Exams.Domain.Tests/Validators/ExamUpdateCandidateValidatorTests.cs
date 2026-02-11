@@ -3,6 +3,7 @@ using Moq;
 using SaM.Core.Types.Entities.Exams;
 using SaM.Modules.Exams.Application.Candidates;
 using SaM.Modules.Exams.Domain.Validators;
+using SaM.Modules.Exams.Ports.InBounds.Candidates;
 using SaM.Modules.Teachers.Ports.OuBounds.Repositories;
 using Xunit;
 
@@ -40,7 +41,7 @@ public class ExamUpdateCandidateValidatorTests
             Title = "title updated",
         };
 
-        var wrapper = new TeacherUpdateWrapper(candidate, entity);
+        var wrapper = new ExamUpdateWrapper(candidate, entity);
 
         // Act
         var result = await validator.ValidateAsync(wrapper);
@@ -79,7 +80,7 @@ public class ExamUpdateCandidateValidatorTests
             Title = "",
         };
 
-        var wrapper = new TeacherUpdateWrapper(candidate, entity);
+        var wrapper = new ExamUpdateWrapper(candidate, entity);
 
         // Act
         var result = await validator.ValidateAsync(wrapper);
@@ -120,7 +121,7 @@ public class ExamUpdateCandidateValidatorTests
             Title = "title",
         };
 
-        var wrapper = new TeacherUpdateWrapper(candidate, entity);
+        var wrapper = new ExamUpdateWrapper(candidate, entity);
 
         // Act
         var result = await validator.ValidateAsync(wrapper);
@@ -161,7 +162,7 @@ public class ExamUpdateCandidateValidatorTests
             Title = "title",
         };
 
-        var wrapper = new TeacherUpdateWrapper(candidate, entity);
+        var wrapper = new ExamUpdateWrapper(candidate, entity);
 
         // Act
         var result = await validator.ValidateAsync(wrapper);
@@ -202,7 +203,7 @@ public class ExamUpdateCandidateValidatorTests
             Title = "title",
         };
 
-        var wrapper = new TeacherUpdateWrapper(candidate, entity);
+        var wrapper = new ExamUpdateWrapper(candidate, entity);
 
         // Act
         var result = await validator.ValidateAsync(wrapper);
