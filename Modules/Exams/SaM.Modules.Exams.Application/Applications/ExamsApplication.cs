@@ -1,9 +1,10 @@
 ﻿using FluentValidation;
+using SaM.Core.Abstractions.Factories;
 using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.Types.Entities.Exams;
-using SaM.Modules.Exams.Domain.Factories;
-using SaM.Modules.Exams.Domain.Validators;
+using SaM.Database.Core.Daos.Exams;
+using SaM.Modules.Exams.Ports.InBounds;
 using SaM.Modules.Exams.Ports.InBounds.Applications;
 using SaM.Modules.Exams.Ports.InBounds.Candidates;
 using SaM.Modules.Exams.Ports.InBounds.Payloads;
@@ -13,9 +14,9 @@ namespace SaM.Modules.Exams.Application.Applications;
 
 public class ExamsApplication(
     IExamsRepository examRepository,
-    ExamEntityFactory examEntityFactory,
+    EntityFactory<Exam,  ExamDao, IExamCreationCandidate> examEntityFactory,
     IValidator<IExamCreationCandidate> examCreationCandidateValidator,
-    IValidator<TeacherUpdateWrapper> examUpdateCandidateValidator,
+    IValidator<ExamUpdateWrapper> examUpdateCandidateValidator,
     Mapper<IExamCreationPayload, IExamCreationCandidate> examCreationPayloadMapper,
     Mapper<IExamUpdatePayload, IExamUpdateCandidate> examUpdatePayloadMapper
 ) : IExamsApplication
@@ -49,7 +50,7 @@ public class ExamsApplication(
         var updateCandidate = examUpdatePayloadMapper.MapNonNullable(updatePayload);
         var currentExam = await examRepository.GetByIdAsync(id);
         var validationResult =
-            await examUpdateCandidateValidator.ValidateAsync(new TeacherUpdateWrapper(updateCandidate, currentExam));
+            await examUpdateCandidateValidator.ValidateAsync(new ExamUpdateWrapper(updateCandidate, currentExam));
 
         if (!validationResult.IsValid)
         {

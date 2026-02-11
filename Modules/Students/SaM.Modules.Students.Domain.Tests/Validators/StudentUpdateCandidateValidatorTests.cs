@@ -2,6 +2,7 @@
 using SaM.Core.Types.Entities.Students;
 using SaM.Modules.Students.Application.Candidates;
 using SaM.Modules.Students.Domain.Validators;
+using SaM.Modules.Students.Ports.InBounds;
 using Xunit;
 
 namespace SaM.Modules.Students.Domain.Tests.Validators;

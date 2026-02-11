@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using SaM.Core.Abstractions.Factories;
 using SaM.Core.Abstractions.Repository;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.Types.Entities.Teachers;
 using SaM.Database.Core;
 using SaM.Database.Core.Daos.Teachers;
-using SaM.Modules.Teachers.Domain.Factories;
 using SaM.Modules.Teachers.Infra.Factories;
 using SaM.Modules.Teachers.Ports.InBounds.Candidates;
 using SaM.Modules.Teachers.Ports.OuBounds.Repositories;
@@ -13,7 +13,7 @@ namespace SaM.Modules.Teachers.Infra.Repositories;
 
 public class TeachersRepository(
     SaMDbContext dbContext,
-    TeacherEntityFactory teacherEntityFactory,
+    EntityFactory<Teacher, TeacherDao, ITeacherCreationCandidate> teacherEntityFactory,
     TeacherDaoFactory teacherDaoFactory
 ) : BaseRepository<TeacherDao>(dbContext), ITeachersRepository
 {

@@ -3,6 +3,7 @@ using SaM.Core.Types.Entities.Teachers;
 using SaM.Core.Types.Enums;
 using SaM.Modules.Teachers.Application.Candidates;
 using SaM.Modules.Teachers.Domain.Validators;
+using SaM.Modules.Teachers.Ports.InBounds;
 using Xunit;
 
 namespace SaM.Modules.Teachers.Domain.Tests.Validators;

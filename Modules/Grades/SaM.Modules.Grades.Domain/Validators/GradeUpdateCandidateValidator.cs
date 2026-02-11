@@ -1,12 +1,9 @@
 ﻿using FluentValidation;
-using SaM.Core.Types.Entities.Grades;
 using SaM.Modules.Exams.Ports.OutBounds.Repositories;
 using SaM.Modules.Grades.Ports.InBounds.Candidates;
 using SaM.Modules.Grades.Ports.OutBounds.Repositories;
 
 namespace SaM.Modules.Grades.Domain.Validators;
-
-public record GradeUpdateWrapper(IGradeUpdateCandidate Candidate, Grade Entity);
 
 public class GradeUpdateCandidateValidator : AbstractValidator<GradeUpdateWrapper>
 {

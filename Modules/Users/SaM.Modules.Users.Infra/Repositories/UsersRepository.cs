@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using SaM.Core.Abstractions.Factories;
 using SaM.Core.Abstractions.Repository;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.Types.Entities.Users;
@@ -6,7 +7,6 @@ using SaM.Database.Core;
 using SaM.Database.Core.Daos.Students;
 using SaM.Database.Core.Daos.Teachers;
 using SaM.Database.Core.Daos.Users;
-using SaM.Modules.Users.Domain.Factories;
 using SaM.Modules.Users.Infra.Factories;
 using SaM.Modules.Users.Ports.InBounds.Candidates;
 using SaM.Modules.Users.Ports.OutBounds.Repositories;
@@ -15,7 +15,7 @@ namespace SaM.Modules.Users.Infra.Repositories;
 
 public class UsersRepository(
     SaMDbContext dbContext,
-    UserEntityFactory userEntityFactory,
+    EntityFactory<User, UserDao, IUserCreationCandidate> userEntityFactory,
     UserDaoFactory userDaoFactory
 ) : BaseRepository<UserDao>(dbContext), IUsersRepository
 {

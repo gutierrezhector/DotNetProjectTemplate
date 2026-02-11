@@ -8,7 +8,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\Database\SaM.Database.Core\SaM.Database.Core.csproj" />
-      <ProjectReference Include="..\..\Users\SaM.Modules.Users.Ports\SaM.Modules.Users.Ports.csproj" />
     </ItemGroup>
 
 </Project>

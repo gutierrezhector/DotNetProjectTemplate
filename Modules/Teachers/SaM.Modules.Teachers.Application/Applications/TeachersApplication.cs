@@ -1,9 +1,10 @@
 using FluentValidation;
+using SaM.Core.Abstractions.Factories;
 using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.Types.Entities.Teachers;
-using SaM.Modules.Teachers.Domain.Factories;
-using SaM.Modules.Teachers.Domain.Validators;
+using SaM.Database.Core.Daos.Teachers;
+using SaM.Modules.Teachers.Ports.InBounds;
 using SaM.Modules.Teachers.Ports.InBounds.Applications;
 using SaM.Modules.Teachers.Ports.InBounds.Candidates;
 using SaM.Modules.Teachers.Ports.InBounds.Payloads;
@@ -13,7 +14,7 @@ namespace SaM.Modules.Teachers.Application.Applications;
 
 public class TeachersApplication(
     ITeachersRepository teachersRepository,
-    TeacherEntityFactory teacherEntityFactory,
+    EntityFactory<Teacher, TeacherDao, ITeacherCreationCandidate> teacherEntityFactory,
     IValidator<ITeacherCreationCandidate> teacherCreationCandidateValidator,
     IValidator<TeacherUpdateWrapper> teacherUpdateCandidateValidator,
     Mapper<ITeacherCreationPayload, ITeacherCreationCandidate> teacherCreationCandidateMapper,

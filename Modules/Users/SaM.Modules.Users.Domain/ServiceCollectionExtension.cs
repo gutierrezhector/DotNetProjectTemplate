@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
+using SaM.Core.Abstractions.Factories;
 using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Types.Entities.Users;
 using SaM.Database.Core.Daos.Users;
@@ -16,7 +17,7 @@ public static class ServiceCollectionExtension
 {
     public static IServiceCollection RegisterUsersDomain(this IServiceCollection services)
     {
-        services.AddScoped<UserEntityFactory>();
+        services.AddScoped<EntityFactory<User, UserDao, IUserCreationCandidate>, UserEntityFactory>();
 
         services.AddScoped<Mapper<UserDao, User>, UserDaoToUserEntityMapper>();
 

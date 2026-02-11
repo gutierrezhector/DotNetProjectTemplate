@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using SaM.Core.Abstractions.Factories;
 using SaM.Core.Abstractions.Repository;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.Types.Entities.Exams;
 using SaM.Database.Core;
 using SaM.Database.Core.Daos.Exams;
-using SaM.Modules.Exams.Domain.Factories;
 using SaM.Modules.Exams.Infra.Factories;
 using SaM.Modules.Exams.Ports.InBounds.Candidates;
 using SaM.Modules.Exams.Ports.OutBounds.Repositories;
@@ -13,7 +13,7 @@ namespace SaM.Modules.Exams.Infra.Repositories;
 
 public class ExamsRepository(
     SaMDbContext dbContext,
-    ExamEntityFactory examEntityFactory,
+    EntityFactory<Exam,  ExamDao, IExamCreationCandidate> examEntityFactory,
     ExamDaoFactory examDaoFactory
 ) : BaseRepository<ExamDao>(dbContext), IExamsRepository
 {

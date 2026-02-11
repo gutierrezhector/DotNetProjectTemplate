@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SaM.Core.Abstractions.Factories;
 using SaM.Core.Abstractions.Repository;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.Types.Entities.Students;
 using SaM.Database.Core;
 using SaM.Database.Core.Daos.Students;
-using SaM.Modules.Students.Domain.Factories;
 using SaM.Modules.Students.Infra.Factories;
 using SaM.Modules.Students.Ports.InBounds.Candidates;
 using SaM.Modules.Students.Ports.OutBounds.Repositories;
@@ -13,7 +13,7 @@ namespace SaM.Modules.Students.Infra.Repositories;
 
 public class StudentsRepository(
     SaMDbContext dbContext,
-    StudentEntityFactory studentEntityFactory,
+    EntityFactory<Student,  StudentDao, IStudentCreationCandidate> studentEntityFactory,
     StudentDaoFactory studentDaoFactory
 ) : BaseRepository<StudentDao>(dbContext), IStudentsRepository
 {

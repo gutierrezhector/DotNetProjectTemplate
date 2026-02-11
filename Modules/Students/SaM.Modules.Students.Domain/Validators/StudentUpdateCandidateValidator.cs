@@ -1,10 +1,7 @@
 ﻿using FluentValidation;
-using SaM.Core.Types.Entities.Students;
-using SaM.Modules.Students.Ports.InBounds.Candidates;
+using SaM.Modules.Students.Ports.InBounds;
 
 namespace SaM.Modules.Students.Domain.Validators;
-
-public record StudentUpdateWrapper(IStudentUpdateCandidate Candidate, Student Entity);
 
 public class StudentUpdateCandidateValidator : AbstractValidator<StudentUpdateWrapper>
 {

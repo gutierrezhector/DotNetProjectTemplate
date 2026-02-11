@@ -5,6 +5,7 @@ using SaM.Core.Types.Entities.Grades;
 using SaM.Modules.Exams.Ports.OutBounds.Repositories;
 using SaM.Modules.Grades.Application.Candidates;
 using SaM.Modules.Grades.Domain.Validators;
+using SaM.Modules.Grades.Ports.InBounds.Candidates;
 using SaM.Modules.Grades.Ports.OutBounds.Repositories;
 using Xunit;
 
