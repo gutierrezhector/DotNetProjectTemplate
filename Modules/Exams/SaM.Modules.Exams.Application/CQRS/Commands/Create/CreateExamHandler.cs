@@ -1,9 +1,10 @@
 ﻿using FluentValidation;
 using MediatR;
+using SaM.Core.Abstractions.Factories;
 using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.Types.Entities.Exams;
-using SaM.Modules.Exams.Domain.Factories;
+using SaM.Database.Core.Daos.Exams;
 using SaM.Modules.Exams.Ports.InBounds.Candidates;
 using SaM.Modules.Exams.Ports.InBounds.Payloads;
 using SaM.Modules.Exams.Ports.OutBounds.Repositories;
@@ -12,7 +13,7 @@ namespace SaM.Modules.Exams.Application.CQRS.Commands.Create;
 
 public class CreateExamHandler(
     IExamsRepository examRepository,
-    ExamEntityFactory examEntityFactory,
+    EntityFactory<Exam,  ExamDao, IExamCreationCandidate> examEntityFactory,
     IValidator<IExamCreationCandidate> examCreationCandidateValidator,
     Mapper<IExamCreationPayload, IExamCreationCandidate> examCreationPayloadMapper
 ) : IRequestHandler<CreateExamCommand, Exam>

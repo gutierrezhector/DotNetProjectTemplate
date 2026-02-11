@@ -3,7 +3,6 @@ using MediatR;
 using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.Types.Entities.Exams;
-using SaM.Modules.Exams.Domain.Validators;
 using SaM.Modules.Exams.Ports.InBounds.Candidates;
 using SaM.Modules.Exams.Ports.InBounds.Payloads;
 using SaM.Modules.Exams.Ports.OutBounds.Repositories;
