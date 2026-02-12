@@ -12,7 +12,7 @@ public static class ServiceCollectionExtension
     public static IServiceCollection RegisterUsersWeb(this IServiceCollection services)
     {
         services.AddScoped<UserViewModelFactory>();
-        services.AddScoped<Mapper<User, UserViewModel>, UserEntityViewModelMapper>();
+        services.AddScoped<Mapper<User, UserViewModel>, UserEntityToUserViewModelMapper>();
 
         return services;
     }

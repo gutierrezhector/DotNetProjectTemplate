@@ -12,7 +12,7 @@ public static class ServiceCollectionExtension
     public static IServiceCollection RegisterGradesWeb(this IServiceCollection services)
     {
         services.AddScoped<GradeViewModelFactory>();
-        services.AddScoped<Mapper<Grade, GradeViewModel>, GradeViewModelMapper>();
+        services.AddScoped<Mapper<Grade, GradeViewModel>, GradeEntityToGradeViewModelMapper>();
 
         return services;
     }

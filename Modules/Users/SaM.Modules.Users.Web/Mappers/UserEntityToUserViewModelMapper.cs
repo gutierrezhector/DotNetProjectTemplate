@@ -4,7 +4,7 @@ using SaM.Core.Types.ViewModels.Users;
 
 namespace SaM.Modules.Users.Web.Mappers;
 
-public class UserEntityViewModelMapper : Mapper<User, UserViewModel>
+public class UserEntityToUserViewModelMapper : Mapper<User, UserViewModel>
 {
     public override UserViewModel MapNonNullable(User from)
     {

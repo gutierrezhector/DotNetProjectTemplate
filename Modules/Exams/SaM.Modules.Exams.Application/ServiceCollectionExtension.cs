@@ -14,8 +14,8 @@ public static class ServiceCollectionExtension
     {
         services.AddScoped<IExamsApplication, ExamsApplication>();
 
-        services.AddScoped<Mapper<IExamCreationPayload, IExamCreationCandidate>, ExamCreationCandidateMapper>();
-        services.AddScoped<Mapper<IExamUpdatePayload, IExamUpdateCandidate>, ExamUpdateCandidateMapper>();
+        services.AddScoped<Mapper<IExamCreationPayload, IExamCreationCandidate>, ExamCreationPayloadToExamCreationCandidateMapper>();
+        services.AddScoped<Mapper<IExamUpdatePayload, IExamUpdateCandidate>, ExamUpdatePayloadToExamUpdateCandidateMapper>();
 
         return services;
     }

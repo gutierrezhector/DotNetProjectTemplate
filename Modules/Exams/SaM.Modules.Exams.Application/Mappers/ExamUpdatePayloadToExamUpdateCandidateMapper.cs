@@ -5,7 +5,7 @@ using SaM.Modules.Exams.Ports.InBounds.Payloads;
 
 namespace SaM.Modules.Exams.Application.Mappers;
 
-public class ExamUpdateCandidateMapper : Mapper<IExamUpdatePayload, IExamUpdateCandidate>
+public class ExamUpdatePayloadToExamUpdateCandidateMapper : Mapper<IExamUpdatePayload, IExamUpdateCandidate>
 {
     public override IExamUpdateCandidate MapNonNullable(IExamUpdatePayload from)
     {

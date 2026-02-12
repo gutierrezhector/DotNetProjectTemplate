@@ -5,7 +5,7 @@ using SaM.Modules.Grades.Ports.InBounds.Payloads;
 
 namespace SaM.Modules.Grades.Application.Mappers;
 
-public class GradeUpdateCandidateMapper : Mapper<IGradeUpdatePayload, IGradeUpdateCandidate>
+public class GradeUpdatePayloadToGradeUpdateCandidateMapper : Mapper<IGradeUpdatePayload, IGradeUpdateCandidate>
 {
     public override IGradeUpdateCandidate MapNonNullable(IGradeUpdatePayload from)
     {

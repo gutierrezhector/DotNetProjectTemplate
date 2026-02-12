@@ -5,7 +5,7 @@ using SaM.Modules.Teachers.Ports.InBounds.Payloads;
 
 namespace SaM.Modules.Teachers.Application.Mappers;
 
-public class TeacherCreationCandidateMapper : Mapper<ITeacherCreationPayload, ITeacherCreationCandidate>
+public class TeacherCreationPayloadToTeacherCreationCandidateMapper : Mapper<ITeacherCreationPayload, ITeacherCreationCandidate>
 {
     public override ITeacherCreationCandidate MapNonNullable(ITeacherCreationPayload from)
     {

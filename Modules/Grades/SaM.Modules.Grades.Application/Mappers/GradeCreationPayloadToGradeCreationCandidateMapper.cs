@@ -5,7 +5,7 @@ using SaM.Modules.Grades.Ports.InBounds.Payloads;
 
 namespace SaM.Modules.Grades.Application.Mappers;
 
-public class GradeCreationCandidateMapper : Mapper<IGradeCreationPayload, IGradeCreationCandidate>
+public class GradeCreationPayloadToGradeCreationCandidateMapper : Mapper<IGradeCreationPayload, IGradeCreationCandidate>
 {
     public override IGradeCreationCandidate MapNonNullable(IGradeCreationPayload from)
     {

@@ -14,8 +14,8 @@ public static class ServiceCollectionExtension
     {
         services.AddScoped<IUsersApplication, UsersApplication>();
 
-        services.AddScoped<Mapper<IUserCreationPayload, IUserCreationCandidate>, UserCreationCandidateMapper>();
-        services.AddScoped<Mapper<IUserUpdatePayload, IUserUpdateCandidate>, UserUpdateCandidateMapper>();
+        services.AddScoped<Mapper<IUserCreationPayload, IUserCreationCandidate>, UserCreationPayloadToUserCreationCandidateMapper>();
+        services.AddScoped<Mapper<IUserUpdatePayload, IUserUpdateCandidate>, UserUpdatePayloadToUserUpdateCandidateMapper>();
 
         return services;
     }
