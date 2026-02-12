@@ -4,7 +4,6 @@ using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.Types.Entities.Exams;
 using SaM.Database.Core.Daos.Exams;
-using SaM.Modules.Exams.Ports.InBounds;
 using SaM.Modules.Exams.Ports.InBounds.Applications;
 using SaM.Modules.Exams.Ports.InBounds.Candidates;
 using SaM.Modules.Exams.Ports.InBounds.Payloads;
