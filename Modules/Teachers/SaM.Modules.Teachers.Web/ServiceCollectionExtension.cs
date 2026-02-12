@@ -12,7 +12,7 @@ public static class ServiceCollectionExtension
     public static IServiceCollection RegisterTeachersWeb(this IServiceCollection services)
     {
         services.AddScoped<TeacherViewModelFactory>();
-        services.AddScoped<Mapper<Teacher, TeacherViewModel>, TeacherViewModelMapper>();
+        services.AddScoped<Mapper<Teacher, TeacherViewModel>, TeacherEntityToTeacherViewModelMapper>();
 
         return services;
     }

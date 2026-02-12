@@ -5,7 +5,7 @@ using SaM.Modules.Users.Ports.InBounds.Payloads;
 
 namespace SaM.Modules.Users.Application.Mappers;
 
-public class UserUpdateCandidateMapper : Mapper<IUserUpdatePayload, IUserUpdateCandidate>
+public class UserUpdatePayloadToUserUpdateCandidateMapper : Mapper<IUserUpdatePayload, IUserUpdateCandidate>
 {
     public override IUserUpdateCandidate MapNonNullable(IUserUpdatePayload from)
     {

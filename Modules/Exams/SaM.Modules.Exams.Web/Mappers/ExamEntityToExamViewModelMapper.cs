@@ -4,7 +4,7 @@ using SaM.Core.Types.ViewModels.Exams;
 
 namespace SaM.Modules.Exams.Web.Mappers;
 
-public class ExamViewModelMapper : Mapper<Exam, ExamViewModel>
+public class ExamEntityToExamViewModelMapper : Mapper<Exam, ExamViewModel>
 {
     public override ExamViewModel MapNonNullable(Exam exam)
     {

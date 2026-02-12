@@ -14,8 +14,8 @@ public static class ServiceCollectionExtension
     {
         services.AddScoped<IGradesApplication, GradesApplication>();
 
-        services.AddScoped<Mapper<IGradeCreationPayload, IGradeCreationCandidate>, GradeCreationCandidateMapper>();
-        services.AddScoped<Mapper<IGradeUpdatePayload, IGradeUpdateCandidate>, GradeUpdateCandidateMapper>();
+        services.AddScoped<Mapper<IGradeCreationPayload, IGradeCreationCandidate>, GradeCreationPayloadToGradeCreationCandidateMapper>();
+        services.AddScoped<Mapper<IGradeUpdatePayload, IGradeUpdateCandidate>, GradeUpdatePayloadToGradeUpdateCandidateMapper>();
 
         return services;
     }

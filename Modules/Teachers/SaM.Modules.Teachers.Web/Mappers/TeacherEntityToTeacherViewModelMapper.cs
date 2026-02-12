@@ -6,7 +6,7 @@ using SaM.Core.Types.ViewModels.Users;
 
 namespace SaM.Modules.Teachers.Web.Mappers;
 
-public class TeacherViewModelMapper(
+public class TeacherEntityToTeacherViewModelMapper(
     Mapper<User, UserViewModel> userViewModelMapper
 ) : Mapper<Teacher, TeacherViewModel>
 {

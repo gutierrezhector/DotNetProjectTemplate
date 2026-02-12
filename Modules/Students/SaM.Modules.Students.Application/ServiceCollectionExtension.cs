@@ -14,8 +14,8 @@ public static class ServiceCollectionExtension
     {
         services.AddScoped<IStudentsApplication, StudentsApplication>();
 
-        services.AddScoped<Mapper<IStudentCreationPayload, IStudentCreationCandidate>, StudentCreationCandidateMapper>();
-        services.AddScoped<Mapper<IStudentUpdatePayload, IStudentUpdateCandidate>, StudentUpdateCandidateMapper>();
+        services.AddScoped<Mapper<IStudentCreationPayload, IStudentCreationCandidate>, StudentCreationPayloadToStudentCreationCandidateMapper>();
+        services.AddScoped<Mapper<IStudentUpdatePayload, IStudentUpdateCandidate>, StudentUpdatePayloadToStudentUpdateCandidateMapper>();
 
         return services;
     }
