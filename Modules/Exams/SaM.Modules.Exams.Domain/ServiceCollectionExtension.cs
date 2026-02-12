@@ -7,7 +7,6 @@ using SaM.Database.Core.Daos.Exams;
 using SaM.Modules.Exams.Domain.Factories;
 using SaM.Modules.Exams.Domain.Mappers;
 using SaM.Modules.Exams.Domain.Validators;
-using SaM.Modules.Exams.Ports.InBounds;
 using SaM.Modules.Exams.Ports.InBounds.Candidates;
 
 namespace SaM.Modules.Exams.Domain;
@@ -18,11 +17,11 @@ public static class ServiceCollectionExtension
     {
         services.AddScoped<EntityFactory<Exam,  ExamDao, IExamCreationCandidate>, ExamEntityFactory>();
 
-        services.AddScoped<IValidator<IExamCreationCandidate>, ExamCreationCandidateValidator>();
-        services.AddScoped<IValidator<ExamUpdateWrapper>, ExamUpdateCandidateValidator>();
-
+        services.AddScoped<Mapper<IExamCreationCandidate, Exam>, ExamCreationCandidateToExamEntityMapper>();
         services.AddScoped<Mapper<ExamDao, Exam>, ExamDaoToExamEntityMapper>();
 
+        services.AddScoped<IValidator<IExamCreationCandidate>, ExamCreationCandidateValidator>();
+        services.AddScoped<IValidator<ExamUpdateWrapper>, ExamUpdateCandidateValidator>();
 
         return services;
     }

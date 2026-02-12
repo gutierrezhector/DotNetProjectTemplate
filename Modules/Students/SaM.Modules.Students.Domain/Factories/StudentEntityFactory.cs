@@ -9,16 +9,14 @@ using SaM.Modules.Students.Ports.InBounds.Candidates;
 namespace SaM.Modules.Students.Domain.Factories;
 
 public class StudentEntityFactory(
+    Mapper<IStudentCreationCandidate, Student> studentCreationCandidateToStudentEntityMapper,
     Mapper<StudentDao, Student> studentDaoToStudentEntityMapper,
     Mapper<UserDao, User> userDaoToUserEntityMapper
 ) : EntityFactory<Student,  StudentDao, IStudentCreationCandidate>
 {
     public override Student CreateFromCandidate(IStudentCreationCandidate creationCandidate)
     {
-        return new Student
-        {
-            UserId = creationCandidate.UserId,
-        };
+        return studentCreationCandidateToStudentEntityMapper.MapNonNullable(creationCandidate);
     }
 
     public override Student CreateFromDao(StudentDao from)

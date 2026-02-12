@@ -7,7 +7,6 @@ using SaM.Database.Core.Daos.Grades;
 using SaM.Modules.Grades.Domain.Factories;
 using SaM.Modules.Grades.Domain.Mappers;
 using SaM.Modules.Grades.Domain.Validators;
-using SaM.Modules.Grades.Ports.InBounds;
 using SaM.Modules.Grades.Ports.InBounds.Candidates;
 
 namespace SaM.Modules.Grades.Domain;
@@ -18,6 +17,7 @@ public static class ServiceCollectionExtension
     {
         services.AddScoped<EntityFactory<Grade,  GradeDao, IGradeCreationCandidate>, GradeEntityFactory>();
 
+        services.AddScoped<Mapper<IGradeCreationCandidate, Grade>, GradeCreationCandidateToGradeEntityMapper>();
         services.AddScoped<Mapper<GradeDao, Grade>, GradeDaoToGradeEntityMapper>();
 
         services.AddScoped<IValidator<IGradeCreationCandidate>, GradeCreationCandidateValidator>();

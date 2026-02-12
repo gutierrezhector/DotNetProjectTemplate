@@ -19,6 +19,7 @@ public static class ServiceCollectionExtension
     {
         services.AddScoped<EntityFactory<User, UserDao, IUserCreationCandidate>, UserEntityFactory>();
 
+        services.AddScoped<Mapper<IUserCreationCandidate, User>, UserCreationCandidateToUserEntityMapper>();
         services.AddScoped<Mapper<UserDao, User>, UserDaoToUserEntityMapper>();
 
         services.AddScoped<IValidator<IUserCreationCandidate>, UserCreationCandidateValidator>();
