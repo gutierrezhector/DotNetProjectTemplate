@@ -11,6 +11,7 @@ using SaM.Modules.Grades.Ports.InBounds.Candidates;
 namespace SaM.Modules.Grades.Domain.Factories;
 
 public class GradeEntityFactory(
+    Mapper<IGradeCreationCandidate, Grade> gradeCreationCandidateToGradeEntityMapper,
     Mapper<GradeDao, Grade> gradeDaoToGradeEntityMapper,
     Mapper<StudentDao, Student> studentDaoToStudentEntityMapper,
     Mapper<ExamDao, Exam> examDaoToExamEntityMapper
@@ -18,12 +19,7 @@ public class GradeEntityFactory(
 {
     public override Grade CreateFromCandidate(IGradeCreationCandidate creationCandidate)
     {
-        return new Grade
-        {
-            Notation = creationCandidate.Notation,
-            ExamId = creationCandidate.ExamId,
-            StudentId = creationCandidate.StudentId,
-        };
+        return gradeCreationCandidateToGradeEntityMapper.MapNonNullable(creationCandidate);
     }
 
     public override Grade CreateFromDao(GradeDao from)

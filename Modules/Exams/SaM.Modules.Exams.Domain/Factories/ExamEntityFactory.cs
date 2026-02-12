@@ -11,29 +11,23 @@ using SaM.Modules.Exams.Ports.InBounds.Candidates;
 namespace SaM.Modules.Exams.Domain.Factories;
 
 public class ExamEntityFactory(
+    Mapper<IExamCreationCandidate, Exam> examCreationCandidateToExamEntityMapper,
+    Mapper<ExamDao, Exam> examDaoToExamEntityMapper,
     Mapper<TeacherDao, Teacher> teacherDaoToExamEntityMapper,
-    Mapper<GradeDao, Grade> gradeDaoToGradeEntityMapper,
-    Mapper<ExamDao, Exam> examDaoToExamEntityMapper
+    Mapper<GradeDao, Grade> gradeDaoToGradeEntityMapper
 ) : EntityFactory<Exam,  ExamDao, IExamCreationCandidate>
 {
     public override Exam CreateFromCandidate(IExamCreationCandidate creationCandidate)
     {
-        return new Exam
-        {
-            Title = creationCandidate.Title,
-            EndDate = creationCandidate.EndDate,
-            StartDate = creationCandidate.StartDate,
-            MaxPoints = creationCandidate.MaxPoints,
-            ResponsibleTeacherId = creationCandidate.ResponsibleTeacherId,
-        };
+        return examCreationCandidateToExamEntityMapper.MapNonNullable(creationCandidate);
     }
 
     public override Exam CreateFromDao(ExamDao from)
     {
         var exam = examDaoToExamEntityMapper.MapNonNullable(from);
-
         exam.ResponsibleTeacher = teacherDaoToExamEntityMapper.MapNullable(from.ResponsibleTeacher);
         exam.Grades =  gradeDaoToGradeEntityMapper.MapNullable(from.Grades);
+
         return exam;
     }
 }

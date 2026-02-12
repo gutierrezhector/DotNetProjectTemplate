@@ -18,10 +18,11 @@ public static class ServiceCollectionExtension
     {
         services.AddScoped<EntityFactory<Student,  StudentDao, IStudentCreationCandidate>, StudentEntityFactory>();
 
+        services.AddScoped<Mapper<IStudentCreationCandidate, Student>, StudentCreationCandidateToStudentEntityMapper>();
+        services.AddScoped<Mapper<StudentDao, Student>, StudentDaoToStudentEntityMapper>();
+
         services.AddScoped<IValidator<IStudentCreationCandidate>, StudentCreationCandidateValidator>();
         services.AddScoped<IValidator<StudentUpdateWrapper>, StudentUpdateCandidateValidator>();
-
-        services.AddScoped<Mapper<StudentDao, Student>, StudentDaoToStudentEntityMapper>();
 
         return services;
     }

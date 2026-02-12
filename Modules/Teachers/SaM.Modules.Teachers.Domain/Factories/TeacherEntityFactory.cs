@@ -9,23 +9,19 @@ using SaM.Modules.Teachers.Ports.InBounds.Candidates;
 namespace SaM.Modules.Teachers.Domain.Factories;
 
 public class TeacherEntityFactory(
+    Mapper<ITeacherCreationCandidate, Teacher> teacherCreationCandidateToTeacherEntityMapper,
     Mapper<TeacherDao, Teacher> teacherDaoToExamEntityMapper,
     Mapper<UserDao, User> userDaoToUserEntityMapper
 ) : EntityFactory<Teacher, TeacherDao, ITeacherCreationCandidate>
 {
     public override Teacher CreateFromCandidate(ITeacherCreationCandidate creationCandidate)
     {
-        return new Teacher
-        {
-            SchoolSubject = creationCandidate.SchoolSubject,
-            UserId = creationCandidate.UserId,
-        };
+        return teacherCreationCandidateToTeacherEntityMapper.MapNonNullable(creationCandidate);
     }
 
     public override Teacher CreateFromDao(TeacherDao from)
     {
         var teacher = teacherDaoToExamEntityMapper.MapNonNullable(from);
-
         teacher.User = userDaoToUserEntityMapper.MapNullable(from.User);
 
         return teacher;

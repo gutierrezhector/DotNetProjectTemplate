@@ -7,16 +7,13 @@ using SaM.Modules.Users.Ports.InBounds.Candidates;
 namespace SaM.Modules.Users.Domain.Factories;
 
 public class UserEntityFactory(
+    Mapper<IUserCreationCandidate, User> userCreationCandidateToUserEntityMapper,
     Mapper<UserDao, User> userDaoToUserEntityMapper
 ) : EntityFactory<User, UserDao, IUserCreationCandidate>
 {
     public override User CreateFromCandidate(IUserCreationCandidate creationCandidate)
     {
-        return new User
-        {
-            FirstName = creationCandidate.FirstName,
-            LastName = creationCandidate.LastName,
-        };
+        return userCreationCandidateToUserEntityMapper.MapNonNullable(creationCandidate);
     }
 
     public override User CreateFromDao(UserDao from)
