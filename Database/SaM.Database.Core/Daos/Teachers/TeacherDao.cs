@@ -1,4 +1,4 @@
-using SaM.Core.Types.Enums;
+using SaM.Core.SharedKernel.Enums;
 using SaM.Database.Core.Daos.Exams;
 using SaM.Database.Core.Daos.Users;
 

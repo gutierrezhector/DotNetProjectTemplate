@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using SaM.Core.Abstractions.Factories;
 using SaM.Core.Abstractions.Repository;
 using SaM.Core.Exceptions.Implementations;
-using SaM.Core.Types.Entities.Users;
+using SaM.Core.SharedKernel.Entities.Users;
 using SaM.Database.Core;
 using SaM.Database.Core.Daos.Students;
 using SaM.Database.Core.Daos.Teachers;

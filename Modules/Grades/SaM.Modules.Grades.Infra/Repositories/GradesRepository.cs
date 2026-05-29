@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using SaM.Core.Abstractions.Factories;
 using SaM.Core.Abstractions.Repository;
 using SaM.Core.Exceptions.Implementations;
-using SaM.Core.Types.Entities.Grades;
+using SaM.Core.SharedKernel.Entities.Grades;
 using SaM.Database.Core;
 using SaM.Database.Core.Daos.Grades;
 using SaM.Modules.Grades.Infra.Factories;

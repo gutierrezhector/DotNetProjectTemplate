@@ -1,6 +1,6 @@
-﻿using SaM.Core.Abstractions.Mappers;
-using SaM.Core.Types.Entities.Grades;
-using SaM.Core.Types.ViewModels.Grades;
+using SaM.Core.Abstractions.Mappers;
+using SaM.Core.SharedKernel.Entities.Grades;
+using SaM.Core.SharedKernel.ViewModels.Grades;
 
 namespace SaM.Modules.Grades.Web.Mappers;
 

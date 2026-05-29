@@ -1,7 +1,7 @@
 using SaM.Core.Abstractions.Factories;
 using SaM.Core.Abstractions.Mappers;
-using SaM.Core.Types.Entities.Teachers;
-using SaM.Core.Types.Entities.Users;
+using SaM.Core.SharedKernel.Entities.Teachers;
+using SaM.Core.SharedKernel.Entities.Users;
 using SaM.Database.Core.Daos.Teachers;
 using SaM.Database.Core.Daos.Users;
 using SaM.Modules.Teachers.Ports.InBounds.Candidates;

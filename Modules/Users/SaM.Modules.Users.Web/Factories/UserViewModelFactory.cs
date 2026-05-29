@@ -1,7 +1,7 @@
-﻿using SaM.Core.Abstractions.Factories;
+using SaM.Core.Abstractions.Factories;
 using SaM.Core.Abstractions.Mappers;
-using SaM.Core.Types.Entities.Users;
-using SaM.Core.Types.ViewModels.Users;
+using SaM.Core.SharedKernel.Entities.Users;
+using SaM.Core.SharedKernel.ViewModels.Users;
 
 namespace SaM.Modules.Users.Web.Factories;
 

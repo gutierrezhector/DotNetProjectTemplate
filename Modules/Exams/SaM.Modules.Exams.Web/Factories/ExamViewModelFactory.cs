@@ -1,11 +1,11 @@
-﻿using SaM.Core.Abstractions.Factories;
+using SaM.Core.Abstractions.Factories;
 using SaM.Core.Abstractions.Mappers;
-using SaM.Core.Types.Entities.Exams;
-using SaM.Core.Types.Entities.Grades;
-using SaM.Core.Types.Entities.Teachers;
-using SaM.Core.Types.ViewModels.Exams;
-using SaM.Core.Types.ViewModels.Grades;
-using SaM.Core.Types.ViewModels.Teachers;
+using SaM.Core.SharedKernel.Entities.Exams;
+using SaM.Core.SharedKernel.Entities.Grades;
+using SaM.Core.SharedKernel.Entities.Teachers;
+using SaM.Core.SharedKernel.ViewModels.Exams;
+using SaM.Core.SharedKernel.ViewModels.Grades;
+using SaM.Core.SharedKernel.ViewModels.Teachers;
 
 namespace SaM.Modules.Exams.Web.Factories;
 

@@ -1,9 +1,9 @@
-using SaM.Core.Types.Entities.Grades;
-using SaM.Core.Types.Entities.Teachers;
+using SaM.Core.SharedKernel.ViewModels.Grades;
+using SaM.Core.SharedKernel.ViewModels.Teachers;
 
-namespace SaM.Core.Types.Entities.Exams;
+namespace SaM.Core.SharedKernel.ViewModels.Exams;
 
-public class Exam
+public record ExamViewModel
 {
     public int Id { get; set; }
     public required string Title { get; set; }
@@ -11,6 +11,6 @@ public class Exam
     public required DateTimeOffset EndDate { get; set; }
     public required decimal MaxPoints { get; set; }
     public required int ResponsibleTeacherId { get; set; }
-    public Teacher? ResponsibleTeacher { get; set; }
-    public List<Grade>? Grades { get; set; }
+    public TeacherViewModel? ResponsibleTeacher { get; set; }
+    public List<GradeViewModel>? Grades { get; set; }
 }

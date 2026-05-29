@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using SaM.Core.Abstractions.Factories;
 using SaM.Core.Abstractions.Repository;
 using SaM.Core.Exceptions.Implementations;
-using SaM.Core.Types.Entities.Exams;
+using SaM.Core.SharedKernel.Entities.Exams;
 using SaM.Database.Core;
 using SaM.Database.Core.Daos.Exams;
 using SaM.Modules.Exams.Infra.Factories;

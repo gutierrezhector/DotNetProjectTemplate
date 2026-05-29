@@ -1,8 +1,8 @@
-﻿using FluentValidation;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using SaM.Core.Abstractions.Factories;
 using SaM.Core.Abstractions.Mappers;
-using SaM.Core.Types.Entities.Exams;
+using SaM.Core.SharedKernel.Entities.Exams;
 using SaM.Database.Core.Daos.Exams;
 using SaM.Modules.Exams.Domain.Factories;
 using SaM.Modules.Exams.Domain.Mappers;

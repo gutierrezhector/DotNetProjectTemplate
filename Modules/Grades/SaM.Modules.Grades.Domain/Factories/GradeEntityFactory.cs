@@ -1,8 +1,8 @@
-﻿using SaM.Core.Abstractions.Factories;
+using SaM.Core.Abstractions.Factories;
 using SaM.Core.Abstractions.Mappers;
-using SaM.Core.Types.Entities.Exams;
-using SaM.Core.Types.Entities.Grades;
-using SaM.Core.Types.Entities.Students;
+using SaM.Core.SharedKernel.Entities.Exams;
+using SaM.Core.SharedKernel.Entities.Grades;
+using SaM.Core.SharedKernel.Entities.Students;
 using SaM.Database.Core.Daos.Exams;
 using SaM.Database.Core.Daos.Grades;
 using SaM.Database.Core.Daos.Students;

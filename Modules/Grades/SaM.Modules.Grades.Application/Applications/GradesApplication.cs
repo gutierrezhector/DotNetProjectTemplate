@@ -2,7 +2,7 @@ using FluentValidation;
 using SaM.Core.Abstractions.Factories;
 using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Exceptions.Implementations;
-using SaM.Core.Types.Entities.Grades;
+using SaM.Core.SharedKernel.Entities.Grades;
 using SaM.Database.Core.Daos.Grades;
 using SaM.Modules.Grades.Ports.InBounds.Applications;
 using SaM.Modules.Grades.Ports.InBounds.Candidates;

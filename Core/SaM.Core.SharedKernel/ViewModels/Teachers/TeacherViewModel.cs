@@ -1,7 +1,7 @@
-﻿using SaM.Core.Types.Enums;
-using SaM.Core.Types.ViewModels.Users;
+using SaM.Core.SharedKernel.Enums;
+using SaM.Core.SharedKernel.ViewModels.Users;
 
-namespace SaM.Core.Types.ViewModels.Teachers;
+namespace SaM.Core.SharedKernel.ViewModels.Teachers;
 
 public record TeacherViewModel
 {

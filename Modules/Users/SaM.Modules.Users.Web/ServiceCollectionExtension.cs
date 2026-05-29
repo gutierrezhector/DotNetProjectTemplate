@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using SaM.Core.Abstractions.Mappers;
-using SaM.Core.Types.Entities.Users;
-using SaM.Core.Types.ViewModels.Users;
+using SaM.Core.SharedKernel.Entities.Users;
+using SaM.Core.SharedKernel.ViewModels.Users;
 using SaM.Modules.Users.Web.Factories;
 using SaM.Modules.Users.Web.Mappers;
 

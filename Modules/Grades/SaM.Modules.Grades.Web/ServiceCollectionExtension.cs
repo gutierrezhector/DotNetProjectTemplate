@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using SaM.Core.Abstractions.Mappers;
-using SaM.Core.Types.Entities.Grades;
-using SaM.Core.Types.ViewModels.Grades;
+using SaM.Core.SharedKernel.Entities.Grades;
+using SaM.Core.SharedKernel.ViewModels.Grades;
 using SaM.Modules.Grades.Web.Factories;
 using SaM.Modules.Grades.Web.Mappers;
 

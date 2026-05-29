@@ -1,5 +1,5 @@
-﻿using SaM.Core.Abstractions.Factories;
-using SaM.Core.Types.Entities.Exams;
+using SaM.Core.Abstractions.Factories;
+using SaM.Core.SharedKernel.Entities.Exams;
 using SaM.Database.Core.Daos.Exams;
 using SaM.Modules.Exams.Ports.InBounds.Candidates;
 

@@ -1,6 +1,6 @@
-using SaM.Core.Types.Entities.Users;
+using SaM.Core.SharedKernel.Entities.Users;
 
-namespace SaM.Core.Types.Entities.Students;
+namespace SaM.Core.SharedKernel.Entities.Students;
 
 public class Student
 {

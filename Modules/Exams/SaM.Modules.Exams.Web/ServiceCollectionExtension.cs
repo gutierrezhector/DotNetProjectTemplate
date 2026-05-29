@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using SaM.Core.Abstractions.Mappers;
-using SaM.Core.Types.Entities.Exams;
-using SaM.Core.Types.ViewModels.Exams;
+using SaM.Core.SharedKernel.Entities.Exams;
+using SaM.Core.SharedKernel.ViewModels.Exams;
 using SaM.Modules.Exams.Web.Factories;
 using SaM.Modules.Exams.Web.Mappers;
 

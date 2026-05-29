@@ -1,6 +1,6 @@
-﻿using FluentAssertions;
-using SaM.Core.Types.Entities.Teachers;
-using SaM.Core.Types.Enums;
+using FluentAssertions;
+using SaM.Core.SharedKernel.Entities.Teachers;
+using SaM.Core.SharedKernel.Enums;
 using SaM.Modules.Teachers.Application.Candidates;
 using SaM.Modules.Teachers.Domain.Validators;
 using SaM.Modules.Teachers.Ports.InBounds;

@@ -1,4 +1,4 @@
-﻿using SaM.Core.Types.Entities.Grades;
+using SaM.Core.SharedKernel.Entities.Grades;
 
 namespace SaM.Modules.Grades.Ports.InBounds.Candidates;
 

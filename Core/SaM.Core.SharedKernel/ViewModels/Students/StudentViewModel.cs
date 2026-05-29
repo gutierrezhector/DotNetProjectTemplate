@@ -1,6 +1,6 @@
-﻿using SaM.Core.Types.ViewModels.Users;
+using SaM.Core.SharedKernel.ViewModels.Users;
 
-namespace SaM.Core.Types.ViewModels.Students;
+namespace SaM.Core.SharedKernel.ViewModels.Students;
 
 public record StudentViewModel
 {

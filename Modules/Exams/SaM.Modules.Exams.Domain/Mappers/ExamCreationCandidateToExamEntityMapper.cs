@@ -1,5 +1,5 @@
-﻿using SaM.Core.Abstractions.Mappers;
-using SaM.Core.Types.Entities.Exams;
+using SaM.Core.Abstractions.Mappers;
+using SaM.Core.SharedKernel.Entities.Exams;
 using SaM.Modules.Exams.Ports.InBounds.Candidates;
 
 namespace SaM.Modules.Exams.Domain.Mappers;

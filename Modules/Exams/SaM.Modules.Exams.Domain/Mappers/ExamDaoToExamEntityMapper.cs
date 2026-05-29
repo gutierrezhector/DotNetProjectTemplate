@@ -1,5 +1,5 @@
 using SaM.Core.Abstractions.Mappers;
-using SaM.Core.Types.Entities.Exams;
+using SaM.Core.SharedKernel.Entities.Exams;
 using SaM.Database.Core.Daos.Exams;
 
 namespace SaM.Modules.Exams.Domain.Mappers;

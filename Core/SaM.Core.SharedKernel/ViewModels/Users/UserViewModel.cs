@@ -1,4 +1,4 @@
-﻿namespace SaM.Core.Types.ViewModels.Users;
+namespace SaM.Core.SharedKernel.ViewModels.Users;
 
 public record UserViewModel
 {

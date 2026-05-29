@@ -1,4 +1,4 @@
-namespace SaM.Core.Types.Enums;
+namespace SaM.Core.SharedKernel.Enums;
 
 public enum SchoolSubject
 {

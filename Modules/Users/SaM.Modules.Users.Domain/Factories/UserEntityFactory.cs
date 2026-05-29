@@ -1,6 +1,6 @@
 using SaM.Core.Abstractions.Factories;
 using SaM.Core.Abstractions.Mappers;
-using SaM.Core.Types.Entities.Users;
+using SaM.Core.SharedKernel.Entities.Users;
 using SaM.Database.Core.Daos.Users;
 using SaM.Modules.Users.Ports.InBounds.Candidates;
 

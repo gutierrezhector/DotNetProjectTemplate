@@ -1,5 +1,5 @@
-﻿using SaM.Core.Abstractions.Factories;
-using SaM.Core.Types.Entities.Grades;
+using SaM.Core.Abstractions.Factories;
+using SaM.Core.SharedKernel.Entities.Grades;
 using SaM.Database.Core.Daos.Grades;
 using SaM.Modules.Grades.Ports.InBounds.Candidates;
 

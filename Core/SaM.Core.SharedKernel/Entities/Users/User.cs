@@ -1,4 +1,4 @@
-namespace SaM.Core.Types.Entities.Users;
+namespace SaM.Core.SharedKernel.Entities.Users;
 
 public class User
 {

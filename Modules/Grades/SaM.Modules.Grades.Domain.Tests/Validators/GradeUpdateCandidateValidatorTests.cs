@@ -1,7 +1,7 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using Moq;
-using SaM.Core.Types.Entities.Exams;
-using SaM.Core.Types.Entities.Grades;
+using SaM.Core.SharedKernel.Entities.Exams;
+using SaM.Core.SharedKernel.Entities.Grades;
 using SaM.Modules.Exams.Ports.OutBounds.Repositories;
 using SaM.Modules.Grades.Application.Candidates;
 using SaM.Modules.Grades.Domain.Validators;

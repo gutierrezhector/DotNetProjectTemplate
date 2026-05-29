@@ -2,7 +2,7 @@ using FluentValidation;
 using SaM.Core.Abstractions.Factories;
 using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Exceptions.Implementations;
-using SaM.Core.Types.Entities.Teachers;
+using SaM.Core.SharedKernel.Entities.Teachers;
 using SaM.Database.Core.Daos.Teachers;
 using SaM.Modules.Teachers.Ports.InBounds;
 using SaM.Modules.Teachers.Ports.InBounds.Applications;

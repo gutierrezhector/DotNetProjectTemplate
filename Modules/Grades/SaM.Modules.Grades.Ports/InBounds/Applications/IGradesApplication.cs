@@ -1,4 +1,4 @@
-using SaM.Core.Types.Entities.Grades;
+using SaM.Core.SharedKernel.Entities.Grades;
 using SaM.Modules.Grades.Ports.InBounds.Payloads;
 
 namespace SaM.Modules.Grades.Ports.InBounds.Applications;

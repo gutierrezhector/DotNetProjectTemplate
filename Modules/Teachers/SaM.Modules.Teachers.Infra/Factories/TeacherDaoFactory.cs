@@ -1,5 +1,5 @@
-﻿using SaM.Core.Abstractions.Factories;
-using SaM.Core.Types.Entities.Teachers;
+using SaM.Core.Abstractions.Factories;
+using SaM.Core.SharedKernel.Entities.Teachers;
 using SaM.Database.Core.Daos.Teachers;
 using SaM.Modules.Teachers.Ports.InBounds.Candidates;
 

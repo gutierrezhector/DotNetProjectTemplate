@@ -1,5 +1,5 @@
 using FluentValidation;
-using SaM.Core.Types.Enums;
+using SaM.Core.SharedKernel.Enums;
 using SaM.Modules.Students.Ports.OutBounds.Repositories;
 using SaM.Modules.Teachers.Ports.InBounds.Candidates;
 using SaM.Modules.Teachers.Ports.OuBounds.Repositories;

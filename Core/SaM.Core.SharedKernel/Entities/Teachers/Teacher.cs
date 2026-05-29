@@ -1,7 +1,7 @@
-using SaM.Core.Types.Entities.Users;
-using SaM.Core.Types.Enums;
+using SaM.Core.SharedKernel.Entities.Users;
+using SaM.Core.SharedKernel.Enums;
 
-namespace SaM.Core.Types.Entities.Teachers;
+namespace SaM.Core.SharedKernel.Entities.Teachers;
 
 public class Teacher
 {

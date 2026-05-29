@@ -1,4 +1,4 @@
-using SaM.Core.Types.Entities.Users;
+using SaM.Core.SharedKernel.Entities.Users;
 using SaM.Modules.Users.Ports.InBounds.Candidates;
 
 namespace SaM.Modules.Users.Ports.OutBounds.Repositories;

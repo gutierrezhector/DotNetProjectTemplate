@@ -1,5 +1,5 @@
-﻿using FluentValidation;
-using SaM.Core.Types.Enums;
+using FluentValidation;
+using SaM.Core.SharedKernel.Enums;
 using SaM.Modules.Teachers.Ports.InBounds;
 
 namespace SaM.Modules.Teachers.Domain.Validators;

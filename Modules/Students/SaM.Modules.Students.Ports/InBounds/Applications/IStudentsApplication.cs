@@ -1,4 +1,4 @@
-using SaM.Core.Types.Entities.Students;
+using SaM.Core.SharedKernel.Entities.Students;
 using SaM.Modules.Students.Ports.InBounds.Payloads;
 
 namespace SaM.Modules.Students.Ports.InBounds.Applications;

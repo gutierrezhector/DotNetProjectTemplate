@@ -1,8 +1,8 @@
-﻿using SaM.Core.Abstractions.Mappers;
-using SaM.Core.Types.Entities.Teachers;
-using SaM.Core.Types.Entities.Users;
-using SaM.Core.Types.ViewModels.Teachers;
-using SaM.Core.Types.ViewModels.Users;
+using SaM.Core.Abstractions.Mappers;
+using SaM.Core.SharedKernel.Entities.Teachers;
+using SaM.Core.SharedKernel.Entities.Users;
+using SaM.Core.SharedKernel.ViewModels.Teachers;
+using SaM.Core.SharedKernel.ViewModels.Users;
 
 namespace SaM.Modules.Teachers.Web.Mappers;
 

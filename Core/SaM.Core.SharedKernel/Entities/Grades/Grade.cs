@@ -1,7 +1,7 @@
-using SaM.Core.Types.Entities.Exams;
-using SaM.Core.Types.Entities.Students;
+using SaM.Core.SharedKernel.Entities.Exams;
+using SaM.Core.SharedKernel.Entities.Students;
 
-namespace SaM.Core.Types.Entities.Grades;
+namespace SaM.Core.SharedKernel.Entities.Grades;
 
 public class Grade
 {

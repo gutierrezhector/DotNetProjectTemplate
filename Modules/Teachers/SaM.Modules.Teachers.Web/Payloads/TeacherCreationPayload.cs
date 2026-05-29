@@ -1,4 +1,4 @@
-using SaM.Core.Types.Enums;
+using SaM.Core.SharedKernel.Enums;
 using SaM.Modules.Teachers.Ports.InBounds.Payloads;
 
 namespace SaM.Modules.Teachers.Web.Payloads;

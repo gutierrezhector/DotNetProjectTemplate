@@ -1,6 +1,6 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using Moq;
-using SaM.Core.Types.Enums;
+using SaM.Core.SharedKernel.Enums;
 using SaM.Modules.Students.Ports.OutBounds.Repositories;
 using SaM.Modules.Teachers.Application.Candidates;
 using SaM.Modules.Teachers.Domain.Validators;

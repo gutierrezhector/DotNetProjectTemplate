@@ -1,5 +1,5 @@
-﻿using SaM.Core.Abstractions.Mappers;
-using SaM.Core.Types.Entities.Users;
+using SaM.Core.Abstractions.Mappers;
+using SaM.Core.SharedKernel.Entities.Users;
 using SaM.Modules.Users.Ports.InBounds.Candidates;
 
 namespace SaM.Modules.Users.Domain.Mappers;

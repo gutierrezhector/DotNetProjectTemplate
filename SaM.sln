@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{670C4BF3-F4C0-4D80-888B-C5E38E307911}"
 EndProject
@@ -61,7 +61,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaM.Modules.Teachers.Domain
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaM.Modules.Teachers.Infra", "Modules\Teachers\SaM.Modules.Teachers.Infra\SaM.Modules.Teachers.Infra.csproj", "{7A8ECB50-3261-47DA-9E47-13EF6946C14C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaM.Core.Types", "Core\SaM.Core.Types\SaM.Core.Types.csproj", "{DC7C0C60-5719-404F-A802-61174E370A4F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaM.Core.SharedKernel", "Core\SaM.Core.SharedKernel\SaM.Core.SharedKernel.csproj", "{DC7C0C60-5719-404F-A802-61174E370A4F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaM.Modules.Grades.Web", "Modules\Grades\SaM.Modules.Grades.Web\SaM.Modules.Grades.Web.csproj", "{E365A919-0ACB-4691-95C4-BB5DC75DFF95}"
 EndProject
@@ -301,3 +301,4 @@ Global
 		{9CBDB00C-9E28-49B3-8216-8D75856944AC} = {0628465A-7DAC-4E3B-8661-4108D5AFAF40}
 	EndGlobalSection
 EndGlobal
+

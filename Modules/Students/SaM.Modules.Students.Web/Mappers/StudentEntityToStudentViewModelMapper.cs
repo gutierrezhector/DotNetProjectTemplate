@@ -1,6 +1,6 @@
-﻿using SaM.Core.Abstractions.Mappers;
-using SaM.Core.Types.Entities.Students;
-using SaM.Core.Types.ViewModels.Students;
+using SaM.Core.Abstractions.Mappers;
+using SaM.Core.SharedKernel.Entities.Students;
+using SaM.Core.SharedKernel.ViewModels.Students;
 
 namespace SaM.Modules.Students.Web.Mappers;
 

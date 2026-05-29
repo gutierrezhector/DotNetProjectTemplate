@@ -1,4 +1,4 @@
-using SaM.Core.Types.Entities.Users;
+using SaM.Core.SharedKernel.Entities.Users;
 using SaM.Modules.Users.Ports.InBounds.Payloads;
 
 namespace SaM.Modules.Users.Ports.InBounds.Applications;

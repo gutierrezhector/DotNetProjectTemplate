@@ -1,4 +1,4 @@
-using SaM.Core.Types.Entities.Exams;
+using SaM.Core.SharedKernel.Entities.Exams;
 using SaM.Modules.Exams.Ports.InBounds.Candidates;
 
 namespace SaM.Modules.Exams.Ports.OutBounds.Repositories;

@@ -1,5 +1,5 @@
-﻿using FluentAssertions;
-using SaM.Core.Types.Entities.Students;
+using FluentAssertions;
+using SaM.Core.SharedKernel.Entities.Students;
 using SaM.Modules.Students.Application.Candidates;
 using SaM.Modules.Students.Domain.Validators;
 using SaM.Modules.Students.Ports.InBounds;
