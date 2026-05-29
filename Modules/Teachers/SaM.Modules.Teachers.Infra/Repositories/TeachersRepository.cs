@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SaM.Core.Abstractions.Factories;
-using SaM.Core.Abstractions.Repository;
+using SaM.Database.Core.Repository;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.SharedKernel.Entities.Teachers;
 using SaM.Database.Core;
