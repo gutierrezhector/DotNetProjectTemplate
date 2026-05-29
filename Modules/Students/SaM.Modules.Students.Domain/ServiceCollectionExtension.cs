@@ -16,7 +16,8 @@ public static class ServiceCollectionExtension
 {
     public static IServiceCollection RegisterStudentsDomain(this IServiceCollection services)
     {
-        services.AddScoped<EntityFactory<Student,  StudentDao, IStudentCreationCandidate>, StudentEntityFactory>();
+        services.AddScoped<EntityFromDaoFactory<Student, StudentDao>, StudentEntityFromDaoFactory>();
+        services.AddScoped<EntityFromCandidateFactory<Student, IStudentCreationCandidate>, StudentEntityFromCandidateFactory>();
 
         services.AddScoped<Mapper<IStudentCreationCandidate, Student>, StudentCreationCandidateToStudentEntityMapper>();
         services.AddScoped<Mapper<StudentDao, Student>, StudentDaoToStudentEntityMapper>();

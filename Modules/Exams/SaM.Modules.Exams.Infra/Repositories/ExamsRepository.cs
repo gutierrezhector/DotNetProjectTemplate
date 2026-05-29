@@ -13,7 +13,7 @@ namespace SaM.Modules.Exams.Infra.Repositories;
 
 public class ExamsRepository(
     SaMDbContext dbContext,
-    EntityFactory<Exam,  ExamDao, IExamCreationCandidate> examEntityFactory,
+    EntityFromDaoFactory<Exam, ExamDao> examEntityFactory,
     ExamDaoFactory examDaoFactory
 ) : BaseRepository<ExamDao>(dbContext), IExamsRepository
 {

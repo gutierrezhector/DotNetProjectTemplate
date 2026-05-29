@@ -15,7 +15,7 @@ namespace SaM.Modules.Users.Infra.Repositories;
 
 public class UsersRepository(
     SaMDbContext dbContext,
-    EntityFactory<User, UserDao, IUserCreationCandidate> userEntityFactory,
+    EntityFromDaoFactory<User, UserDao> userEntityFactory,
     UserDaoFactory userDaoFactory
 ) : BaseRepository<UserDao>(dbContext), IUsersRepository
 {

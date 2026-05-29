@@ -3,7 +3,6 @@ using SaM.Core.Abstractions.Factories;
 using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.SharedKernel.Entities.Grades;
-using SaM.Database.Core.Daos.Grades;
 using SaM.Modules.Grades.Ports.InBounds.Applications;
 using SaM.Modules.Grades.Ports.InBounds.Candidates;
 using SaM.Modules.Grades.Ports.InBounds.Payloads;
@@ -13,7 +12,7 @@ namespace SaM.Modules.Grades.Application.Applications;
 
 public class GradesApplication(
     IGradesRepository gradesRepository,
-    EntityFactory<Grade,  GradeDao, IGradeCreationCandidate> gradeEntityFactory,
+    EntityFromCandidateFactory<Grade, IGradeCreationCandidate> gradeCandidateFactory,
     IValidator<IGradeCreationCandidate> gradeCreationCandidateValidator,
     IValidator<GradeUpdateWrapper> gradeUpdateCandidateValidator,
     Mapper<IGradeCreationPayload, IGradeCreationCandidate> gradeCreationCandidateMapper,
@@ -34,7 +33,7 @@ public class GradesApplication(
             throw new ValidationResultException(validationResult);
         }
 
-        var gradeToCreate = gradeEntityFactory.CreateFromCandidate(creationCandidate);
+        var gradeToCreate = gradeCandidateFactory.CreateFromCandidate(creationCandidate);
         var newGrade = await gradesRepository.CreateAsync(gradeToCreate);
 
         return newGrade;

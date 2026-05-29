@@ -13,7 +13,7 @@ namespace SaM.Modules.Grades.Infra.Repositories;
 
 public class GradesRepository(
     SaMDbContext dbContext,
-    EntityFactory<Grade,  GradeDao, IGradeCreationCandidate> gradeEntityFactory,
+    EntityFromDaoFactory<Grade, GradeDao> gradeEntityFactory,
     GradeDaoFactory gradeDaoFactory
 ) : BaseRepository<GradeDao>(dbContext), IGradesRepository
 {

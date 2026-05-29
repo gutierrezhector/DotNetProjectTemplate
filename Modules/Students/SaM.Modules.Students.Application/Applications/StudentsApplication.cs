@@ -3,7 +3,6 @@ using SaM.Core.Abstractions.Factories;
 using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.SharedKernel.Entities.Students;
-using SaM.Database.Core.Daos.Students;
 using SaM.Modules.Students.Ports.InBounds;
 using SaM.Modules.Students.Ports.InBounds.Applications;
 using SaM.Modules.Students.Ports.InBounds.Candidates;
@@ -14,7 +13,7 @@ namespace SaM.Modules.Students.Application.Applications;
 
 public class StudentsApplication(
     IStudentsRepository studentsRepository,
-    EntityFactory<Student,  StudentDao, IStudentCreationCandidate> studentEntityFactory,
+    EntityFromCandidateFactory<Student, IStudentCreationCandidate> studentCandidateFactory,
     IValidator<IStudentCreationCandidate> studentCreationCandidateValidator,
     IValidator<StudentUpdateWrapper> studentUpdateCandidateValidator,
     Mapper<IStudentCreationPayload, IStudentCreationCandidate> studentCreationCandidateMapper,
@@ -40,7 +39,7 @@ public class StudentsApplication(
             throw new ValidationResultException(validationResult);
         }
 
-        var studentToCreate = studentEntityFactory.CreateFromCandidate(creationCandidate);
+        var studentToCreate = studentCandidateFactory.CreateFromCandidate(creationCandidate);
 
         return await studentsRepository.Create(studentToCreate);
     }

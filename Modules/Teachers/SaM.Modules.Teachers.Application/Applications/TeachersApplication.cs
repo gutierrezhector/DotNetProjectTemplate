@@ -3,7 +3,6 @@ using SaM.Core.Abstractions.Factories;
 using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.SharedKernel.Entities.Teachers;
-using SaM.Database.Core.Daos.Teachers;
 using SaM.Modules.Teachers.Ports.InBounds;
 using SaM.Modules.Teachers.Ports.InBounds.Applications;
 using SaM.Modules.Teachers.Ports.InBounds.Candidates;
@@ -14,7 +13,7 @@ namespace SaM.Modules.Teachers.Application.Applications;
 
 public class TeachersApplication(
     ITeachersRepository teachersRepository,
-    EntityFactory<Teacher, TeacherDao, ITeacherCreationCandidate> teacherEntityFactory,
+    EntityFromCandidateFactory<Teacher, ITeacherCreationCandidate> teacherCandidateFactory,
     IValidator<ITeacherCreationCandidate> teacherCreationCandidateValidator,
     IValidator<TeacherUpdateWrapper> teacherUpdateCandidateValidator,
     Mapper<ITeacherCreationPayload, ITeacherCreationCandidate> teacherCreationCandidateMapper,
@@ -40,7 +39,7 @@ public class TeachersApplication(
             throw new ValidationResultException(validationResult);
         }
 
-        var newTeacher = teacherEntityFactory.CreateFromCandidate(creationCandidate);
+        var newTeacher = teacherCandidateFactory.CreateFromCandidate(creationCandidate);
         return await teachersRepository.Create(newTeacher);
     }
 

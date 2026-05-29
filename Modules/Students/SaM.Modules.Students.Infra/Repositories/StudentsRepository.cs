@@ -13,7 +13,7 @@ namespace SaM.Modules.Students.Infra.Repositories;
 
 public class StudentsRepository(
     SaMDbContext dbContext,
-    EntityFactory<Student,  StudentDao, IStudentCreationCandidate> studentEntityFactory,
+    EntityFromDaoFactory<Student, StudentDao> studentEntityFactory,
     StudentDaoFactory studentDaoFactory
 ) : BaseRepository<StudentDao>(dbContext), IStudentsRepository
 {

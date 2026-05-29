@@ -3,7 +3,6 @@ using SaM.Core.Abstractions.Factories;
 using SaM.Core.Abstractions.Mappers;
 using SaM.Core.Exceptions.Implementations;
 using SaM.Core.SharedKernel.Entities.Users;
-using SaM.Database.Core.Daos.Users;
 using SaM.Modules.Users.Ports.InBounds.Applications;
 using SaM.Modules.Users.Ports.InBounds.Candidates;
 using SaM.Modules.Users.Ports.InBounds.Payloads;
@@ -14,7 +13,7 @@ namespace SaM.Modules.Users.Application.Applications;
 
 public class UsersApplication(
     IUsersRepository usersRepository,
-    EntityFactory<User, UserDao, IUserCreationCandidate> userEntityFactory,
+    EntityFromCandidateFactory<User, IUserCreationCandidate> userCandidateFactory,
     IUserDeletableService userDeletableService,
     IValidator<IUserCreationCandidate> userCreationCandidateValidator,
     IValidator<IUserUpdateCandidate> userUpdateCandidateValidator,
@@ -36,7 +35,7 @@ public class UsersApplication(
             throw new ValidationResultException(validationResult);
         }
 
-        var userToCreate = userEntityFactory.CreateFromCandidate(creationCandidate);
+        var userToCreate = userCandidateFactory.CreateFromCandidate(creationCandidate);
         return await usersRepository.CreateAsync(userToCreate);
     }
 
